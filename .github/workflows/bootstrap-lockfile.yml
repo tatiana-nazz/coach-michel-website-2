@@ -1,4 +1,4 @@
-name: P4-S04 bounded ESLint compatibility remediation
+name: P4-S04 isolated ESLint compatibility remediation
 
 on:
   push:
@@ -11,24 +11,37 @@ permissions:
   contents: write
 
 concurrency:
-  group: p4-s04-bounded-eslint-carrier
+  group: p4-s04-isolated-eslint-carrier
   cancel-in-progress: false
 
 jobs:
   remediate:
     runs-on: [self-hosted, Windows, X64]
     steps:
-      - name: Checkout exact carrier commit
+      - name: Prepare isolated checkout directory
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $checkout = Join-Path $env:GITHUB_WORKSPACE '_central_p4s04'
+          if (Test-Path -LiteralPath $checkout) {
+            Remove-Item -LiteralPath $checkout -Recurse -Force
+          }
+          Write-Output "Prepared isolated checkout path: $checkout"
+
+      - name: Checkout exact carrier commit into isolated directory
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.sha }}
           fetch-depth: 2
+          clean: true
+          path: _central_p4s04
 
-      - name: Validate carrier commit binding
+      - name: Validate isolated carrier binding
         shell: powershell
+        working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
-          $requiredParent = '14af1a84ab1d394872b31d27819323c54e6b9039'
+          $requiredParent = '17eb69f471b9599b1074d9352127ef9987eacd10'
           $requiredPackageBlob = 'f09f9ce0392c63e5445dbdae25cc07ad28829bcd'
           $requiredWorkflowPath = '.github/workflows/bootstrap-lockfile.yml'
 
@@ -37,7 +50,7 @@ jobs:
             throw "Carrier parent mismatch. Expected $requiredParent, observed $parent."
           }
 
-          $changed = @(git diff --name-only HEAD^ HEAD) | Where-Object { $_ }
+          $changed = @(git diff --name-only HEAD^ HEAD --) | Where-Object { $_ }
           if ($changed.Count -ne 1 -or $changed[0] -ne $requiredWorkflowPath) {
             throw "Carrier commit changed unexpected paths: $($changed -join ', ')"
           }
@@ -47,18 +60,27 @@ jobs:
             throw "package.json blob mismatch. Expected $requiredPackageBlob, observed $packageBlob."
           }
 
-          git cat-file -e HEAD:pnpm-lock.yaml 2>$null
-          if ($LASTEXITCODE -eq 0) {
-            throw 'pnpm-lock.yaml unexpectedly exists before remediation.'
+          # Absence is validated with git ls-tree because an absent path is the expected
+          # state and must not cause a native-command nonzero exit under fail-closed PowerShell.
+          $lockEntries = @(git ls-tree --name-only HEAD -- pnpm-lock.yaml) | Where-Object { $_ }
+          if ($lockEntries.Count -ne 0) {
+            throw "pnpm-lock.yaml unexpectedly exists before remediation."
           }
 
           $status = @(git status --porcelain) | Where-Object { $_ }
           if ($status.Count -ne 0) {
-            throw "Working tree is not clean before remediation: $($status -join ', ')"
+            throw "Isolated working tree is not clean before remediation: $($status -join ', ')"
           }
+
+          Write-Output "Carrier parent: $parent"
+          Write-Output "Carrier changed path: $($changed[0])"
+          Write-Output "package.json blob: $packageBlob"
+          Write-Output "pnpm-lock.yaml state: ABSENT"
+          Write-Output "Isolated working tree: CLEAN"
 
       - name: Bootstrap portable PowerShell 7
         shell: powershell
+        working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
           [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -75,13 +97,13 @@ jobs:
             throw "PowerShell archive SHA-256 mismatch. Expected $expectedSha256, observed $actualSha256."
           }
 
-          if (Test-Path $destination) {
-            Remove-Item -Path $destination -Recurse -Force
+          if (Test-Path -LiteralPath $destination) {
+            Remove-Item -LiteralPath $destination -Recurse -Force
           }
           Expand-Archive -Path $archive -DestinationPath $destination -Force
 
           $pwsh = Join-Path $destination 'pwsh.exe'
-          if (-not (Test-Path $pwsh)) {
+          if (-not (Test-Path -LiteralPath $pwsh)) {
             throw 'pwsh.exe not found after extraction.'
           }
 
@@ -90,6 +112,7 @@ jobs:
 
       - name: Validate self-hosted Windows X64 runner
         shell: pwsh
+        working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
           if ($env:RUNNER_OS -ne 'Windows') {
@@ -115,6 +138,7 @@ jobs:
 
       - name: Apply exact ESLint compatibility pin
         shell: pwsh
+        working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
           $path = 'package.json'
@@ -135,21 +159,23 @@ jobs:
 
       - name: Generate pnpm lockfile and install dependencies
         shell: pwsh
+        working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
           pnpm install
           if ($LASTEXITCODE -ne 0) {
             throw "pnpm install failed with exit code $LASTEXITCODE."
           }
-          if (-not (Test-Path 'pnpm-lock.yaml')) {
+          if (-not (Test-Path -LiteralPath 'pnpm-lock.yaml')) {
             throw 'pnpm-lock.yaml was not generated.'
           }
-          if ((Get-Item 'pnpm-lock.yaml').Length -le 0) {
+          if ((Get-Item -LiteralPath 'pnpm-lock.yaml').Length -le 0) {
             throw 'pnpm-lock.yaml is empty.'
           }
 
       - name: Validate exact remediation scope before gates
         shell: pwsh
+        working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
           $changed = @(
@@ -174,50 +200,62 @@ jobs:
 
       - name: Format check
         shell: pwsh
+        working-directory: _central_p4s04
         run: pnpm format:check
 
       - name: Lint
         shell: pwsh
+        working-directory: _central_p4s04
         run: pnpm lint
 
       - name: Typecheck
         shell: pwsh
+        working-directory: _central_p4s04
         run: pnpm typecheck
 
       - name: Unit tests
         shell: pwsh
+        working-directory: _central_p4s04
         run: pnpm test:unit
 
       - name: Contract tests
         shell: pwsh
+        working-directory: _central_p4s04
         run: pnpm test:contract
 
       - name: Accessibility foundation tests
         shell: pwsh
+        working-directory: _central_p4s04
         run: pnpm test:a11y
 
       - name: RTL foundation tests
         shell: pwsh
+        working-directory: _central_p4s04
         run: pnpm test:rtl
 
       - name: Build
         shell: pwsh
+        working-directory: _central_p4s04
         run: pnpm build
 
       - name: Install Playwright Chromium
         shell: pwsh
+        working-directory: _central_p4s04
         run: pnpm exec playwright install chromium
 
       - name: E2E tests
         shell: pwsh
+        working-directory: _central_p4s04
         run: pnpm test:e2e
 
       - name: Dependency audit
         shell: pwsh
+        working-directory: _central_p4s04
         run: pnpm audit --audit-level high
 
       - name: Capture final remediation evidence
         shell: pwsh
+        working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
           $changed = @(
@@ -239,6 +277,7 @@ jobs:
 
       - name: Commit exact P4-S04 remediation
         shell: pwsh
+        working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
           git config user.name 'github-actions[bot]'
