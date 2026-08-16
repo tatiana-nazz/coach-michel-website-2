@@ -1,0 +1,48 @@
+{
+  "name": "coach-michel-website-2",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.21.0",
+  "engines": {
+    "node": "24.18.0",
+    "pnpm": "11.21.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "vitest run tests/unit",
+    "test:contract": "vitest run tests/contract",
+    "test:a11y": "vitest run tests/a11y",
+    "test:rtl": "vitest run tests/rtl",
+    "test:e2e": "playwright test tests/e2e",
+    "test": "pnpm test:unit && pnpm test:contract && pnpm test:a11y && pnpm test:rtl"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "5.101.4",
+    "next": "16.3.0",
+    "next-intl": "4.13.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-hook-form": "7.84.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/react": "16.3.2",
+    "@types/node": "24.13.3",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
+    "axe-core": "4.12.1",
+    "eslint": "10.8.0",
+    "eslint-config-next": "16.3.0",
+    "prettier": "3.9.6",
+    "typescript": "6.0.2",
+    "vitest": "4.1.10"
+  }
+}

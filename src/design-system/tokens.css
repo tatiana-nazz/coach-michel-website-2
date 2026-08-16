@@ -1,0 +1,73 @@
+:root {
+  color-scheme: light;
+
+  /* Governed luminous mobile-luxury foundation. */
+  --cmh-canvas: #f4f7fa;
+  --cmh-paper: #fcfdfe;
+  --cmh-surface-ice: #edf4fb;
+  --cmh-surface-mineral: #e8eef4;
+  --cmh-ink-primary: #08172b;
+  --cmh-ink-secondary: #40546b;
+  --cmh-ink-muted: #687a8e;
+  --cmh-rule: #c6d1dc;
+  --cmh-rule-strong: #95a7b9;
+
+  --cmh-blue-core: #096cff;
+  --cmh-blue-strong: #004ec4;
+  --cmh-blue-light: #dcebff;
+  --cmh-blue-node: #49a6ff;
+  --cmh-blue-focus: #005fcc;
+
+  --cmh-state-danger: #a63a32;
+  --cmh-state-information: #175cd3;
+  --cmh-state-success: #0a7452;
+  --cmh-state-uncertain: #6e5b7b;
+  --cmh-state-warning: #8a5a00;
+
+  --cmh-border-width: 1px;
+  --cmh-accent-rule-width: 2px;
+  --cmh-focus-width: 2px;
+  --cmh-focus-offset: 2px;
+  --cmh-radius-0: 0;
+  --cmh-radius-2: 2px;
+  --cmh-radius-4: 4px;
+  --cmh-radius-media: 8px;
+
+  --cmh-space-1: 0.25rem;
+  --cmh-space-2: 0.5rem;
+  --cmh-space-3: 0.75rem;
+  --cmh-space-4: 1rem;
+  --cmh-space-6: 1.5rem;
+  --cmh-space-8: 2rem;
+
+  --cmh-grid-mobile-columns: 4;
+  --cmh-grid-mobile-gutter: 16px;
+  --cmh-grid-mobile-margin: 16px;
+  --cmh-grid-tablet-columns: 8;
+  --cmh-grid-tablet-gutter: 20px;
+  --cmh-grid-tablet-margin: 28px;
+  --cmh-grid-desktop-columns: 12;
+  --cmh-grid-desktop-gutter: 24px;
+  --cmh-grid-desktop-margin-min: 48px;
+  --cmh-grid-desktop-max-content: 1320px;
+
+  --cmh-font-ui: "IBM Plex Sans", system-ui, sans-serif;
+  --cmh-font-display: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif;
+  --cmh-font-data: "IBM Plex Mono", ui-monospace, monospace;
+  --cmh-font-arabic: "IBM Plex Sans Arabic", "Noto Sans Arabic", sans-serif;
+}
+
+[dir='rtl'] {
+  font-family: var(--cmh-font-arabic);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

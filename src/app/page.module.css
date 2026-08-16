@@ -1,0 +1,46 @@
+.shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--cmh-space-4);
+}
+
+.panel {
+  position: relative;
+  width: min(100%, 44rem);
+  border: var(--cmh-border-width) solid var(--cmh-rule);
+  border-radius: var(--cmh-radius-4);
+  background: var(--cmh-paper);
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.accent {
+  display: block;
+  width: 4rem;
+  height: var(--cmh-accent-rule-width);
+  margin-bottom: var(--cmh-space-4);
+  background: var(--cmh-blue-core);
+}
+
+.eyebrow {
+  margin: 0 0 var(--cmh-space-2);
+  color: var(--cmh-blue-strong);
+  font-family: var(--cmh-font-data);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.panel h1 {
+  margin: 0;
+  font-family: var(--cmh-font-display);
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 600;
+  line-height: 0.98;
+}
+
+.note {
+  max-width: 60ch;
+  margin: var(--cmh-space-4) 0 0;
+  color: var(--cmh-ink-secondary);
+  line-height: 1.6;
+}
