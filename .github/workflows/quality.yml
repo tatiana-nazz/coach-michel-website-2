@@ -1,11 +1,7 @@
 name: Scaffold quality gates
 
 on:
-  push:
-    branches:
-      - p4/bootstrap-greenfield
-    paths:
-      - pnpm-lock.yaml
+  workflow_dispatch:
   pull_request:
     branches:
       - main
@@ -15,7 +11,7 @@ permissions:
 
 jobs:
   quality:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Windows, X64]
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -33,37 +29,45 @@ jobs:
           cache: pnpm
 
       - name: Install
+        shell: pwsh
         run: pnpm install --frozen-lockfile
 
-      - name: Lint
-        run: pnpm lint
-
       - name: Format check
+        shell: pwsh
         run: pnpm format:check
 
+      - name: Lint
+        shell: pwsh
+        run: pnpm lint
+
       - name: Typecheck
+        shell: pwsh
         run: pnpm typecheck
 
       - name: Unit tests
+        shell: pwsh
         run: pnpm test:unit
 
       - name: Contract tests
+        shell: pwsh
         run: pnpm test:contract
 
       - name: Accessibility foundation tests
+        shell: pwsh
         run: pnpm test:a11y
 
       - name: RTL foundation tests
+        shell: pwsh
         run: pnpm test:rtl
 
       - name: Build
+        shell: pwsh
         run: pnpm build
 
       - name: Install Playwright Chromium
-        run: pnpm exec playwright install --with-deps chromium
+        shell: pwsh
+        run: pnpm exec playwright install chromium
 
       - name: E2E tests
+        shell: pwsh
         run: pnpm test:e2e
-
-      - name: Dependency audit
-        run: pnpm audit --audit-level high

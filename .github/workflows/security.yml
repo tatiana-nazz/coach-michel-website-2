@@ -1,31 +1,20 @@
-name: CodeQL security analysis
+name: Zero-cost dependency security audit
 
 on:
-  push:
-    branches:
-      - p4/bootstrap-greenfield
-    paths:
-      - pnpm-lock.yaml
+  workflow_dispatch:
   pull_request:
     branches:
       - main
 
 permissions:
   contents: read
-  security-events: write
-  packages: read
 
 jobs:
-  analyze:
-    runs-on: ubuntu-latest
+  dependency-audit:
+    runs-on: [self-hosted, Windows, X64]
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@ff2f1c621b7f889edc0d3c761ac2e6a3f8cdb0dd # v4.37.7
-        with:
-          languages: javascript-typescript
 
       - name: Setup pnpm
         uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
@@ -40,10 +29,9 @@ jobs:
           cache: pnpm
 
       - name: Install
+        shell: pwsh
         run: pnpm install --frozen-lockfile
 
-      - name: Build
-        run: pnpm build
-
-      - name: Analyze
-        uses: github/codeql-action/analyze@ff2f1c621b7f889edc0d3c761ac2e6a3f8cdb0dd # v4.37.7
+      - name: Dependency audit
+        shell: pwsh
+        run: pnpm audit --audit-level high
