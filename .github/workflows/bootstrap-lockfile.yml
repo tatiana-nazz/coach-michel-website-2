@@ -85,7 +85,7 @@ jobs:
           if (Test-Path 'pnpm-lock.yaml') {
             throw 'pnpm-lock.yaml unexpectedly exists before remediation generation.'
           }
-          pnpm install
+          pnpm install --allow-build=@parcel/watcher --allow-build=@swc/core --allow-build=unrs-resolver
           if ($LASTEXITCODE -ne 0) {
             throw "pnpm install failed with exit code $LASTEXITCODE."
           }
