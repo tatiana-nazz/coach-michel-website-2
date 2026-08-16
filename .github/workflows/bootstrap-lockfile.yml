@@ -6,8 +6,6 @@ on:
       - p4/bootstrap-greenfield
     paths:
       - .github/workflows/bootstrap-lockfile.yml
-      - .github/workflows/quality.yml
-      - .github/workflows/security.yml
   workflow_dispatch:
 
 permissions:
@@ -22,6 +20,38 @@ jobs:
         with:
           ref: p4/bootstrap-greenfield
           fetch-depth: 0
+
+      - name: Bootstrap portable PowerShell 7 for pwsh shell
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+          $version = '7.6.5'
+          $expectedSha256 = '32eb8f6cdce08f86e987d625a2733e54ac3e289ae7e1621b14c0b5bcec2434ea'
+          $archive = Join-Path $env:RUNNER_TEMP "PowerShell-$version-win-x64.zip"
+          $destination = Join-Path $env:RUNNER_TEMP "pwsh-$version"
+          $url = "https://github.com/PowerShell/PowerShell/releases/download/v$version/PowerShell-$version-win-x64.zip"
+
+          Invoke-WebRequest -Uri $url -OutFile $archive -UseBasicParsing
+
+          $actualSha256 = (Get-FileHash -Path $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actualSha256 -ne $expectedSha256) {
+            throw "PowerShell archive SHA-256 mismatch. Expected $expectedSha256, observed $actualSha256."
+          }
+
+          if (Test-Path $destination) {
+            Remove-Item -Path $destination -Recurse -Force
+          }
+          Expand-Archive -Path $archive -DestinationPath $destination -Force
+
+          $pwsh = Join-Path $destination 'pwsh.exe'
+          if (-not (Test-Path $pwsh)) {
+            throw "pwsh.exe not found after portable PowerShell extraction."
+          }
+
+          $destination | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          & $pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion.ToString()'
 
       - name: Validate self-hosted Windows X64 runner
         shell: pwsh
