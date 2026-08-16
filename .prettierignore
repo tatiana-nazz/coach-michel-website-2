@@ -4,3 +4,10 @@ coverage
 playwright-report
 test-results
 SOURCE_REV4267_AUTHORITY_SNAPSHOT.zip
+CURRENT_CANONICAL_POINTER_REV4267.json
+P4_S02_GITHUB_CAPABILITY_PREFLIGHT_REV4267.json
+P4_S02_REPOSITORY_TARGET_RESOLUTION_SUMMARY.json
+PACKAGE_MANIFEST.json
+next-env.d.ts
+pnpm-lock.yaml
+pnpm-workspace.yaml

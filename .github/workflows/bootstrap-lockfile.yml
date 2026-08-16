@@ -108,8 +108,8 @@ jobs:
             tsconfig.json `
             vitest.config.ts `
             playwright.config.ts `
-            "src/**/*.{ts,tsx,css,md}" `
-            "tests/**/*.{ts,tsx}" `
+            "src/**/*.{ts,tsx,css,md,json}" `
+            "tests/**/*.{ts,tsx,md}" `
             ".github/workflows/*.yml"
           if ($LASTEXITCODE -ne 0) {
             throw "Prettier normalization failed with exit code $LASTEXITCODE."
