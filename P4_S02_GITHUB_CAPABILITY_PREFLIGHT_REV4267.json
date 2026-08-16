@@ -1,0 +1,27 @@
+{
+  "schema_version": "app-builder-p4-s02-github-capability-preflight-1.0",
+  "preflight_id": "P4S02-GHPREFLIGHT-CMH-REV4267-001",
+  "stage_id": "P4-S02-CODEX-CODEBASE-INSPECTION",
+  "execution_anchor_id": "P4-EA02-REPOSITORY-ENVIRONMENT-AND-EXISTING-BEHAVIOR-INSPECTION",
+  "preferred_skill_id": "github-repository-inspection",
+  "github_connector_authenticated": true,
+  "authenticated_login": "tatiana-nazz",
+  "repository_list_call_succeeded": true,
+  "accessible_repository_count": 0,
+  "repository_target_status": "UNRESOLVED_NO_ACCESSIBLE_REPOSITORY",
+  "github_repository_read_surface": "AVAILABLE_BUT_NO_RESOURCE_TARGET",
+  "github_branch_read_resource_validation": "NOT_TESTABLE_WITHOUT_REPOSITORY_TARGET",
+  "github_commit_read_resource_validation": "NOT_TESTABLE_WITHOUT_REPOSITORY_TARGET",
+  "required_authoritative_input_status": "MISSING_REPOSITORY_TARGET",
+  "pre_dispatch_gate_result": "FAIL_CLOSED_REPLAN_REQUIRED",
+  "execution_authority_created": false,
+  "specialist_dispatch_allowed": false,
+  "allowed_resolution_paths": [
+    "Connect or expose the intended GitHub repository to the linked GitHub account/app.",
+    "Provide the existing codebase as a repository archive for a governed manual-fallback inspection route."
+  ],
+  "repository_creation_by_current_github_provider": "NOT_SUPPORTED_BY_CONNECTED_PROVIDER_PROFILE",
+  "implementation_authority": false,
+  "revision": 4267,
+  "record_hash": "9485fff46b7fe5a66c20f6d5327436635b6eeeb17093f37693b0669063bade36"
+}

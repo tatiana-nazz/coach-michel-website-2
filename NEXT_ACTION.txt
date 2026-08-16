@@ -1,0 +1,6 @@
+P4-S02 cannot be dispatched until an authoritative codebase target is resolved.
+
+Option A: make the intended GitHub repository accessible to the connected GitHub account/app, then return to Central.
+Option B: upload the existing repository/codebase ZIP to Central for a governed manual-fallback inspection route.
+
+No P4-S02 execution authority has been created.
