@@ -1,6 +1,12 @@
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
 import { describe, expect, it } from 'vitest';
 
-import tokens from '../../src/design-system/tokens.css?raw';
+const tokens = readFileSync(
+  fileURLToPath(new URL('../../src/design-system/tokens.css', import.meta.url)),
+  'utf8',
+);
 
 describe('accessibility foundation', () => {
   it('preserves the governed solid focus ring and non-blue semantic state channels', () => {
