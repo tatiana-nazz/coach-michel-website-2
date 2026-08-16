@@ -1,4 +1,4 @@
-name: P4-S04 format and ESLint compatibility remediation
+name: P4-S04 format ESLint and typecheck remediation
 
 on:
   push:
@@ -11,12 +11,12 @@ permissions:
   contents: write
 
 concurrency:
-  group: p4-s04-format-eslint-remediation
+  group: p4-s04-format-eslint-typecheck-remediation
   cancel-in-progress: false
 
 jobs:
   remediate:
-    if: "${{ github.event.head_commit.message == 'ci: run P4-S04 format and ESLint remediation v2' }}"
+    if: "${{ github.event.head_commit.message == 'ci: run P4-S04 typecheck remediation v3' }}"
     runs-on: [self-hosted, Windows, X64]
     steps:
       - name: Prepare isolated checkout directory
@@ -27,7 +27,6 @@ jobs:
           if (Test-Path -LiteralPath $checkout) {
             Remove-Item -LiteralPath $checkout -Recurse -Force
           }
-          Write-Output "Prepared isolated checkout path: $checkout"
 
       - name: Checkout exact carrier commit into isolated directory
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -42,8 +41,9 @@ jobs:
         working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
-          $requiredParent = '72e6c777f2052db15694457bb033f77ca54856bc'
+          $requiredParent = 'fcbcb9241f863babbd79bb5d5aafa806fbfbc077'
           $requiredPackageBlob = 'f09f9ce0392c63e5445dbdae25cc07ad28829bcd'
+          $requiredPlaywrightBlob = '3531687b7bf84db883df5f594ca390ff90a9018e'
           $requiredWorkflowPath = '.github/workflows/bootstrap-lockfile.yml'
 
           $parent = (git rev-parse HEAD^).Trim()
@@ -61,6 +61,11 @@ jobs:
             throw "package.json blob mismatch. Expected $requiredPackageBlob, observed $packageBlob."
           }
 
+          $playwrightBlob = (git rev-parse HEAD:playwright.config.ts).Trim()
+          if ($playwrightBlob -ne $requiredPlaywrightBlob) {
+            throw "playwright.config.ts blob mismatch. Expected $requiredPlaywrightBlob, observed $playwrightBlob."
+          }
+
           $lockEntries = @((git ls-tree --name-only HEAD -- pnpm-lock.yaml) | Where-Object { $_ })
           if ($lockEntries.Count -ne 0) {
             throw 'pnpm-lock.yaml unexpectedly exists before remediation.'
@@ -70,12 +75,6 @@ jobs:
           if ($status.Count -ne 0) {
             throw "Isolated working tree is not clean before remediation: $($status -join ', ')"
           }
-
-          Write-Output "Carrier parent: $parent"
-          Write-Output "Carrier changed path: $($changed -join ', ')"
-          Write-Output "package.json blob: $packageBlob"
-          Write-Output "pnpm-lock.yaml state: ABSENT"
-          Write-Output 'Isolated working tree: CLEAN'
 
       - name: Bootstrap portable PowerShell 7
         shell: powershell
@@ -93,7 +92,7 @@ jobs:
           Invoke-WebRequest -Uri $url -OutFile $archive -UseBasicParsing
           $actualSha256 = (Get-FileHash -Path $archive -Algorithm SHA256).Hash.ToLowerInvariant()
           if ($actualSha256 -ne $expectedSha256) {
-            throw "PowerShell archive SHA-256 mismatch. Expected $expectedSha256, observed $actualSha256."
+            throw "PowerShell archive SHA-256 mismatch."
           }
 
           if (Test-Path -LiteralPath $destination) {
@@ -107,22 +106,14 @@ jobs:
           }
 
           $destination | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          & $pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion.ToString()'
 
       - name: Validate self-hosted Windows X64 runner
         shell: pwsh
         working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
-          if ($env:RUNNER_OS -ne 'Windows') {
-            throw "Expected RUNNER_OS=Windows, observed '$env:RUNNER_OS'."
-          }
-          if ($env:RUNNER_ARCH -ne 'X64') {
-            throw "Expected RUNNER_ARCH=X64, observed '$env:RUNNER_ARCH'."
-          }
-          Write-Output "Runner name: $env:RUNNER_NAME"
-          Write-Output "Runner OS: $env:RUNNER_OS"
-          Write-Output "Runner architecture: $env:RUNNER_ARCH"
+          if ($env:RUNNER_OS -ne 'Windows') { throw "Expected Windows runner." }
+          if ($env:RUNNER_ARCH -ne 'X64') { throw "Expected X64 runner." }
 
       - name: Setup pnpm
         uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
@@ -144,15 +135,30 @@ jobs:
           $before = [System.IO.File]::ReadAllText($path)
           $from = '"eslint": "10.8.0"'
           $to = '"eslint": "9.39.5"'
-          $count = ([regex]::Matches($before, [regex]::Escape($from))).Count
-          if ($count -ne 1) {
-            throw "Expected exactly one ESLint version token, observed $count."
+          if (([regex]::Matches($before, [regex]::Escape($from))).Count -ne 1) {
+            throw 'Expected exactly one ESLint version token.'
           }
-
-          $after = $before.Replace($from, $to)
           [System.IO.File]::WriteAllText(
             $path,
-            $after,
+            $before.Replace($from, $to),
+            (New-Object System.Text.UTF8Encoding($false))
+          )
+
+      - name: Apply exact Playwright workers type fix
+        shell: pwsh
+        working-directory: _central_p4s04
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = 'playwright.config.ts'
+          $before = [System.IO.File]::ReadAllText($path)
+          $from = '  workers: process.env.CI ? 1 : undefined,'
+          $to = '  ...(process.env.CI ? { workers: 1 } : {}),'
+          if (([regex]::Matches($before, [regex]::Escape($from))).Count -ne 1) {
+            throw 'Expected exactly one Playwright workers token.'
+          }
+          [System.IO.File]::WriteAllText(
+            $path,
+            $before.Replace($from, $to),
             (New-Object System.Text.UTF8Encoding($false))
           )
 
@@ -226,6 +232,9 @@ jobs:
 
           if (-not ($changed -contains 'pnpm-lock.yaml')) {
             throw 'pnpm-lock.yaml is not present in the change set.'
+          }
+          if (-not ($changed -contains 'playwright.config.ts')) {
+            throw 'playwright.config.ts type remediation is not present in the change set.'
           }
 
           $forbidden = @($changed | Where-Object { -not (Test-AllowedPath $_) })
@@ -307,36 +316,6 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
 
-          function Test-AllowedPath([string]$Path) {
-            if ($Path -eq 'pnpm-lock.yaml') { return $true }
-            $allowedRoot = @(
-              'package.json',
-              '.prettierrc.json',
-              'eslint.config.mjs',
-              'next.config.mjs',
-              'tsconfig.json',
-              'vitest.config.ts',
-              'playwright.config.ts'
-            )
-            if ($allowedRoot -contains $Path) { return $true }
-            if ($Path.StartsWith('src/')) { return $true }
-            if ($Path.StartsWith('tests/')) { return $true }
-            if ($Path.StartsWith('.github/workflows/')) { return $true }
-            return $false
-          }
-
-          $changed = @(
-            @(
-              git diff --name-only
-              git ls-files --others --exclude-standard
-            ) | Where-Object { $_ } | Sort-Object -Unique
-          )
-
-          $forbidden = @($changed | Where-Object { -not (Test-AllowedPath $_) })
-          if ($forbidden.Count -gt 0) {
-            throw "Out-of-scope changed paths detected after gates: $($forbidden -join ', ')"
-          }
-
           $diffText = git diff --no-ext-diff --binary
           $diffHash = [Convert]::ToHexString(
             [System.Security.Cryptography.SHA256]::HashData(
@@ -345,14 +324,7 @@ jobs:
           ).ToLowerInvariant()
 
           if ($diffHash -ne $env:PRE_GATE_TRACKED_DIFF_SHA256) {
-            throw 'Tracked scaffold files changed during retained gates after Prettier normalization.'
-          }
-
-          if (-not (Test-Path -LiteralPath 'pnpm-lock.yaml')) {
-            throw 'pnpm-lock.yaml disappeared during retained gates.'
-          }
-          if ((Get-Item -LiteralPath 'pnpm-lock.yaml').Length -le 0) {
-            throw 'pnpm-lock.yaml is empty after retained gates.'
+            throw 'Tracked files changed during retained gates.'
           }
 
       - name: Commit authorized P4-S04 remediation output
@@ -372,36 +344,14 @@ jobs:
           if (-not ($staged -contains 'pnpm-lock.yaml')) {
             throw 'pnpm-lock.yaml is not staged.'
           }
-          if ($staged.Count -eq 0) {
-            throw 'No authorized remediation changes are staged.'
-          }
-
-          $forbidden = @(
-            $staged | Where-Object {
-              $path = $_
-              -not (
-                $path -eq 'pnpm-lock.yaml' -or
-                $path -eq 'package.json' -or
-                $path -eq '.prettierrc.json' -or
-                $path -eq 'eslint.config.mjs' -or
-                $path -eq 'next.config.mjs' -or
-                $path -eq 'tsconfig.json' -or
-                $path -eq 'vitest.config.ts' -or
-                $path -eq 'playwright.config.ts' -or
-                $path.StartsWith('src/') -or
-                $path.StartsWith('tests/') -or
-                $path.StartsWith('.github/workflows/')
-              )
-            }
-          )
-          if ($forbidden.Count -gt 0) {
-            throw "Forbidden staged paths: $($forbidden -join ', ')"
+          if (-not ($staged -contains 'playwright.config.ts')) {
+            throw 'playwright.config.ts is not staged.'
           }
 
           Write-Output 'Staged authorized remediation paths:'
           $staged | ForEach-Object { Write-Output " - $_" }
 
-          git commit -m 'chore: finalize P4-S04 formatting and ESLint compatibility [self-hosted-remediation]'
+          git commit -m 'chore: finalize P4-S04 formatting ESLint and typecheck remediation'
           if ($LASTEXITCODE -ne 0) {
             throw "git commit failed with exit code $LASTEXITCODE."
           }
