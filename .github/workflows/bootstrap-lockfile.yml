@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   remediate:
-    if: github.event.head_commit.message == 'ci: run P4-S04 format and ESLint remediation'
+    if: "${{ github.event.head_commit.message == 'ci: run P4-S04 format and ESLint remediation v2' }}"
     runs-on: [self-hosted, Windows, X64]
     steps:
       - name: Prepare isolated checkout directory
@@ -42,7 +42,7 @@ jobs:
         working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
-          $requiredParent = '18b7e7a5fe5093a4c35dad9d7d223551696eba6e'
+          $requiredParent = '72e6c777f2052db15694457bb033f77ca54856bc'
           $requiredPackageBlob = 'f09f9ce0392c63e5445dbdae25cc07ad28829bcd'
           $requiredWorkflowPath = '.github/workflows/bootstrap-lockfile.yml'
 
