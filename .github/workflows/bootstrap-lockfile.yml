@@ -41,7 +41,7 @@ jobs:
         working-directory: _central_p4s04
         run: |
           $ErrorActionPreference = 'Stop'
-          $requiredParent = '17eb69f471b9599b1074d9352127ef9987eacd10'
+          $requiredParent = '29b29172cc3443cd1101f858b3dd4b4ef873dd47'
           $requiredPackageBlob = 'f09f9ce0392c63e5445dbdae25cc07ad28829bcd'
           $requiredWorkflowPath = '.github/workflows/bootstrap-lockfile.yml'
 
@@ -50,8 +50,8 @@ jobs:
             throw "Carrier parent mismatch. Expected $requiredParent, observed $parent."
           }
 
-          $changed = @(git diff --name-only HEAD^ HEAD --) | Where-Object { $_ }
-          if ($changed.Count -ne 1 -or $changed[0] -ne $requiredWorkflowPath) {
+          $changed = @((git diff --name-only HEAD^ HEAD --) | Where-Object { $_ })
+          if ($changed.Count -ne 1 -or ($changed -join "`n") -ne $requiredWorkflowPath) {
             throw "Carrier commit changed unexpected paths: $($changed -join ', ')"
           }
 
@@ -62,18 +62,18 @@ jobs:
 
           # Absence is validated with git ls-tree because an absent path is the expected
           # state and must not cause a native-command nonzero exit under fail-closed PowerShell.
-          $lockEntries = @(git ls-tree --name-only HEAD -- pnpm-lock.yaml) | Where-Object { $_ }
+          $lockEntries = @((git ls-tree --name-only HEAD -- pnpm-lock.yaml) | Where-Object { $_ })
           if ($lockEntries.Count -ne 0) {
             throw "pnpm-lock.yaml unexpectedly exists before remediation."
           }
 
-          $status = @(git status --porcelain) | Where-Object { $_ }
+          $status = @((git status --porcelain) | Where-Object { $_ })
           if ($status.Count -ne 0) {
             throw "Isolated working tree is not clean before remediation: $($status -join ', ')"
           }
 
           Write-Output "Carrier parent: $parent"
-          Write-Output "Carrier changed path: $($changed[0])"
+          Write-Output "Carrier changed path: $($changed -join ', ')"
           Write-Output "package.json blob: $packageBlob"
           Write-Output "pnpm-lock.yaml state: ABSENT"
           Write-Output "Isolated working tree: CLEAN"
@@ -179,9 +179,11 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $changed = @(
-            git diff --name-only
-            git ls-files --others --exclude-standard
-          ) | Where-Object { $_ } | Sort-Object -Unique
+            @(
+              git diff --name-only
+              git ls-files --others --exclude-standard
+            ) | Where-Object { $_ } | Sort-Object -Unique
+          )
 
           $expected = @('package.json', 'pnpm-lock.yaml') | Sort-Object
           if (($changed -join "`n") -ne ($expected -join "`n")) {
@@ -259,9 +261,11 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $changed = @(
-            git diff --name-only
-            git ls-files --others --exclude-standard
-          ) | Where-Object { $_ } | Sort-Object -Unique
+            @(
+              git diff --name-only
+              git ls-files --others --exclude-standard
+            ) | Where-Object { $_ } | Sort-Object -Unique
+          )
 
           $expected = @('package.json', 'pnpm-lock.yaml') | Sort-Object
           if (($changed -join "`n") -ne ($expected -join "`n")) {
@@ -285,7 +289,7 @@ jobs:
 
           git add -- package.json pnpm-lock.yaml
 
-          $staged = @(git diff --cached --name-only) | Where-Object { $_ } | Sort-Object -Unique
+          $staged = @((git diff --cached --name-only) | Where-Object { $_ } | Sort-Object -Unique)
           $expected = @('package.json', 'pnpm-lock.yaml') | Sort-Object
           if (($staged -join "`n") -ne ($expected -join "`n")) {
             throw "Unexpected staged paths: $($staged -join ', ')"
