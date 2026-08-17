@@ -113,10 +113,7 @@ export function createBrowserApiClient(fetchImpl: typeof fetch = fetch): ApiClie
 
       let response: Response;
       try {
-        response = await fetchImpl(
-          operation.path,
-          buildRequestInit(operation.method, request),
-        );
+        response = await fetchImpl(operation.path, buildRequestInit(operation.method, request));
       } catch (cause) {
         return {
           ok: false,

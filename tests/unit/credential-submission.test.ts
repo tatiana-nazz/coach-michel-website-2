@@ -47,9 +47,7 @@ describe('P4-S08 credential submission boundary', () => {
     expect(classifyProviderAuthFailure({ status: 400, code: 'invalid_credentials' })).toBe(
       'AUTHENTICATION_REQUIRED_OR_INVALID',
     );
-    expect(classifyProviderAuthFailure({ status: 401 })).toBe(
-      'AUTHENTICATION_REQUIRED_OR_INVALID',
-    );
+    expect(classifyProviderAuthFailure({ status: 401 })).toBe('AUTHENTICATION_REQUIRED_OR_INVALID');
   });
 
   it('maps provider rate limits and transient failures to governed stable codes', () => {

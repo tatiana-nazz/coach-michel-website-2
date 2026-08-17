@@ -3,10 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
-import {
-  ESTABLISH_SESSION_OPERATION_ID,
-  operationRegistry,
-} from '@/platform/api/operations';
+import { ESTABLISH_SESSION_OPERATION_ID, operationRegistry } from '@/platform/api/operations';
 
 const route = readFileSync(
   fileURLToPath(new URL('../../src/app/access/session/route.ts', import.meta.url)),

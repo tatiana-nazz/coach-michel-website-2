@@ -29,9 +29,7 @@ describe('P4-S08 browser API client', () => {
     expect(init?.method).toBe('POST');
     expect(init?.credentials).toBe('same-origin');
     expect(init?.cache).toBe('no-store');
-    expect(init?.body).toBe(
-      JSON.stringify({ email: 'trainee@example.com', password: 'secret' }),
-    );
+    expect(init?.body).toBe(JSON.stringify({ email: 'trainee@example.com', password: 'secret' }));
   });
 
   it('maps stable error codes without exposing a provider-specific response body', async () => {

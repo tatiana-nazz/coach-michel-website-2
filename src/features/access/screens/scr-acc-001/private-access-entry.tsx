@@ -76,7 +76,12 @@ export function PrivateAccessEntry({
     const email = formData.get('email');
     const password = formData.get('password');
 
-    if (typeof email !== 'string' || email.length === 0 || typeof password !== 'string' || password.length === 0) {
+    if (
+      typeof email !== 'string' ||
+      email.length === 0 ||
+      typeof password !== 'string' ||
+      password.length === 0
+    ) {
       setActiveStatus('validation_error');
       return;
     }
