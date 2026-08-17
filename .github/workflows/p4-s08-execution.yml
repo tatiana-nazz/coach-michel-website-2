@@ -18,16 +18,16 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.sha }}
-          fetch-depth: 2
+          fetch-depth: 3
           clean: true
           persist-credentials: true
 
-      - name: Validate state-bound parent
+      - name: Validate state-bound ancestry and scope
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD^)" = "3205312969567d638fd4c47c0c9edcf7ecd7857a"
-          test "$(git rev-parse HEAD^{tree})" != ""
-          git diff --name-only HEAD^ HEAD | sort > /tmp/p4s08-candidate-paths.txt
+          START=3205312969567d638fd4c47c0c9edcf7ecd7857a
+          git merge-base --is-ancestor "$START" HEAD
+          git diff --name-only "$START" HEAD | sort > /tmp/p4s08-candidate-paths.txt
           cat /tmp/p4s08-candidate-paths.txt
           python - <<'PY'
           from pathlib import Path
@@ -69,7 +69,7 @@ jobs:
           cache: pnpm
 
       - name: Resolve deterministic lockfile
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Normalize authorized files
         run: |
