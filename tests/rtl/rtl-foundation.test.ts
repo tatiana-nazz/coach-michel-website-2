@@ -1,7 +1,14 @@
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
 import { describe, expect, it } from 'vitest';
 
-import tokens from '../../src/design-system/tokens.css?raw';
 import { directionForLocale } from '@/i18n/direction';
+
+const tokens = readFileSync(
+  fileURLToPath(new URL('../../src/design-system/tokens.css', import.meta.url)),
+  'utf8',
+);
 
 describe('Arabic RTL foundation', () => {
   it('uses semantic RTL direction for Arabic', () => {
