@@ -39,7 +39,7 @@ test('governed authentication failure maps to the existing UI without provider d
   await page.getByLabel('Password').fill('not-a-live-credential');
   await page.getByRole('button', { name: 'Continue' }).click();
 
-  await expect(page.getByRole('alert')).toContainText(
+  await expect(page.locator('#private-access-status')).toContainText(
     'Private access could not be established with those credentials.',
   );
   await expect(page.locator('body')).not.toContainText('invalid_credentials');
