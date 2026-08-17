@@ -51,10 +51,10 @@
   --cmh-grid-desktop-margin-min: 48px;
   --cmh-grid-desktop-max-content: 1320px;
 
-  --cmh-font-ui: "IBM Plex Sans", system-ui, sans-serif;
-  --cmh-font-display: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif;
-  --cmh-font-data: "IBM Plex Mono", ui-monospace, monospace;
-  --cmh-font-arabic: "IBM Plex Sans Arabic", "Noto Sans Arabic", sans-serif;
+  --cmh-font-ui: 'IBM Plex Sans', system-ui, sans-serif;
+  --cmh-font-display: 'IBM Plex Sans Condensed', 'IBM Plex Sans', system-ui, sans-serif;
+  --cmh-font-data: 'IBM Plex Mono', ui-monospace, monospace;
+  --cmh-font-arabic: 'IBM Plex Sans Arabic', 'Noto Sans Arabic', sans-serif;
 }
 
 [dir='rtl'] {

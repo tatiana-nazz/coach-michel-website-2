@@ -8,8 +8,8 @@ export default function ScaffoldPage() {
         <p className={styles.eyebrow}>P4-S04</p>
         <h1 id="scaffold-title">Implementation scaffold</h1>
         <p className={styles.note}>
-          Governed product routes, screens, data, permissions, and business behavior are intentionally
-          not implemented at this stage.
+          Governed product routes, screens, data, permissions, and business behavior are
+          intentionally not implemented at this stage.
         </p>
       </section>
     </main>

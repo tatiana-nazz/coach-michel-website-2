@@ -17,8 +17,7 @@ export interface ApiFailure {
 }
 
 export type ApiResult<T> =
-  | { readonly ok: true; readonly data: T }
-  | { readonly ok: false; readonly error: ApiFailure };
+  { readonly ok: true; readonly data: T } | { readonly ok: false; readonly error: ApiFailure };
 
 export interface ApiRequest<TBody = unknown> {
   readonly operationId: string;
