@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, type FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 
 import type { SupportedLocale } from '@/i18n/config';
 import { browserApiClient } from '@/platform/api/browser-client';
@@ -62,10 +62,6 @@ export function PrivateAccessEntry({
   const [activeLocale, setActiveLocale] = useState<SupportedLocale>(locale);
   const [activeStatus, setActiveStatus] = useState<PrivateAccessEntryStatus>(status);
   const [submitting, setSubmitting] = useState(false);
-
-  useEffect(() => {
-    setActiveStatus(status);
-  }, [status]);
 
   const viewModel = getPrivateAccessEntryViewModel(activeLocale, activeStatus);
   const { copy } = viewModel;
