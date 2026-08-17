@@ -1,4 +1,4 @@
-name: Operator Prettier path diagnostic
+name: Operator full remediation validation
 
 on:
   push:
@@ -11,10 +11,10 @@ permissions:
   contents: write
 
 jobs:
-  diagnose:
+  validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout diagnostic trigger commit
+      - name: Checkout validation trigger commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.sha }}
@@ -36,20 +36,51 @@ jobs:
       - name: Install exact lockfile
         run: pnpm install --frozen-lockfile
 
-      - name: Capture exact Prettier differences
+      - name: Apply exact remaining Prettier repair
         run: |
-          set +e
-          pnpm exec prettier --list-different . > PRETTIER_DIFFERENCES.txt
-          status=$?
-          set -e
-          echo "prettier_exit_code=$status" >> PRETTIER_DIFFERENCES.txt
-          cat PRETTIER_DIFFERENCES.txt
+          set -euo pipefail
+          pnpm exec prettier --write tests/unit/session-authorization.test.ts
+          pnpm exec prettier --check tests/unit/session-authorization.test.ts
 
-      - name: Commit diagnostic report
+      - name: Commit one-file format fix and remove diagnostic report
         run: |
           set -euo pipefail
           git config user.name 'operator-repair-bot'
           git config user.email 'operator-repair-bot@users.noreply.github.com'
-          git add PRETTIER_DIFFERENCES.txt
-          git commit -m 'ci: capture exact Prettier differing paths'
+          git rm -f PRETTIER_DIFFERENCES.txt
+          git add -- tests/unit/session-authorization.test.ts
+          git commit -m 'fix: normalize session authorization test formatting'
           git push origin HEAD:p4/bootstrap-greenfield
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Unit tests
+        run: pnpm test:unit
+
+      - name: Contract tests
+        run: pnpm test:contract
+
+      - name: Accessibility foundation tests
+        run: pnpm test:a11y
+
+      - name: RTL foundation tests
+        run: pnpm test:rtl
+
+      - name: Build
+        run: pnpm build
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: E2E tests
+        run: pnpm test:e2e
+
+      - name: Dependency audit
+        run: pnpm audit --audit-level high
