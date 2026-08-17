@@ -1,0 +1,64 @@
+name: Operator deterministic format repair
+
+on:
+  push:
+    branches:
+      - p4/bootstrap-greenfield
+    paths:
+      - '.github/workflows/operator-repair-format.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: [self-hosted, Windows, X64]
+    steps:
+      - name: Checkout repair trigger commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          clean: true
+          persist-credentials: true
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86
+        with:
+          version: 11.21.0
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24.18.0
+          cache: pnpm
+
+      - name: Install exact lockfile
+        shell: powershell
+        run: pnpm install --frozen-lockfile
+
+      - name: Apply deterministic Prettier repair
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          pnpm exec prettier --write .github/workflows/quality.yml package.json src/platform/auth/session.ts
+          if ($LASTEXITCODE -ne 0) { throw 'Prettier repair failed.' }
+          pnpm format:check
+          if ($LASTEXITCODE -ne 0) { throw 'Repository still fails format check after repair.' }
+
+      - name: Commit and push formatted files
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git config user.name 'operator-repair-bot'
+          git config user.email 'operator-repair-bot@users.noreply.github.com'
+          git add -- .github/workflows/quality.yml package.json src/platform/auth/session.ts
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 0) {
+            Write-Output 'No formatting changes required.'
+            exit 0
+          }
+          git commit -m 'chore: apply deterministic Prettier repair'
+          if ($LASTEXITCODE -ne 0) { throw 'Formatting commit failed.' }
+          git push origin HEAD:p4/bootstrap-greenfield
+          if ($LASTEXITCODE -ne 0) { throw 'Formatting push failed.' }
