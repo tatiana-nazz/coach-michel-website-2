@@ -1,0 +1,477 @@
+name: P4-S04 v9 next-env-tolerant retained-gate remediation
+
+on:
+  push:
+    branches:
+      - p4/bootstrap-greenfield
+    paths:
+      - .github/workflows/p4-s04-v9.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: p4-s04-v9-next-env-tolerant
+  cancel-in-progress: false
+
+jobs:
+  remediate:
+    if: "${{ github.event.head_commit.message == 'ci: run P4-S04 next-env remediation v9' }}"
+    runs-on: [self-hosted, Windows, X64]
+    steps:
+      - name: Prepare isolated checkout
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $checkout = Join-Path $env:GITHUB_WORKSPACE '_central_p4s04_v9'
+          if (Test-Path -LiteralPath $checkout) {
+            Remove-Item -LiteralPath $checkout -Recurse -Force
+          }
+
+      - name: Checkout exact v9 carrier commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          clean: true
+          path: _central_p4s04_v9
+
+      - name: Validate v9 binding
+        shell: powershell
+        working-directory: _central_p4s04_v9
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $requiredParent = '72d4ccc538bef8140efd41c76e08f0aac86412f1'
+          $requiredWorkflowPath = '.github/workflows/p4-s04-v9.yml'
+          $requiredRetiredV4Blob = '26e342e61c81db379ccf9741c14f8f3a23817f98'
+          $requiredPackageBlob = 'f09f9ce0392c63e5445dbdae25cc07ad28829bcd'
+          $requiredPlaywrightBlob = '3531687b7bf84db883df5f594ca390ff90a9018e'
+          $requiredA11yBlob = '3bd45ac8652c09ba33719cf5f42011674909c244'
+
+          $parent = (git rev-parse HEAD^).Trim()
+          if ($parent -ne $requiredParent) {
+            throw "Carrier parent mismatch. Expected $requiredParent, observed $parent."
+          }
+
+          $changed = @((git diff --name-only HEAD^ HEAD --) | Where-Object { $_ })
+          if ($changed.Count -ne 1 -or ($changed -join "`n") -ne $requiredWorkflowPath) {
+            throw "Carrier commit changed unexpected paths: $($changed -join ', ')"
+          }
+
+          if ((git rev-parse HEAD:.github/workflows/p4-s04-v4.yml).Trim() -ne $requiredRetiredV4Blob) {
+            throw 'Retired v4 workflow blob mismatch.'
+          }
+          if ((git rev-parse HEAD:package.json).Trim() -ne $requiredPackageBlob) {
+            throw 'package.json blob mismatch.'
+          }
+          if ((git rev-parse HEAD:playwright.config.ts).Trim() -ne $requiredPlaywrightBlob) {
+            throw 'playwright.config.ts blob mismatch.'
+          }
+          if ((git rev-parse HEAD:tests/a11y/foundation.test.ts).Trim() -ne $requiredA11yBlob) {
+            throw 'Accessibility fixture-loader blob mismatch.'
+          }
+          $requiredRTLBlob = '2e23244ab8d9c7ffae2485c7608d6490c991e494'
+          if ((git rev-parse HEAD:tests/rtl/rtl-foundation.test.ts).Trim() -ne $requiredRTLBlob) {
+            throw 'RTL fixture-loader blob mismatch.'
+          }
+          $requiredTsconfigBlob = 'af3a62b676f93b0985dba4a7a2649bb3b3ea2e12'
+          if ((git rev-parse HEAD:tsconfig.json).Trim() -ne $requiredTsconfigBlob) {
+            throw 'Build-stable tsconfig blob mismatch.'
+          }
+          $requiredNextEnvBlob = 'e29239c1d65a1c08876106b10ed7803b88df485d'
+          if ((git rev-parse HEAD:next-env.d.ts).Trim() -ne $requiredNextEnvBlob) {
+            throw 'next-env.d.ts pre-build blob mismatch.'
+          }
+
+          $lockEntries = @((git ls-tree --name-only HEAD -- pnpm-lock.yaml) | Where-Object { $_ })
+          if ($lockEntries.Count -ne 0) {
+            throw 'pnpm-lock.yaml unexpectedly exists.'
+          }
+
+          $status = @((git status --porcelain) | Where-Object { $_ })
+          if ($status.Count -ne 0) {
+            throw "Working tree is not clean: $($status -join ', ')"
+          }
+
+      - name: Bootstrap or reuse portable PowerShell 7
+        shell: powershell
+        working-directory: _central_p4s04_v9
+        run: |
+          $ErrorActionPreference = 'Stop'
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+          $version = '7.6.5'
+          $expectedSha256 = '32eb8f6cdce08f86e987d625a2733e54ac3e289ae7e1621b14c0b5bcec2434ea'
+          $archive = Join-Path $env:RUNNER_TEMP "PowerShell-$version-win-x64.zip"
+          $destination = Join-Path $env:RUNNER_TEMP "pwsh-$version"
+          $pwsh = Join-Path $destination 'pwsh.exe'
+          $url = "https://github.com/PowerShell/PowerShell/releases/download/v$version/PowerShell-$version-win-x64.zip"
+
+          if (Test-Path -LiteralPath $pwsh) {
+            $destination | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+            & $pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion.ToString()'
+            exit 0
+          }
+
+          $archiveIsValid = $false
+          if (Test-Path -LiteralPath $archive) {
+            $archiveHash = (Get-FileHash -Path $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+            if ($archiveHash -eq $expectedSha256) {
+              $archiveIsValid = $true
+            } else {
+              Remove-Item -LiteralPath $archive -Force
+            }
+          }
+
+          if (-not $archiveIsValid) {
+            $downloaded = $false
+            for ($attempt = 1; $attempt -le 3; $attempt++) {
+              try {
+                Write-Output "PowerShell download attempt $attempt of 3"
+                Invoke-WebRequest -Uri $url -OutFile $archive -UseBasicParsing -TimeoutSec 600
+                $actualSha256 = (Get-FileHash -Path $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+                if ($actualSha256 -ne $expectedSha256) {
+                  throw "PowerShell archive SHA-256 mismatch."
+                }
+                $downloaded = $true
+                break
+              } catch {
+                if ($attempt -eq 3) { throw }
+                Start-Sleep -Seconds (20 * $attempt)
+              }
+            }
+            if (-not $downloaded) {
+              throw 'Portable PowerShell download did not complete.'
+            }
+          }
+
+          if (Test-Path -LiteralPath $destination) {
+            Remove-Item -LiteralPath $destination -Recurse -Force
+          }
+          Expand-Archive -Path $archive -DestinationPath $destination -Force
+          if (-not (Test-Path -LiteralPath $pwsh)) {
+            throw 'pwsh.exe not found after extraction.'
+          }
+          $destination | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          & $pwsh -NoLogo -NoProfile -Command '$PSVersionTable.PSVersion.ToString()'
+
+      - name: Validate runner
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:RUNNER_OS -ne 'Windows') { throw 'Expected Windows runner.' }
+          if ($env:RUNNER_ARCH -ne 'X64') { throw 'Expected X64 runner.' }
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86
+        with:
+          version: 11.21.0
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24.18.0
+
+      - name: Apply ESLint compatibility pin
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = 'package.json'
+          $before = [IO.File]::ReadAllText($path)
+          $from = '"eslint": "10.8.0"'
+          $to = '"eslint": "9.39.5"'
+          if (([regex]::Matches($before, [regex]::Escape($from))).Count -ne 1) {
+            throw 'Expected one ESLint token.'
+          }
+          [IO.File]::WriteAllText(
+            $path,
+            $before.Replace($from, $to),
+            (New-Object Text.UTF8Encoding($false))
+          )
+
+      - name: Apply Playwright workers type fix
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $path = 'playwright.config.ts'
+          $before = [IO.File]::ReadAllText($path)
+          $from = '  workers: process.env.CI ? 1 : undefined,'
+          $to = '  ...(process.env.CI ? { workers: 1 } : {}),'
+          if (([regex]::Matches($before, [regex]::Escape($from))).Count -ne 1) {
+            throw 'Expected one Playwright workers token.'
+          }
+          [IO.File]::WriteAllText(
+            $path,
+            $before.Replace($from, $to),
+            (New-Object Text.UTF8Encoding($false))
+          )
+
+      - name: Generate lockfile and install with bounded network retries
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $installArgs = @(
+            'install',
+            '--prefer-offline',
+            '--no-frozen-lockfile',
+            '--network-concurrency=4',
+            '--fetch-retries=5',
+            '--fetch-retry-mintimeout=10000',
+            '--fetch-retry-maxtimeout=180000',
+            '--fetch-timeout=600000'
+          )
+
+          $success = $false
+          for ($attempt = 1; $attempt -le 3; $attempt++) {
+            Write-Output "pnpm install transport attempt $attempt of 3"
+            & pnpm @installArgs
+            if ($LASTEXITCODE -eq 0) {
+              $success = $true
+              break
+            }
+            if ($attempt -lt 3) {
+              Start-Sleep -Seconds (30 * $attempt)
+            }
+          }
+
+          if (-not $success) {
+            throw 'pnpm install exhausted the three authorized transport attempts.'
+          }
+          if (-not (Test-Path -LiteralPath 'pnpm-lock.yaml')) {
+            throw 'pnpm-lock.yaml was not generated.'
+          }
+          if ((Get-Item -LiteralPath 'pnpm-lock.yaml').Length -le 0) {
+            throw 'pnpm-lock.yaml is empty.'
+          }
+
+      - name: Normalize authorized formatting
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: |
+          $ErrorActionPreference = 'Stop'
+          pnpm exec prettier --write `
+            package.json `
+            .prettierrc.json `
+            eslint.config.mjs `
+            next.config.mjs `
+            tsconfig.json `
+            vitest.config.ts `
+            playwright.config.ts `
+            "src/**/*.{ts,tsx,css,md,json}" `
+            "tests/**/*.{ts,tsx,md}" `
+            ".github/workflows/*.yml"
+          if ($LASTEXITCODE -ne 0) {
+            throw "Prettier normalization failed with exit code $LASTEXITCODE."
+          }
+
+      - name: Validate remediation scope
+        id: scope
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          function Test-AllowedPath([string]$Path) {
+            if ($Path -eq 'pnpm-lock.yaml') { return $true }
+            $roots = @(
+              'package.json',
+              '.prettierrc.json',
+              'eslint.config.mjs',
+              'next.config.mjs',
+              'tsconfig.json',
+              'vitest.config.ts',
+              'playwright.config.ts',
+              'next-env.d.ts'
+            )
+            if ($roots -contains $Path) { return $true }
+            if ($Path.StartsWith('src/')) { return $true }
+            if ($Path.StartsWith('tests/')) { return $true }
+            if ($Path.StartsWith('.github/workflows/')) { return $true }
+            return $false
+          }
+
+          $changed = @(
+            @(
+              git diff --name-only
+              git ls-files --others --exclude-standard
+            ) | Where-Object { $_ } | Sort-Object -Unique
+          )
+
+          $forbidden = @($changed | Where-Object { -not (Test-AllowedPath $_) })
+          if ($forbidden.Count -gt 0) {
+            throw "Forbidden paths: $($forbidden -join ', ')"
+          }
+          if (-not ($changed -contains 'pnpm-lock.yaml')) {
+            throw 'Lockfile missing from changes.'
+          }
+          if (-not ($changed -contains 'playwright.config.ts')) {
+            throw 'Playwright type fix missing from changes.'
+          }
+
+          $stableDiffText = git diff --no-ext-diff --binary -- . ':(exclude)next-env.d.ts'
+          $stableHash = [Convert]::ToHexString(
+            [Security.Cryptography.SHA256]::HashData(
+              [Text.Encoding]::UTF8.GetBytes(($stableDiffText -join "`n"))
+            )
+          ).ToLowerInvariant()
+          "stable_tracked_diff_sha256=$stableHash" |
+            Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Format check
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: pnpm format:check
+
+      - name: Lint
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: pnpm lint
+
+      - name: Typecheck
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: pnpm typecheck
+
+      - name: Unit tests
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: pnpm test:unit
+
+      - name: Contract tests
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: pnpm test:contract
+
+      - name: Accessibility tests
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: pnpm test:a11y
+
+      - name: RTL tests
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: pnpm test:rtl
+
+      - name: Build
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: pnpm build
+
+      - name: Install Playwright Chromium
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: pnpm exec playwright install chromium
+
+      - name: E2E tests
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: pnpm test:e2e
+
+      - name: Dependency audit
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: pnpm audit --audit-level high
+
+      - name: Revalidate retained-gate immutability
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        env:
+          PRE_GATE_STABLE_TRACKED_DIFF_SHA256: ${{ steps.scope.outputs.stable_tracked_diff_sha256 }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          function Test-AllowedPath([string]$Path) {
+            if ($Path -eq 'pnpm-lock.yaml') { return $true }
+            $roots = @(
+              'package.json',
+              '.prettierrc.json',
+              'eslint.config.mjs',
+              'next.config.mjs',
+              'tsconfig.json',
+              'vitest.config.ts',
+              'playwright.config.ts',
+              'next-env.d.ts'
+            )
+            if ($roots -contains $Path) { return $true }
+            if ($Path.StartsWith('src/')) { return $true }
+            if ($Path.StartsWith('tests/')) { return $true }
+            if ($Path.StartsWith('.github/workflows/')) { return $true }
+            return $false
+          }
+
+          $postChanged = @(
+            @(
+              git diff --name-only
+              git ls-files --others --exclude-standard
+            ) | Where-Object { $_ } | Sort-Object -Unique
+          )
+
+          Write-Output 'Changed paths after retained gates:'
+          $postChanged | ForEach-Object { Write-Output " - $_" }
+
+          $forbidden = @($postChanged | Where-Object { -not (Test-AllowedPath $_) })
+          if ($forbidden.Count -gt 0) {
+            throw "Forbidden post-gate paths: $($forbidden -join ', ')"
+          }
+
+          $stableDiffText = git diff --no-ext-diff --binary -- . ':(exclude)next-env.d.ts'
+          $stableHash = [Convert]::ToHexString(
+            [Security.Cryptography.SHA256]::HashData(
+              [Text.Encoding]::UTF8.GetBytes(($stableDiffText -join "`n"))
+            )
+          ).ToLowerInvariant()
+
+          if ($stableHash -ne $env:PRE_GATE_STABLE_TRACKED_DIFF_SHA256) {
+            Write-Output "Pre-gate stable hash: $env:PRE_GATE_STABLE_TRACKED_DIFF_SHA256"
+            Write-Output "Post-gate stable hash: $stableHash"
+            throw 'Tracked files other than next-env.d.ts changed during retained gates.'
+          }
+
+          $nextEnvChanged = @((git diff --name-only -- next-env.d.ts) | Where-Object { $_ })
+          if ($nextEnvChanged.Count -gt 0) {
+            $nextEnvContent = [IO.File]::ReadAllText('next-env.d.ts')
+            if (-not $nextEnvContent.Contains('/// <reference types="next" />')) {
+              throw 'Generated next-env.d.ts lost the Next.js type reference.'
+            }
+            if (-not $nextEnvContent.Contains('/// <reference types="next/image-types/global" />')) {
+              throw 'Generated next-env.d.ts lost the Next.js image type reference.'
+            }
+            Write-Output 'Authorized Next.js-generated next-env.d.ts diff:'
+            git diff -- next-env.d.ts
+          } else {
+            Write-Output 'next-env.d.ts did not change during retained gates.'
+          }
+
+      - name: Commit authorized remediation
+        shell: pwsh
+        working-directory: _central_p4s04_v9
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          git add -- pnpm-lock.yaml package.json .prettierrc.json `
+            eslint.config.mjs next.config.mjs tsconfig.json vitest.config.ts `
+            playwright.config.ts next-env.d.ts src tests .github/workflows
+
+          $staged = @((git diff --cached --name-only) | Where-Object { $_ } | Sort-Object -Unique)
+          if (-not ($staged -contains 'pnpm-lock.yaml')) {
+            throw 'pnpm-lock.yaml is not staged.'
+          }
+          if (-not ($staged -contains 'playwright.config.ts')) {
+            throw 'playwright.config.ts is not staged.'
+          }
+
+          git commit -m 'chore: finalize P4-S04 retained-gate remediation'
+          if ($LASTEXITCODE -ne 0) {
+            throw 'git commit failed.'
+          }
+          git push origin HEAD:p4/bootstrap-greenfield
+          if ($LASTEXITCODE -ne 0) {
+            throw 'git push failed.'
+          }
