@@ -1,0 +1,2 @@
+tests/unit/session-authorization.test.ts
+prettier_exit_code=1
