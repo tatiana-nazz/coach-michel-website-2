@@ -1,4 +1,4 @@
-name: Operator deterministic format repair
+name: Operator Prettier path diagnostic
 
 on:
   push:
@@ -11,11 +11,10 @@ permissions:
   contents: write
 
 jobs:
-  repair:
-    if: "${{ github.event.head_commit.message != 'chore: apply deterministic Prettier repair' }}"
+  diagnose:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repair trigger commit
+      - name: Checkout diagnostic trigger commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.sha }}
@@ -37,24 +36,20 @@ jobs:
       - name: Install exact lockfile
         run: pnpm install --frozen-lockfile
 
-      - name: Apply deterministic Prettier repair
+      - name: Capture exact Prettier differences
         run: |
-          set -euo pipefail
-          pnpm exec prettier --write .github/workflows/operator-repair-format.yml .github/workflows/quality.yml package.json src/platform/auth/session.ts
-          pnpm exec prettier --check .github/workflows/operator-repair-format.yml .github/workflows/quality.yml package.json src/platform/auth/session.ts
+          set +e
+          pnpm exec prettier --list-different . > PRETTIER_DIFFERENCES.txt
+          status=$?
+          set -e
+          echo "prettier_exit_code=$status" >> PRETTIER_DIFFERENCES.txt
+          cat PRETTIER_DIFFERENCES.txt
 
-      - name: Commit and push formatted files
+      - name: Commit diagnostic report
         run: |
           set -euo pipefail
           git config user.name 'operator-repair-bot'
           git config user.email 'operator-repair-bot@users.noreply.github.com'
-          git add -- .github/workflows/operator-repair-format.yml .github/workflows/quality.yml package.json src/platform/auth/session.ts
-          if git diff --cached --quiet; then
-            echo 'No formatting changes required.'
-          else
-            git commit -m 'chore: apply deterministic Prettier repair'
-            git push origin HEAD:p4/bootstrap-greenfield
-          fi
-
-      - name: Verify repository-wide formatting
-        run: pnpm format:check
+          git add PRETTIER_DIFFERENCES.txt
+          git commit -m 'ci: capture exact Prettier differing paths'
+          git push origin HEAD:p4/bootstrap-greenfield
