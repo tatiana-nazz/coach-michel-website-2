@@ -23,6 +23,8 @@
     "test": "pnpm test:unit && pnpm test:contract && pnpm test:a11y && pnpm test:rtl"
   },
   "dependencies": {
+    "@supabase/ssr": "0.12.4",
+    "@supabase/supabase-js": "2.111.0",
     "@tanstack/react-query": "5.101.4",
     "next": "16.3.0",
     "next-intl": "4.13.4",

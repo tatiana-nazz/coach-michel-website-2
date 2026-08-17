@@ -1,8 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 
 import type { SupportedLocale } from '@/i18n/config';
+import { browserApiClient } from '@/platform/api/browser-client';
+import type { ApiClient, StableApiErrorCode } from '@/platform/api/client';
+import { ESTABLISH_SESSION_OPERATION_ID } from '@/platform/api/operations';
 
 import {
   getPrivateAccessEntryViewModel,
@@ -14,6 +17,16 @@ export interface PrivateAccessEntryProps {
   readonly locale?: SupportedLocale;
   readonly status?: PrivateAccessEntryStatus;
   readonly defaultEmail?: string;
+  readonly apiClient?: ApiClient;
+}
+
+interface EstablishSessionResponse {
+  readonly status: 'authenticated';
+}
+
+interface EstablishSessionRequest {
+  readonly email: string;
+  readonly password: string;
 }
 
 const statusToneClass = {
@@ -23,22 +36,77 @@ const statusToneClass = {
   success: styles.statusSuccess,
 } as const;
 
+function statusForStableCode(code: StableApiErrorCode | undefined): PrivateAccessEntryStatus {
+  switch (code) {
+    case 'VALIDATION_FAILED':
+      return 'validation_error';
+    case 'AUTHENTICATION_REQUIRED_OR_INVALID':
+      return 'authentication_required';
+    case 'AUTHORITY_DENIED':
+      return 'denied';
+    case 'RATE_LIMITED':
+    case 'DEPENDENCY_UNAVAILABLE':
+    case 'RESOURCE_NOT_FOUND_OR_UNAVAILABLE':
+    case 'STALE_OR_CONFLICTING_STATE':
+    case undefined:
+      return 'unavailable';
+  }
+}
+
 export function PrivateAccessEntry({
   locale = 'en',
   status = 'default',
   defaultEmail,
+  apiClient = browserApiClient,
 }: PrivateAccessEntryProps) {
   const [activeLocale, setActiveLocale] = useState<SupportedLocale>(locale);
-  const viewModel = getPrivateAccessEntryViewModel(activeLocale, status);
+  const [activeStatus, setActiveStatus] = useState<PrivateAccessEntryStatus>(status);
+  const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    setActiveStatus(status);
+  }, [status]);
+
+  const viewModel = getPrivateAccessEntryViewModel(activeLocale, activeStatus);
   const { copy } = viewModel;
   const credentialStateInvalid =
-    status === 'validation_error' || status === 'authentication_required';
+    activeStatus === 'validation_error' || activeStatus === 'authentication_required';
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (submitting) return;
+
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get('email');
+    const password = formData.get('password');
+
+    if (typeof email !== 'string' || email.length === 0 || typeof password !== 'string' || password.length === 0) {
+      setActiveStatus('validation_error');
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const result = await apiClient.execute<EstablishSessionResponse, EstablishSessionRequest>({
+        operationId: ESTABLISH_SESSION_OPERATION_ID,
+        body: { email, password },
+      });
+
+      if (result.ok) {
+        setActiveStatus(result.data.status === 'authenticated' ? 'authenticated' : 'unavailable');
+      } else {
+        setActiveStatus(statusForStableCode(result.error.stableCode));
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <section
       className={styles.screen}
       data-screen-id="SCR-ACC-001"
-      data-implementation-stage="P4-S06"
+      data-implementation-stage="P4-S08"
       dir={viewModel.direction}
       lang={activeLocale}
       aria-labelledby="private-access-title"
@@ -77,7 +145,12 @@ export function PrivateAccessEntry({
             </div>
 
             {viewModel.showCredentialForm ? (
-              <form className={styles.form} aria-describedby="private-access-status">
+              <form
+                className={styles.form}
+                aria-describedby="private-access-status"
+                aria-busy={submitting}
+                onSubmit={handleSubmit}
+              >
                 <div className={styles.field}>
                   <label htmlFor="private-access-email">{copy.emailLabel}</label>
                   <input
@@ -87,6 +160,7 @@ export function PrivateAccessEntry({
                     autoComplete="username"
                     defaultValue={defaultEmail}
                     dir="ltr"
+                    required
                     aria-invalid={credentialStateInvalid}
                     aria-describedby="private-access-status"
                   />
@@ -99,19 +173,20 @@ export function PrivateAccessEntry({
                     name="password"
                     type="password"
                     autoComplete="current-password"
+                    required
                     aria-invalid={credentialStateInvalid}
                     aria-describedby="private-access-status"
                   />
                 </div>
 
-                <button className={styles.primaryAction} type="button">
-                  {copy.submitLabel}
+                <button className={styles.primaryAction} type="submit" disabled={submitting}>
+                  {submitting ? copy.submittingLabel : copy.submitLabel}
                 </button>
               </form>
             ) : (
-              <div className={styles.outcome} aria-labelledby="private-access-recovered-title">
-                <h2 id="private-access-recovered-title">{copy.recoveredTitle}</h2>
-                <p>{copy.recoveredBody}</p>
+              <div className={styles.outcome} aria-labelledby="private-access-outcome-title">
+                <h2 id="private-access-outcome-title">{viewModel.outcomeTitle}</h2>
+                <p>{viewModel.outcomeBody}</p>
               </div>
             )}
 

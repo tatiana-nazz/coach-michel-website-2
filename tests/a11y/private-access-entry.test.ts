@@ -32,6 +32,14 @@ describe('SCR-ACC-001 accessibility contract', () => {
     expect(component).toContain('aria-describedby="private-access-status"');
   });
 
+  it('uses a real form submission boundary with loading semantics', () => {
+    expect(component).toContain('onSubmit={handleSubmit}');
+    expect(component).toContain('type="submit"');
+    expect(component).toContain('aria-busy={submitting}');
+    expect(component).toContain('disabled={submitting}');
+    expect(component).toContain('required');
+  });
+
   it('keeps compact controls touch-sized with the governed visible focus treatment', () => {
     expect(styles).toContain('min-block-size: 44px;');
     expect(styles).toContain('min-block-size: 48px;');

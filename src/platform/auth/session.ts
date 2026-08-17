@@ -12,4 +12,8 @@ export interface SessionAdapter {
   read(): Promise<SessionState>;
 }
 
-/** No identity or session provider is selected in P4-S04. */
+/**
+ * Provider-neutral application session contract.
+ * P4-S08 establishes the governed Supabase SSR cookie session at the application-server boundary;
+ * role mapping and post-identity access-context resolution remain governed separately.
+ */
