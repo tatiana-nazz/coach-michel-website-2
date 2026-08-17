@@ -1,0 +1,48 @@
+name: P4-S05 formatting probe
+
+on:
+  push:
+    branches:
+      - p4/bootstrap-greenfield
+    paths:
+      - '.github/workflows/p4-s05-format-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    if: "${{ github.event.head_commit.message == 'ci: probe P4-S05 exact Prettier diff' }}"
+    runs-on: [self-hosted, Windows, X64]
+    steps:
+      - name: Checkout exact probe commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          clean: true
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86
+        with:
+          version: 11.21.0
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24.18.0
+          cache: pnpm
+
+      - name: Install exact lockfile
+        shell: powershell
+        run: pnpm install --frozen-lockfile
+
+      - name: Produce exact Prettier diff
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          pnpm exec prettier --write .github/workflows/quality.yml package.json src/platform/auth/session.ts
+          if ($LASTEXITCODE -ne 0) { throw 'Prettier write failed.' }
+          Write-Output '--- P4-S05 EXACT PRETTIER DIFF BEGIN ---'
+          git diff --no-ext-diff -- .github/workflows/quality.yml package.json src/platform/auth/session.ts
+          Write-Output '--- P4-S05 EXACT PRETTIER DIFF END ---'
