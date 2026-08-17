@@ -1,10 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import type { SessionAdapter, SessionState } from '@/platform/auth/session';
-import type {
-  AuthorizationContext,
-  AuthorizationPolicy,
-} from '@/platform/authorization/policy';
+import type { AuthorizationContext, AuthorizationPolicy } from '@/platform/authorization/policy';
 import { SessionAuthorizationService } from '@/platform/authorization/session-authorization';
 
 function createSessionAdapter(state: SessionState): SessionAdapter {
