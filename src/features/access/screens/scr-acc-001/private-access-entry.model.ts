@@ -11,8 +11,7 @@ export const privateAccessEntryStatuses = [
   'recovered',
 ] as const;
 
-export type PrivateAccessEntryStatus =
-  (typeof privateAccessEntryStatuses)[number];
+export type PrivateAccessEntryStatus = (typeof privateAccessEntryStatuses)[number];
 
 type StatusTone = 'info' | 'danger' | 'warning' | 'success';
 type StatusRole = 'status' | 'alert';
@@ -57,8 +56,7 @@ const copyByLocale = {
     recoveryText:
       'If you forgot your password or need to reset it, use the approved recovery process.',
     privacyTitle: 'Privacy & access guidance',
-    privacyText:
-      'Private access is used only for your authorized coaching space.',
+    privacyText: 'Private access is used only for your authorized coaching space.',
     supportTitle: 'WhatsApp support',
     supportExternalLabel: 'External service',
     supportText: 'Approved support is provided through an external service.',
@@ -67,14 +65,12 @@ const copyByLocale = {
     contextBody:
       'Private coaching stays separate from public content. Access is established only after approved credentials are accepted.',
     recoveredTitle: 'Recovery completed',
-    recoveredBody:
-      'Use your approved credentials when you return to private access.',
+    recoveredBody: 'Use your approved credentials when you return to private access.',
   },
   ar: {
     eyebrow: 'الدخول الخاص',
     title: 'ادخل إلى مساحتك التدريبية',
-    invitedNotice:
-      'الدخول الخاص متاح فقط للأشخاص الذين دعاهم Coach Michel. لا يوجد تسجيل عام.',
+    invitedNotice: 'الدخول الخاص متاح فقط للأشخاص الذين دعاهم Coach Michel. لا يوجد تسجيل عام.',
     identityNotice: 'ينشئ Coach Michel وصول المتدربين الخاص ويديره.',
     emailLabel: 'البريد الإلكتروني',
     passwordLabel: 'كلمة المرور',
@@ -82,8 +78,7 @@ const copyByLocale = {
     languageLabel: 'اللغة',
     helpSummary: 'مساعدة الدخول',
     recoveryTitle: 'استعادة الوصول',
-    recoveryText:
-      'إذا نسيت كلمة المرور أو احتجت إلى إعادة تعيينها، استخدم مسار الاستعادة المعتمد.',
+    recoveryText: 'إذا نسيت كلمة المرور أو احتجت إلى إعادة تعيينها، استخدم مسار الاستعادة المعتمد.',
     privacyTitle: 'إرشادات الخصوصية والوصول',
     privacyText: 'يُستخدم الدخول الخاص فقط لمساحتك التدريبية المصرح بها.',
     supportTitle: 'دعم WhatsApp',
@@ -94,8 +89,7 @@ const copyByLocale = {
     contextBody:
       'يبقى التدريب الخاص منفصلاً عن المحتوى العام. لا يتم إنشاء الوصول إلا بعد قبول بيانات الاعتماد المعتمدة.',
     recoveredTitle: 'اكتملت الاستعادة',
-    recoveredBody:
-      'استخدم بيانات الاعتماد المعتمدة عند عودتك إلى الدخول الخاص.',
+    recoveredBody: 'استخدم بيانات الاعتماد المعتمدة عند عودتك إلى الدخول الخاص.',
   },
 } satisfies Record<SupportedLocale, PrivateAccessEntryCopy>;
 
@@ -103,8 +97,7 @@ const statusByLocale = {
   en: {
     default: 'Not signed in',
     validation_error: 'Check the highlighted credential fields.',
-    authentication_required:
-      'Private access could not be established with those credentials.',
+    authentication_required: 'Private access could not be established with those credentials.',
     expired: 'Your previous access has expired. Sign in again.',
     denied: 'Private access is not available for this account.',
     recovery_available: 'Recovery is available in Access help.',
@@ -113,8 +106,7 @@ const statusByLocale = {
   ar: {
     default: 'لم يتم تسجيل الدخول',
     validation_error: 'راجع حقول بيانات الاعتماد المحددة.',
-    authentication_required:
-      'تعذر إنشاء الدخول الخاص باستخدام بيانات الاعتماد هذه.',
+    authentication_required: 'تعذر إنشاء الدخول الخاص باستخدام بيانات الاعتماد هذه.',
     expired: 'انتهت صلاحية الوصول السابق. سجّل الدخول مرة أخرى.',
     denied: 'الدخول الخاص غير متاح لهذا الحساب.',
     recovery_available: 'الاستعادة متاحة ضمن مساعدة الدخول.',
