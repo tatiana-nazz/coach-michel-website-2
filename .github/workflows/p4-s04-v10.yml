@@ -1,0 +1,275 @@
+name: P4-S04 v10 finalization-only closure
+
+on:
+  push:
+    branches:
+      - p4/bootstrap-greenfield
+    paths:
+      - .github/workflows/p4-s04-v10.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: p4-s04-v10-finalization
+  cancel-in-progress: false
+
+jobs:
+  finalize:
+    if: "${{ github.event.head_commit.message == 'ci: finalize P4-S04 remediation v10' }}"
+    runs-on: [self-hosted, Windows, X64]
+    steps:
+      - name: Prepare isolated checkout
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $checkout = Join-Path $env:GITHUB_WORKSPACE '_central_p4s04_v10'
+          if (Test-Path -LiteralPath $checkout) {
+            Remove-Item -LiteralPath $checkout -Recurse -Force
+          }
+
+      - name: Checkout exact v10 carrier commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+          clean: true
+          path: _central_p4s04_v10
+
+      - name: Validate finalization binding
+        shell: powershell
+        working-directory: _central_p4s04_v10
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $requiredParent = '7a3ea6141f23d807cd07c001de00098ba489811d'
+          $requiredWorkflow = '.github/workflows/p4-s04-v10.yml'
+          $requiredV4Blob = 'de9055a7d10b5b61bae3afcd56363efe4b244a81'
+          $requiredPackageBlob = 'f09f9ce0392c63e5445dbdae25cc07ad28829bcd'
+          $requiredPlaywrightBlob = '3531687b7bf84db883df5f594ca390ff90a9018e'
+          $requiredTsconfigBlob = 'af3a62b676f93b0985dba4a7a2649bb3b3ea2e12'
+          $requiredA11yBlob = '3bd45ac8652c09ba33719cf5f42011674909c244'
+          $requiredRTLBlob = '2e23244ab8d9c7ffae2485c7608d6490c991e494'
+
+          if ((git rev-parse HEAD^).Trim() -ne $requiredParent) {
+            throw 'v10 parent binding mismatch.'
+          }
+
+          $carrierChanged = @((git diff --name-only HEAD^ HEAD --) | Where-Object { $_ })
+          if ($carrierChanged.Count -ne 1 -or ($carrierChanged -join "`n") -ne $requiredWorkflow) {
+            throw "v10 carrier changed unexpected paths: $($carrierChanged -join ', ')"
+          }
+
+          if ((git rev-parse HEAD:.github/workflows/p4-s04-v4.yml).Trim() -ne $requiredV4Blob) {
+            throw 'v4 retired workflow blob mismatch.'
+          }
+          if ((git rev-parse HEAD:package.json).Trim() -ne $requiredPackageBlob) {
+            throw 'package.json blob mismatch.'
+          }
+          if ((git rev-parse HEAD:playwright.config.ts).Trim() -ne $requiredPlaywrightBlob) {
+            throw 'playwright.config.ts blob mismatch.'
+          }
+          if ((git rev-parse HEAD:tsconfig.json).Trim() -ne $requiredTsconfigBlob) {
+            throw 'tsconfig.json blob mismatch.'
+          }
+          if ((git rev-parse HEAD:tests/a11y/foundation.test.ts).Trim() -ne $requiredA11yBlob) {
+            throw 'Accessibility fixture-loader blob mismatch.'
+          }
+          if ((git rev-parse HEAD:tests/rtl/rtl-foundation.test.ts).Trim() -ne $requiredRTLBlob) {
+            throw 'RTL fixture-loader blob mismatch.'
+          }
+
+          $lockEntries = @((git ls-tree --name-only HEAD -- pnpm-lock.yaml) | Where-Object { $_ })
+          if ($lockEntries.Count -ne 0) {
+            throw 'pnpm-lock.yaml unexpectedly exists before finalization.'
+          }
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86
+        with:
+          version: 11.21.0
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24.18.0
+
+      - name: Reconstruct validated remediation
+        shell: powershell
+        working-directory: _central_p4s04_v10
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          $packagePath = 'package.json'
+          $package = [IO.File]::ReadAllText($packagePath)
+          $fromEslint = '"eslint": "10.8.0"'
+          $toEslint = '"eslint": "9.39.5"'
+          if (([regex]::Matches($package, [regex]::Escape($fromEslint))).Count -ne 1) {
+            throw 'Expected one ESLint compatibility token.'
+          }
+          [IO.File]::WriteAllText(
+            $packagePath,
+            $package.Replace($fromEslint, $toEslint),
+            (New-Object Text.UTF8Encoding($false))
+          )
+
+          $playwrightPath = 'playwright.config.ts'
+          $playwright = [IO.File]::ReadAllText($playwrightPath)
+          $fromWorkers = '  workers: process.env.CI ? 1 : undefined,'
+          $toWorkers = '  ...(process.env.CI ? { workers: 1 } : {}),'
+          if (([regex]::Matches($playwright, [regex]::Escape($fromWorkers))).Count -ne 1) {
+            throw 'Expected one Playwright workers token.'
+          }
+          [IO.File]::WriteAllText(
+            $playwrightPath,
+            $playwright.Replace($fromWorkers, $toWorkers),
+            (New-Object Text.UTF8Encoding($false))
+          )
+
+          $installArgs = @(
+            'install',
+            '--prefer-offline',
+            '--no-frozen-lockfile',
+            '--network-concurrency=4',
+            '--fetch-retries=5',
+            '--fetch-retry-mintimeout=10000',
+            '--fetch-retry-maxtimeout=180000',
+            '--fetch-timeout=600000'
+          )
+
+          $installed = $false
+          for ($attempt = 1; $attempt -le 3; $attempt++) {
+            & pnpm @installArgs
+            if ($LASTEXITCODE -eq 0) {
+              $installed = $true
+              break
+            }
+            if ($attempt -lt 3) {
+              Start-Sleep -Seconds (30 * $attempt)
+            }
+          }
+          if (-not $installed) {
+            throw 'pnpm install failed after three bounded transport attempts.'
+          }
+
+          pnpm exec prettier --write `
+            package.json `
+            .prettierrc.json `
+            eslint.config.mjs `
+            next.config.mjs `
+            tsconfig.json `
+            vitest.config.ts `
+            playwright.config.ts `
+            "src/**/*.{ts,tsx,css,md,json}" `
+            "tests/**/*.{ts,tsx,md}"
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Prettier reconstruction failed.'
+          }
+
+          $nextEnvLines = @(
+            '/// <reference types="next" />',
+            '/// <reference types="next/image-types/global" />',
+            'import "./.next/types/routes.d.ts";',
+            'import "./.next/types/root-params.d.ts";',
+            '',
+            '// NOTE: This file should not be edited',
+            '// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.'
+          )
+          [IO.File]::WriteAllText(
+            'next-env.d.ts',
+            ($nextEnvLines -join "`n") + "`n",
+            (New-Object Text.UTF8Encoding($false))
+          )
+
+      - name: Validate exact finalization scope
+        shell: powershell
+        working-directory: _central_p4s04_v10
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          $expected = @(
+            'next-env.d.ts',
+            'package.json',
+            'playwright.config.ts',
+            'pnpm-lock.yaml',
+            'src/app/page.tsx',
+            'src/design-system/tokens.css',
+            'src/features/screen-contract-registry.ts',
+            'src/platform/api/client.ts',
+            'tsconfig.json'
+          ) | Sort-Object
+
+          $actual = @(
+            @(
+              git diff --name-only
+              git ls-files --others --exclude-standard
+            ) | Where-Object { $_ } | Sort-Object -Unique
+          )
+
+          Write-Output 'Finalization paths:'
+          $actual | ForEach-Object { Write-Output " - $_" }
+
+          if (($actual -join "`n") -ne ($expected -join "`n")) {
+            throw "Finalization path set mismatch. Expected $($expected -join ', '); observed $($actual -join ', ')."
+          }
+
+          $package = Get-Content package.json -Raw | ConvertFrom-Json
+          if ($package.devDependencies.eslint -ne '9.39.5') {
+            throw 'Final ESLint version mismatch.'
+          }
+
+          $playwright = [IO.File]::ReadAllText('playwright.config.ts')
+          if (-not $playwright.Contains('...(process.env.CI ? { workers: 1 } : {})')) {
+            throw 'Final Playwright type fix missing.'
+          }
+
+          $nextEnv = [IO.File]::ReadAllText('next-env.d.ts')
+          if (-not $nextEnv.Contains('import "./.next/types/routes.d.ts";')) {
+            throw 'Generated next-env routes import missing.'
+          }
+          if (-not $nextEnv.Contains('import "./.next/types/root-params.d.ts";')) {
+            throw 'Generated next-env root-params import missing.'
+          }
+
+      - name: Final dependency audit sanity check
+        shell: powershell
+        working-directory: _central_p4s04_v10
+        run: pnpm audit --audit-level high
+
+      - name: Commit and push validated P4-S04 remediation
+        shell: powershell
+        working-directory: _central_p4s04_v10
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          git add -- `
+            next-env.d.ts `
+            package.json `
+            playwright.config.ts `
+            pnpm-lock.yaml `
+            src/app/page.tsx `
+            src/design-system/tokens.css `
+            src/features/screen-contract-registry.ts `
+            src/platform/api/client.ts `
+            tsconfig.json
+
+          $staged = @((git diff --cached --name-only) | Where-Object { $_ } | Sort-Object -Unique)
+          if ($staged.Count -ne 9) {
+            throw "Expected 9 staged remediation paths; observed $($staged.Count)."
+          }
+          if (@($staged | Where-Object { $_.StartsWith('.github/workflows/') }).Count -ne 0) {
+            throw 'Workflow path unexpectedly staged.'
+          }
+
+          git commit -m 'chore: finalize P4-S04 retained-gate remediation'
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Final remediation commit failed.'
+          }
+
+          git push origin HEAD:p4/bootstrap-greenfield
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Final remediation push failed.'
+          }
