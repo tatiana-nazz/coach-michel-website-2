@@ -2,6 +2,11 @@ name: Zero-cost dependency security audit
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - p4/bootstrap-greenfield
+    paths-ignore:
+      - '.github/workflows/**'
   pull_request:
     branches:
       - main
