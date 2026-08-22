@@ -59,9 +59,9 @@ describe('SCR-PUB-001 public overview view model', () => {
     expect(getPublicOverviewViewModel('en', 'authority_denied').feedbackRole).toBe('alert');
     expect(getPublicOverviewViewModel('en', 'dependency_unavailable').feedbackRole).toBe('alert');
     expect(getPublicOverviewViewModel('en', 'rate_limited').feedbackRole).toBe('alert');
-    expect(
-      getPublicOverviewViewModel('en', 'resource_not_found_or_unavailable').feedbackRole,
-    ).toBe('alert');
+    expect(getPublicOverviewViewModel('en', 'resource_not_found_or_unavailable').feedbackRole).toBe(
+      'alert',
+    );
     expect(getPublicOverviewViewModel('en', 'stale_or_conflicting_state').feedbackRole).toBe(
       'alert',
     );

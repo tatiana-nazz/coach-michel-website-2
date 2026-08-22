@@ -5,10 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 const component = readFileSync(
   fileURLToPath(
-    new URL(
-      '../../src/features/public/screens/scr-pub-001/public-overview.tsx',
-      import.meta.url,
-    ),
+    new URL('../../src/features/public/screens/scr-pub-001/public-overview.tsx', import.meta.url),
   ),
   'utf8',
 );
