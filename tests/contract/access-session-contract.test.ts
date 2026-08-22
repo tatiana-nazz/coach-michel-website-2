@@ -96,11 +96,7 @@ describe('P4-S08 SCR-ACC-001 session contract', () => {
   });
 
   it.each([
-    [
-      { status: 401, code: 'invalid_credentials' },
-      401,
-      'AUTHENTICATION_REQUIRED_OR_INVALID',
-    ],
+    [{ status: 401, code: 'invalid_credentials' }, 401, 'AUTHENTICATION_REQUIRED_OR_INVALID'],
     [{ status: 429 }, 429, 'RATE_LIMITED'],
     [{ status: 500 }, 503, 'DEPENDENCY_UNAVAILABLE'],
   ] as const)(
@@ -152,45 +148,42 @@ describe('P4-S08 SCR-ACC-001 session contract', () => {
     await expect(response.json()).resolves.toEqual({ status: 'authenticated' });
   });
 
-  it(
-    'fails closed when provider success lacks a user or the provider client is unavailable',
-    async () => {
-      mockSignInResult({
-        data: { user: null },
-        error: null,
-      });
+  it('fails closed when provider success lacks a user or the provider client is unavailable', async () => {
+    mockSignInResult({
+      data: { user: null },
+      error: null,
+    });
 
-      const missingUserResponse = await POST(
-        credentialRequest(
-          JSON.stringify({
-            email: 'trainee@example.com',
-            password: 'exact-secret',
-          }),
-        ),
-      );
+    const missingUserResponse = await POST(
+      credentialRequest(
+        JSON.stringify({
+          email: 'trainee@example.com',
+          password: 'exact-secret',
+        }),
+      ),
+    );
 
-      expect(missingUserResponse.status).toBe(503);
-      expect(missingUserResponse.headers.get('cache-control')).toBe('private, no-store');
-      await expect(missingUserResponse.json()).resolves.toEqual({
-        error: { code: 'DEPENDENCY_UNAVAILABLE' },
-      });
+    expect(missingUserResponse.status).toBe(503);
+    expect(missingUserResponse.headers.get('cache-control')).toBe('private, no-store');
+    await expect(missingUserResponse.json()).resolves.toEqual({
+      error: { code: 'DEPENDENCY_UNAVAILABLE' },
+    });
 
-      createSupabaseServerClientMock.mockRejectedValueOnce(new Error('provider unavailable'));
+    createSupabaseServerClientMock.mockRejectedValueOnce(new Error('provider unavailable'));
 
-      const unavailableResponse = await POST(
-        credentialRequest(
-          JSON.stringify({
-            email: 'trainee@example.com',
-            password: 'exact-secret',
-          }),
-        ),
-      );
+    const unavailableResponse = await POST(
+      credentialRequest(
+        JSON.stringify({
+          email: 'trainee@example.com',
+          password: 'exact-secret',
+        }),
+      ),
+    );
 
-      expect(unavailableResponse.status).toBe(503);
-      expect(unavailableResponse.headers.get('cache-control')).toBe('private, no-store');
-      await expect(unavailableResponse.json()).resolves.toEqual({
-        error: { code: 'DEPENDENCY_UNAVAILABLE' },
-      });
-    },
-  );
+    expect(unavailableResponse.status).toBe(503);
+    expect(unavailableResponse.headers.get('cache-control')).toBe('private, no-store');
+    await expect(unavailableResponse.json()).resolves.toEqual({
+      error: { code: 'DEPENDENCY_UNAVAILABLE' },
+    });
+  });
 });
