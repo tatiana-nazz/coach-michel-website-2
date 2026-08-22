@@ -1,0 +1,127 @@
+.screen {
+  min-block-size: 100vh;
+  background: var(--cmh-canvas);
+  color: var(--cmh-ink-primary);
+}
+
+.frame {
+  inline-size: min(100%, var(--cmh-grid-desktop-max-content));
+  margin-inline: auto;
+  padding-block: var(--cmh-space-6) var(--cmh-space-8);
+  padding-inline: var(--cmh-grid-mobile-margin);
+}
+
+.contextFrame {
+  max-inline-size: 58rem;
+  border-block-end: var(--cmh-border-width) solid var(--cmh-rule-strong);
+  padding-block-end: var(--cmh-space-6);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--cmh-blue-strong);
+  font-family: var(--cmh-font-data);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contextFrame h1 {
+  max-inline-size: 15ch;
+  margin-block: var(--cmh-space-3) 0;
+  font-family: var(--cmh-font-display);
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 600;
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.sequence {
+  display: grid;
+  max-inline-size: 58rem;
+  gap: var(--cmh-space-8);
+  padding-block-start: var(--cmh-space-8);
+}
+
+.region,
+.feedbackRegion {
+  border-inline-start: var(--cmh-border-width) solid var(--cmh-rule);
+  padding-inline-start: var(--cmh-space-4);
+}
+
+.region h2,
+.region h3,
+.feedbackRegion h2 {
+  margin-block: 0;
+  font-family: var(--cmh-font-display);
+  text-wrap: balance;
+}
+
+.region h2,
+.feedbackRegion h2 {
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+
+.region h3 {
+  margin-block-start: var(--cmh-space-6);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.region p,
+.feedbackRegion p {
+  max-inline-size: 68ch;
+  margin-block: var(--cmh-space-3) 0;
+  color: var(--cmh-ink-secondary);
+  line-height: 1.65;
+}
+
+.stateMessage {
+  color: var(--cmh-ink-muted);
+}
+
+.feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--cmh-space-3);
+  margin-block-start: var(--cmh-space-3);
+  border-inline-start: var(--cmh-accent-rule-width) solid currentColor;
+  background: var(--cmh-paper);
+  padding-block: var(--cmh-space-3);
+  padding-inline: var(--cmh-space-4);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.feedbackMarker {
+  inline-size: 0.625rem;
+  block-size: 0.625rem;
+  flex: 0 0 auto;
+  margin-block-start: var(--cmh-space-1);
+  border: var(--cmh-accent-rule-width) solid currentColor;
+  border-radius: 50%;
+}
+
+.feedbackInfo {
+  color: var(--cmh-state-information);
+}
+
+.feedbackDanger {
+  color: var(--cmh-state-danger);
+}
+
+.feedbackWarning {
+  color: var(--cmh-state-warning);
+}
+
+.feedbackSuccess {
+  color: var(--cmh-state-success);
+}
+
+.screen :is(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: var(--cmh-focus-width) solid var(--cmh-blue-focus);
+  outline-offset: var(--cmh-focus-offset);
+}
