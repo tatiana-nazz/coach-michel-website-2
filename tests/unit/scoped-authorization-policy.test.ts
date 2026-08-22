@@ -45,11 +45,7 @@ const requiredAuthorityAndScopeFields = [
 
 type RequiredAuthorityAndScopeField = (typeof requiredAuthorityAndScopeFields)[number];
 
-const operationalGuardFields = [
-  'lifecycleAllowed',
-  'incidentAllowed',
-  'recoveryAllowed',
-] as const;
+const operationalGuardFields = ['lifecycleAllowed', 'incidentAllowed', 'recoveryAllowed'] as const;
 
 type OperationalGuardField = (typeof operationalGuardFields)[number];
 

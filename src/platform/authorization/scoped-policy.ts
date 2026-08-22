@@ -74,11 +74,7 @@ export type GovernedResourceId = (typeof GOVERNED_RESOURCE_IDS)[number];
 export type GovernedScopeId = (typeof GOVERNED_SCOPE_IDS)[number];
 
 export type AuthorityEvidenceStatus =
-  | 'current'
-  | 'missing'
-  | 'stale'
-  | 'contradictory'
-  | 'unavailable';
+  'current' | 'missing' | 'stale' | 'contradictory' | 'unavailable';
 
 export interface ScopedAuthorizationFacts {
   readonly authorityEvidenceStatus: AuthorityEvidenceStatus;
