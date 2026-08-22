@@ -68,14 +68,11 @@ describe('scoped authorization policy', () => {
     },
   );
 
-  it.each(operationalGuardFields)(
-    'denies while %s is false',
-    (field: OperationalGuardField) => {
-      expect(evaluateScopedAuthorization({ ...allowedFacts, [field]: false })).toEqual({
-        allowed: false,
-      });
-    },
-  );
+  it.each(operationalGuardFields)('denies while %s is false', (field: OperationalGuardField) => {
+    expect(evaluateScopedAuthorization({ ...allowedFacts, [field]: false })).toEqual({
+      allowed: false,
+    });
+  });
 
   it('allows only when all explicit current authority and scope facts pass', () => {
     expect(evaluateScopedAuthorization(allowedFacts)).toEqual({ allowed: true });
