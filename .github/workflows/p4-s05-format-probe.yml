@@ -1,25 +1,36 @@
-name: P4-S05 formatting probe
+name: P4-S05 exact one-file Prettier carrier
 
 on:
   push:
     branches:
-      - p4/bootstrap-greenfield
+      - ops/p4-s05-prettier-carrier-c664e793
     paths:
       - '.github/workflows/p4-s05-format-probe.yml'
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: p4-s05-exact-prettier-carrier-c664e793
+  cancel-in-progress: false
 
 jobs:
-  probe:
-    if: "${{ github.event.head_commit.message == 'ci: probe P4-S05 exact Prettier diff' }}"
-    runs-on: [self-hosted, Windows, X64]
+  carrier:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout exact probe commit
+      - name: Checkout exact carrier commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ github.sha }}
           clean: true
+
+      - name: Verify carrier source binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "675143fe400882290a0860d2f4489beaedeceb32"
+          test "$(git rev-parse HEAD:tests/unit/scoped-authorization-policy.test.ts)" = "91df5a948d1b0adaa71080aaaf286e8e9400ae4c"
+          test "$(git rev-parse HEAD:.prettierrc.json)" = "47174e441851e7811ccf97e9ecd4f0a8f3c63105"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86
@@ -34,15 +45,26 @@ jobs:
           cache: pnpm
 
       - name: Install exact lockfile
-        shell: powershell
         run: pnpm install --frozen-lockfile
 
-      - name: Produce exact Prettier diff
-        shell: powershell
+      - name: Materialize exact Prettier 3.9.6 output
+        shell: bash
         run: |
-          $ErrorActionPreference = 'Stop'
-          pnpm exec prettier --write .github/workflows/quality.yml package.json src/platform/auth/session.ts
-          if ($LASTEXITCODE -ne 0) { throw 'Prettier write failed.' }
-          Write-Output '--- P4-S05 EXACT PRETTIER DIFF BEGIN ---'
-          git diff --no-ext-diff -- .github/workflows/quality.yml package.json src/platform/auth/session.ts
-          Write-Output '--- P4-S05 EXACT PRETTIER DIFF END ---'
+          set -euo pipefail
+          test "$(pnpm exec prettier --version)" = "3.9.6"
+          pnpm exec prettier --write "tests/unit/scoped-authorization-policy.test.ts"
+          pnpm exec prettier --check "tests/unit/scoped-authorization-policy.test.ts"
+
+          mapfile -t changed < <(git diff --name-only)
+          test "${#changed[@]}" -eq 1
+          test "${changed[0]}" = "tests/unit/scoped-authorization-policy.test.ts"
+
+          echo "PRETTIER_POST_BLOB=$(git hash-object 'tests/unit/scoped-authorization-policy.test.ts')"
+          git diff --check
+          git diff -- "tests/unit/scoped-authorization-policy.test.ts"
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "tests/unit/scoped-authorization-policy.test.ts"
+          git commit -m 'chore: materialize P4-S05 exact Prettier output'
+          git push origin "HEAD:${{ github.ref_name }}"
