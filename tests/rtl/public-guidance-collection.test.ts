@@ -7,14 +7,20 @@ import { getPublicGuidanceCollectionViewModel } from '@/features/public/screens/
 
 const component = readFileSync(
   fileURLToPath(
-    new URL('../../src/features/public/screens/scr-pub-003/public-guidance-collection.tsx', import.meta.url),
+    new URL(
+      '../../src/features/public/screens/scr-pub-003/public-guidance-collection.tsx',
+      import.meta.url,
+    ),
   ),
   'utf8',
 );
 
 const styles = readFileSync(
   fileURLToPath(
-    new URL('../../src/features/public/screens/scr-pub-003/public-guidance-collection.module.css', import.meta.url),
+    new URL(
+      '../../src/features/public/screens/scr-pub-003/public-guidance-collection.module.css',
+      import.meta.url,
+    ),
   ),
   'utf8',
 );

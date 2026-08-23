@@ -24,8 +24,7 @@ interface PublicCoachingPurposeNonReadyProps extends PublicCoachingPurposeBasePr
 }
 
 export type PublicCoachingPurposeProps =
-  | PublicCoachingPurposeReadyProps
-  | PublicCoachingPurposeNonReadyProps;
+  PublicCoachingPurposeReadyProps | PublicCoachingPurposeNonReadyProps;
 
 const feedbackToneClass = {
   info: styles.feedbackInfo,

@@ -7,14 +7,20 @@ import { getPublicCoachingPurposeViewModel } from '@/features/public/screens/scr
 
 const component = readFileSync(
   fileURLToPath(
-    new URL('../../src/features/public/screens/scr-pub-002/public-coaching-purpose.tsx', import.meta.url),
+    new URL(
+      '../../src/features/public/screens/scr-pub-002/public-coaching-purpose.tsx',
+      import.meta.url,
+    ),
   ),
   'utf8',
 );
 
 const styles = readFileSync(
   fileURLToPath(
-    new URL('../../src/features/public/screens/scr-pub-002/public-coaching-purpose.module.css', import.meta.url),
+    new URL(
+      '../../src/features/public/screens/scr-pub-002/public-coaching-purpose.module.css',
+      import.meta.url,
+    ),
   ),
   'utf8',
 );

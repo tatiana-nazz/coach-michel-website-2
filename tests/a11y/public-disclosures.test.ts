@@ -5,14 +5,20 @@ import { describe, expect, it } from 'vitest';
 
 const component = readFileSync(
   fileURLToPath(
-    new URL('../../src/features/public/screens/scr-pub-004/public-disclosures.tsx', import.meta.url),
+    new URL(
+      '../../src/features/public/screens/scr-pub-004/public-disclosures.tsx',
+      import.meta.url,
+    ),
   ),
   'utf8',
 );
 
 const styles = readFileSync(
   fileURLToPath(
-    new URL('../../src/features/public/screens/scr-pub-004/public-disclosures.module.css', import.meta.url),
+    new URL(
+      '../../src/features/public/screens/scr-pub-004/public-disclosures.module.css',
+      import.meta.url,
+    ),
   ),
   'utf8',
 );

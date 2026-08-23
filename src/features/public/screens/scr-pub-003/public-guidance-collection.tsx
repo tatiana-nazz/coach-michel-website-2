@@ -24,8 +24,7 @@ interface PublicGuidanceCollectionNonReadyProps extends PublicGuidanceCollection
 }
 
 export type PublicGuidanceCollectionProps =
-  | PublicGuidanceCollectionReadyProps
-  | PublicGuidanceCollectionNonReadyProps;
+  PublicGuidanceCollectionReadyProps | PublicGuidanceCollectionNonReadyProps;
 
 const feedbackToneClass = {
   info: styles.feedbackInfo,

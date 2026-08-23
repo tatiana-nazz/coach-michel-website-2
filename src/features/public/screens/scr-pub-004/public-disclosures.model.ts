@@ -108,7 +108,9 @@ const stateByErrorCode = {
   STALE_OR_CONFLICTING_STATE: 'stale_or_conflicting_state',
 } as const satisfies Record<PublicDisclosuresErrorCode, PublicDisclosuresState>;
 
-export function mapPublicDisclosuresErrorCode(code: PublicDisclosuresErrorCode): PublicDisclosuresState {
+export function mapPublicDisclosuresErrorCode(
+  code: PublicDisclosuresErrorCode,
+): PublicDisclosuresState {
   return stateByErrorCode[code];
 }
 

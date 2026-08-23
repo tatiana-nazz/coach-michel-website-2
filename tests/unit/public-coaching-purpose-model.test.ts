@@ -55,8 +55,8 @@ describe('SCR-PUB-002 public coaching purpose view model', () => {
     const approvedContentContext = 'CTX::opaque/PUB-002';
 
     expect(
-      getPublicCoachingPurposeViewModel('ar', 'ready', { approvedContentContext })
-        .opaqueReferences.approvedContentContext,
+      getPublicCoachingPurposeViewModel('ar', 'ready', { approvedContentContext }).opaqueReferences
+        .approvedContentContext,
     ).toBe(approvedContentContext);
   });
 
