@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-export const SUPABASE_PROJECT_ID = 'diawtfefkwgsukntogip';
+export const SUPABASE_PROJECT_ID = 'szlcakassgylokircuxs';
 
 function requiredEnvironmentValue(name: string): string {
   const value = process.env[name];
