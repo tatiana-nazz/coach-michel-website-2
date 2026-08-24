@@ -93,7 +93,7 @@ export type StatusChipVariant = (typeof statusChipVariants)[number];
 
 export interface StatusChipProps extends HTMLAttributes<HTMLSpanElement> {
   readonly variant?: StatusChipVariant;
-  readonly children: ReactNode;
+  readonly children: string;
 }
 
 const statusChipVariantClass: Readonly<Record<StatusChipVariant, string>> = {
@@ -110,6 +110,10 @@ export function StatusChip({
   children,
   ...props
 }: StatusChipProps) {
+  if (children.trim().length === 0) {
+    throw new Error('StatusChip requires visible text.');
+  }
+
   const classes = [styles.statusChip, statusChipVariantClass[variant], className]
     .filter(Boolean)
     .join(' ');

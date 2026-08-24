@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import { renderToStaticMarkup } from 'react-dom/server';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 
 import {
   ActionButton,
@@ -11,6 +11,7 @@ import {
   actionButtonVariants,
   glassCardVariants,
   statusChipVariants,
+  type StatusChipProps,
 } from '@/design-system/components';
 
 const css = readFileSync(
@@ -65,14 +66,28 @@ describe('App Builder v1.2 luminous core primitive contract', () => {
     expect(loading).toContain('aria-busy="true"');
   });
 
-  it('renders StatusChip with visible text and an aria-hidden decorative marker', () => {
+  it('requires StatusChip visible text at the type and runtime boundary', () => {
+    expectTypeOf<StatusChipProps['children']>().toEqualTypeOf<string>();
+
+    expect(() => renderToStaticMarkup(<StatusChip>{''}</StatusChip>)).toThrowError(
+      'StatusChip requires visible text.',
+    );
+    expect(() => renderToStaticMarkup(<StatusChip>{'   '}</StatusChip>)).toThrowError(
+      'StatusChip requires visible text.',
+    );
+  });
+
+  it('renders StatusChip variants with unchanged visible text and an aria-hidden marker', () => {
     for (const variant of statusChipVariants) {
+      const suppliedText = '  Visible status  ';
       const markup = renderToStaticMarkup(
-        <StatusChip variant={variant}>Visible status</StatusChip>,
+        <StatusChip variant={variant}>{suppliedText}</StatusChip>,
       );
       expect(markup).toContain(`data-status-chip-variant="${variant}"`);
-      expect(markup).toContain('Visible status');
+      expect(markup).toContain(`>${suppliedText}</span>`);
       expect(markup).toContain('aria-hidden="true"');
+      expect(markup).not.toContain('role=');
+      expect(markup).not.toContain('aria-live=');
     }
   });
 
