@@ -1,73 +1,151 @@
 :root {
   color-scheme: light;
 
-  /* Governed luminous mobile-luxury foundation. */
-  --cmh-canvas: #f4f7fa;
-  --cmh-paper: #fcfdfe;
-  --cmh-surface-ice: #edf4fb;
-  --cmh-surface-mineral: #e8eef4;
-  --cmh-ink-primary: #08172b;
-  --cmh-ink-secondary: #40546b;
-  --cmh-ink-muted: #687a8e;
-  --cmh-rule: #c6d1dc;
-  --cmh-rule-strong: #95a7b9;
+  /* App Builder v1.2 accepted luminous-luxury foundation. */
+  --cmh-canvas: #f7faff;
+  --cmh-canvas-alt: #eff5ff;
+  --cmh-paper: #ffffff;
+  --cmh-surface-ice: #f0f6ff;
+  --cmh-surface-mineral: #eff5ff;
 
-  --cmh-blue-core: #096cff;
-  --cmh-blue-strong: #004ec4;
-  --cmh-blue-light: #dcebff;
-  --cmh-blue-node: #49a6ff;
-  --cmh-blue-focus: #005fcc;
+  --cmh-ink-primary: #071c3d;
+  --cmh-ink-secondary: #203a64;
+  --cmh-ink-muted: #4d6a94;
 
-  --cmh-state-danger: #a63a32;
-  --cmh-state-information: #175cd3;
-  --cmh-state-success: #0a7452;
+  --cmh-border-accessible: #6e8cb5;
+  --cmh-border-soft-decorative: #bdd0ea;
+  --cmh-rule: var(--cmh-border-soft-decorative);
+  --cmh-rule-strong: var(--cmh-border-accessible);
+
+  --cmh-blue-core: #075fea;
+  --cmh-blue-primary: #075fea;
+  --cmh-blue-strong: #034fc7;
+  --cmh-blue-focus: #034fc7;
+  --cmh-blue-cyan-decorative: #4bc3ff;
+  --cmh-blue-node: #2f9cf4;
+  --cmh-blue-light: #eaf3ff;
+
+  --cmh-navy-panel: #071f49;
+  --cmh-navy-panel-2: #0a2a5c;
+  --cmh-navy-text: #ffffff;
+  --cmh-navy-text-secondary: #c8d9f4;
+
+  --cmh-state-danger: #b42318;
+  --cmh-state-information: #0b5fcc;
+  --cmh-state-success: #0f6b50;
+  --cmh-state-warning: #8a4b00;
+  --cmh-state-warning-surface: #fff8e8;
   --cmh-state-uncertain: #6e5b7b;
-  --cmh-state-warning: #8a5a00;
 
   --cmh-border-width: 1px;
+  --cmh-interactive-border-width: 1px;
+  --cmh-active-border-width: 1.5px;
   --cmh-accent-rule-width: 2px;
   --cmh-focus-width: 2px;
   --cmh-focus-offset: 2px;
-  --cmh-radius-0: 0;
-  --cmh-radius-2: 2px;
-  --cmh-radius-4: 4px;
-  --cmh-radius-media: 8px;
 
-  --cmh-space-1: 0.25rem;
-  --cmh-space-2: 0.5rem;
-  --cmh-space-3: 0.75rem;
-  --cmh-space-4: 1rem;
-  --cmh-space-6: 1.5rem;
-  --cmh-space-8: 2rem;
+  --cmh-glass-soft: rgba(255, 255, 255, 0.72);
+  --cmh-glass-standard: rgba(255, 255, 255, 0.82);
+  --cmh-glass-strong: rgba(255, 255, 255, 0.94);
+  --cmh-glass-dark: rgba(7, 31, 73, 0.92);
+  --cmh-glass-blur-mobile: 12px;
+  --cmh-glass-blur-desktop: 16px;
+
+  --cmh-gradient-blue-action: linear-gradient(135deg, #075fea 0%, #0a83ff 100%);
+  --cmh-gradient-canvas-luminous: linear-gradient(
+    160deg,
+    #ffffff 0%,
+    #f7faff 35%,
+    #eaf3ff 100%
+  );
+  --cmh-gradient-hero-ice: radial-gradient(
+      circle at 75% 30%,
+      rgba(75, 195, 255, 0.18),
+      transparent 34%
+    ),
+    linear-gradient(160deg, #ffffff, #edf5ff);
+  --cmh-gradient-navy-data: linear-gradient(145deg, #071f49 0%, #0a326a 70%, #0b4c8c 100%);
+
+  --cmh-shadow-card: 0 12px 34px rgba(25, 72, 140, 0.1);
+  --cmh-shadow-elevated: 0 20px 50px rgba(18, 63, 130, 0.16);
+  --cmh-shadow-blue-glow: 0 0 28px rgba(7, 95, 234, 0.18);
+  --cmh-shadow-button-glow: 0 10px 26px rgba(7, 95, 234, 0.26);
+
+  --cmh-radius-control: 16px;
+  --cmh-radius-card: 20px;
+  --cmh-radius-panel: 24px;
+  --cmh-radius-hero: 28px;
+  --cmh-radius-sheet: 28px;
+  --cmh-radius-pill: 999px;
+
+  /* Compatibility aliases for existing screen CSS. */
+  --cmh-radius-0: 0;
+  --cmh-radius-2: var(--cmh-radius-control);
+  --cmh-radius-4: var(--cmh-radius-card);
+  --cmh-radius-media: var(--cmh-radius-panel);
+
+  --cmh-space-1: 4px;
+  --cmh-space-2: 8px;
+  --cmh-space-3: 12px;
+  --cmh-space-4: 16px;
+  --cmh-space-5: 20px;
+  --cmh-space-6: 24px;
+  --cmh-space-8: 32px;
+  --cmh-space-10: 40px;
+  --cmh-space-12: 48px;
+  --cmh-space-16: 64px;
+  --cmh-space-20: 80px;
+  --cmh-space-24: 96px;
 
   --cmh-grid-mobile-columns: 4;
-  --cmh-grid-mobile-gutter: 16px;
-  --cmh-grid-mobile-margin: 16px;
+  --cmh-grid-mobile-gutter: 14px;
+  --cmh-grid-mobile-margin: 20px;
+  --cmh-grid-mobile-375-gutter: 12px;
+  --cmh-grid-mobile-375-margin: 20px;
+  --cmh-grid-mobile-430-gutter: 16px;
+  --cmh-grid-mobile-430-margin: 24px;
   --cmh-grid-tablet-columns: 8;
   --cmh-grid-tablet-gutter: 20px;
-  --cmh-grid-tablet-margin: 28px;
+  --cmh-grid-tablet-margin: 32px;
   --cmh-grid-desktop-columns: 12;
   --cmh-grid-desktop-gutter: 24px;
-  --cmh-grid-desktop-margin-min: 48px;
-  --cmh-grid-desktop-max-content: 1320px;
+  --cmh-grid-desktop-margin-min: 40px;
+  --cmh-grid-desktop-margin-1440: 48px;
+  --cmh-grid-desktop-max-content: 1280px;
 
-  --cmh-font-ui: 'IBM Plex Sans', system-ui, sans-serif;
-  --cmh-font-display: 'IBM Plex Sans Condensed', 'IBM Plex Sans', system-ui, sans-serif;
-  --cmh-font-data: 'IBM Plex Mono', ui-monospace, monospace;
-  --cmh-font-arabic: 'IBM Plex Sans Arabic', 'Noto Sans Arabic', sans-serif;
+  --cmh-font-ui: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --cmh-font-display: var(--cmh-font-ui);
+  --cmh-font-data: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --cmh-font-arabic: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Tahoma, Arial, sans-serif;
+
+  --cmh-type-display-mobile-size: 42px;
+  --cmh-type-display-desktop-size: 64px;
+  --cmh-type-h1-mobile-size: 34px;
+  --cmh-type-h1-desktop-size: 48px;
+  --cmh-type-h2-size: 28px;
+  --cmh-type-h3-size: 20px;
+  --cmh-type-body-size: 16px;
+  --cmh-type-body-small-size: 14px;
+  --cmh-type-data-large-size: 32px;
+  --cmh-type-label-size: 12px;
+
+  --cmh-motion-instant: 0ms;
+  --cmh-motion-press: 90ms;
+  --cmh-motion-micro: 120ms;
+  --cmh-motion-route: 160ms;
+  --cmh-motion-standard: 220ms;
+  --cmh-motion-panel: 280ms;
+  --cmh-motion-card-enter: 300ms;
+  --cmh-motion-chart-draw: 600ms;
+  --cmh-motion-hero-trails: 900ms;
+  --cmh-motion-hero-total-budget: 1100ms;
+  --cmh-motion-stagger: 40ms;
+  --cmh-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --cmh-ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
+  --cmh-ease-linear-data: linear;
 }
 
 [dir='rtl'] {
   font-family: var(--cmh-font-arabic);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
 }
