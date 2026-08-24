@@ -1,0 +1,131 @@
+.glassCard {
+  border: var(--cmh-border-width) solid var(--cmh-border-accessible);
+  border-radius: var(--cmh-radius-card);
+  box-shadow: var(--cmh-shadow-card);
+  padding-block: var(--cmh-space-6);
+  padding-inline: var(--cmh-space-6);
+  backdrop-filter: blur(var(--cmh-glass-blur-mobile));
+}
+
+.glassSoft {
+  background: var(--cmh-glass-soft);
+  color: var(--cmh-ink-primary);
+}
+
+.glassStandard {
+  background: var(--cmh-glass-standard);
+  color: var(--cmh-ink-primary);
+}
+
+.glassStrong {
+  background: var(--cmh-glass-strong);
+  color: var(--cmh-ink-primary);
+}
+
+.glassDark {
+  border-color: var(--cmh-border-accessible);
+  background: var(--cmh-glass-dark);
+  color: var(--cmh-navy-text);
+  box-shadow: var(--cmh-shadow-elevated);
+}
+
+.actionButton {
+  min-block-size: 48px;
+  border: var(--cmh-interactive-border-width) solid var(--cmh-border-accessible);
+  border-radius: var(--cmh-radius-control);
+  padding-block: var(--cmh-space-3);
+  padding-inline: var(--cmh-space-5);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform var(--cmh-motion-press) var(--cmh-ease-standard),
+    box-shadow var(--cmh-motion-micro) var(--cmh-ease-standard),
+    background-color var(--cmh-motion-micro) var(--cmh-ease-standard);
+}
+
+.actionButton:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.actionButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.actionPrimaryGlow {
+  border-color: var(--cmh-blue-primary);
+  background: var(--cmh-gradient-blue-action);
+  color: var(--cmh-paper);
+  box-shadow: var(--cmh-shadow-button-glow);
+}
+
+.actionSecondaryOutline {
+  background: var(--cmh-glass-strong);
+  color: var(--cmh-blue-primary);
+}
+
+.actionGhost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--cmh-blue-primary);
+  box-shadow: none;
+}
+
+.actionDanger {
+  border-color: var(--cmh-state-danger);
+  background: var(--cmh-paper);
+  color: var(--cmh-state-danger);
+  box-shadow: none;
+}
+
+.statusChip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--cmh-space-2);
+  min-block-size: 32px;
+  border: var(--cmh-border-width) solid currentColor;
+  border-radius: var(--cmh-radius-pill);
+  padding-block: var(--cmh-space-1);
+  padding-inline: var(--cmh-space-3);
+  background: var(--cmh-paper);
+  font-size: var(--cmh-type-body-small-size);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.statusMarker {
+  inline-size: 8px;
+  block-size: 8px;
+  flex: 0 0 auto;
+  border: var(--cmh-border-width) solid currentColor;
+  border-radius: var(--cmh-radius-pill);
+  background: currentColor;
+}
+
+.statusInfo {
+  color: var(--cmh-state-information);
+}
+
+.statusSuccess {
+  color: var(--cmh-state-success);
+}
+
+.statusWarning {
+  background: var(--cmh-state-warning-surface);
+  color: var(--cmh-state-warning);
+}
+
+.statusDanger {
+  color: var(--cmh-state-danger);
+}
+
+.statusNeutral {
+  color: var(--cmh-ink-secondary);
+}
+
+@media (min-width: 768px) {
+  .glassCard {
+    backdrop-filter: blur(var(--cmh-glass-blur-desktop));
+  }
+}
