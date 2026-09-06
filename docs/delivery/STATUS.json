@@ -15,8 +15,8 @@
     {
       "number": 2,
       "title": "Runtime and application architecture",
-      "status": "in_progress",
-      "evidence_note": "Runtime, dispatcher, content negotiation, and private workspace architecture integrated; final release acceptance pending."
+      "status": "completed",
+      "evidence_note": "Runtime, dispatcher, content negotiation, build and private workspace architecture implemented and locally verified."
     },
     {
       "number": 3,
@@ -64,19 +64,19 @@
       "number": 10,
       "title": "Responsive, Arabic and visual acceptance",
       "status": "in_progress",
-      "evidence_note": "Public96 checks and3 interactions pass; private88 initial and24 targeted rechecks use synthetic provider fixtures. Final reviewed scope remains explicit."
+      "evidence_note": "96 public checks and 3 interactions; 88 initial private checks, 24 corrective rechecks and 16 authoring checks with 84 control assertions. Private evidence uses clearly labeled synthetic provider fixtures."
     },
     {
       "number": 11,
       "title": "Security and end-to-end release verification",
       "status": "in_progress",
-      "evidence_note": "Build/lint and464 tests pass;30 SQL fixture checks pass against applied migration bytes; live schema/advisor checks pass; real Auth/role acceptance remains pending."
+      "evidence_note": "Build, formatting, lint and 464 tests pass; 30 SQL scenarios pass against applied migration bytes. Live schema/security checks pass. Real Auth/role acceptance remains pending."
     },
     {
       "number": 12,
       "title": "Deploy and hand over the finished website",
-      "status": "pending",
-      "evidence_note": "No live deployment, real account acceptance, or production handover established."
+      "status": "blocked",
+      "evidence_note": "Automatic approval review rejected uploading private source to Vercel without explicit source-transfer authorization. No project or deployment was created."
     }
   ],
   "checkpoint": "02-integrated-private-application",
@@ -90,14 +90,14 @@
     "live-database-checkpoint-02.json",
     "database-performance-checkpoint-02.json"
   ],
-  "next_owner_input": "Owner-designated initial administrator email and independently approved author/approver identities; never request passwords in chat. These facts do not block remaining independent engineering.",
-  "next_engineering_work": "Finalize the release evidence and exact source commit, configure and verify hosting/provider callbacks, and complete real account and role acceptance. The runtime migration is applied and verified.",
+  "next_owner_input": "Explicit authorization to upload this private repository source to the connected Vercel team for a preview deployment; initial administrator email; secure Supabase dashboard sign-in to configure callback/email settings.",
+  "next_engineering_work": "After source-transfer authorization, deploy the already prepared verified source, record the preview origin, configure and verify Auth callbacks through an authenticated provider session, then onboard the approved identity and verify actual role workflows.",
   "limitations": [
     "No production deployment or live URL established by this checkpoint",
     "No real successful sign-in, invitation/recovery delivery, or hosted role workflow acceptance",
     "SQL tests run in isolated PGlite with synthetic Auth scaffolding; private browser checks use a synthetic provider",
     "Owner-approved notices, public content/contact/privacy facts and independent approval actors remain to be established",
-    "Final checkpoint commit, deployed origin, and real account/workflow acceptance remain pending"
+    "Hosting blocked by automatic approval review; real accounts, approved content, provider configuration and live workflow acceptance remain outstanding."
   ],
   "validation": {
     "production_build": "pass",
@@ -118,8 +118,8 @@
     "sql_fixture_final_result": "pass",
     "sql_scope": "isolated PGlite database with synthetic Auth scaffolding",
     "live_authenticated_role_flows": "not_run",
-    "deployment": "not_performed",
-    "exact_source_commit": null,
+    "deployment": "blocked_by_automatic_approval_review_before_upload",
+    "exact_source_commit": "fda433b6dc3fbc968dff6510f8c63025ef13e97e",
     "sql_fixture_checks_passed": 30,
     "live_schema_and_security_advisors": "pass",
     "private_authoring_checks": 16,
@@ -132,9 +132,9 @@
       "security_findings": 0
     }
   },
-  "checkpoint_commit": null,
-  "checkpoint_tree": null,
-  "evidence_finalization": "verified_application_ready_for_source_commit_and_preview_deployment",
+  "checkpoint_commit": "fda433b6dc3fbc968dff6510f8c63025ef13e97e",
+  "checkpoint_tree": "36d5f8328578e44942e648f63d8c430ccd2a65b2",
+  "evidence_finalization": "Source committed and tree verified against GitHub; local and database evidence finalized; hosted deployment blocked by automatic approval review.",
   "owner_must_execute_prompts_manually": false,
   "implementation": {
     "intended_screens": 31,
@@ -208,5 +208,22 @@
     "explicit_grants": 15,
     "grant_expiry_optional": true,
     "default_grant_expiry": null
+  },
+  "hosting": {
+    "provider": "Vercel",
+    "team_id": "team_vyjs0uvAAX1zO1oCqAKEtgps",
+    "proposed_project": "coach-michel-website-2",
+    "target": "preview",
+    "status": "automatic_approval_review_rejected",
+    "project_created": false,
+    "deployment_id": null,
+    "url": null,
+    "source_commit": "fda433b6dc3fbc968dff6510f8c63025ef13e97e",
+    "source_tree": "36d5f8328578e44942e648f63d8c430ccd2a65b2",
+    "source_file_count": 288,
+    "source_payload_sha256": "34a862260eb92cb7728aff7d69d05dca3628998ab5aef8229c7db74adc762869",
+    "proposed_configuration": "Supabase project URL and publishable key only; no service key; Node24.x",
+    "reason": "Private repository source transfer to Vercel needs explicit user authorization. Do not retry through another path without resolving that authorization.",
+    "post_rejection_projects_list": "empty"
   }
 }

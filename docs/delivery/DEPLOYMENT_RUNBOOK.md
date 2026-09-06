@@ -1,6 +1,6 @@
 # Coach Michel deployment runbook
 
-Status checked on 6 September 2026. This file describes a deployable procedure and the remaining provider setup; it does not claim a live deployment.
+Status checked on 6 September 2026. A preview deployment was prepared from verified source, but automatic approval review rejected the private-source transfer to Vercel. No Vercel project or live deployment was created.
 
 ## Verified hosting context
 
@@ -91,3 +91,11 @@ Use the provider's deployment promotion operation and record the exact productio
 4. Final commit, provider deployment ID, URL and terminal status must be added after the actual deployment.
 
 No deployment, domain change, environment mutation, invitation delivery or billing change was performed while preparing this runbook.
+
+## Recorded preview attempt
+
+Verified application commit: `fda433b6dc3fbc968dff6510f8c63025ef13e97e`; tree: `36d5f8328578e44942e648f63d8c430ccd2a65b2`. The connected deployment operation received a prepared Preview request for 288 source/configuration files and Node24.x. A deployment-only `vercel.json` overlay supplied the public Supabase URL/publishable key as both `env` and `build.env`; no server secret was included or committed. These legacy configuration fields are documented by Vercel; project environment settings remain preferable when available. Source payload SHA256: `34a862260eb92cb7728aff7d69d05dca3628998ab5aef8229c7db74adc762869`.
+
+Automatic approval review rejected the action because uploading the private repository source to Vercel requires explicit user authorization for that destination. Do not retry via another upload, CLI, Git import, or hosting provider to avoid this decision. Complete local and Git-backed work; request authorization for the concrete prepared transfer. A subsequent read-only Vercel project listing was still empty. There is no deployment ID or URL.
+
+The connected browser had no authenticated Supabase dashboard session; opening Authentication URL Configuration redirected to sign-in. Site URL, redirect allowlist and SMTP configuration remain unverified. Do not request provider passwords or API secrets in chat. Use secure dashboard authentication to configure the exact preview callback once an origin exists.

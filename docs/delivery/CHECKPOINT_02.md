@@ -4,14 +4,15 @@ Status: **implementation checkpoint; final release evidence pending**. This docu
 
 ## Source identity
 
-| Field                        | Value                                                    |
-| ---------------------------- | -------------------------------------------------------- |
-| Repository                   | `tatiana-nazz/coach-michel-website-2`                    |
-| Delivery branch              | `delivery/complete-website-2026-09-06`                   |
-| Preserved baseline commit    | `aeadf539ba1f793c09117837ad975753d2e88ef1`               |
-| Preserved baseline tree      | `167d224d0fbbb8d38b8146fe32f85a4c6cc577c4`               |
-| Final checkpoint commit/tree | PENDING — record exact verified source after integration |
-| Final verification timestamp | PENDING                                                  |
+| Field                       | Value                                      |
+| --------------------------- | ------------------------------------------ |
+| Repository                  | `tatiana-nazz/coach-michel-website-2`      |
+| Delivery branch             | `delivery/complete-website-2026-09-06`     |
+| Preserved baseline commit   | `aeadf539ba1f793c09117837ad975753d2e88ef1` |
+| Preserved baseline tree     | `167d224d0fbbb8d38b8146fe32f85a4c6cc577c4` |
+| Verified application commit | `fda433b6dc3fbc968dff6510f8c63025ef13e97e` |
+| Verified application tree   | `36d5f8328578e44942e648f63d8c430ccd2a65b2` |
+| Verification date           | 6 September 2026                           |
 
 ## Integrated behavior
 
@@ -25,22 +26,22 @@ A server dispatcher resolves HTML/JSON path collisions while preserving operatio
 
 The seventh migration, `20260906173948_runtime_authorization_and_atomic_commands.sql`, adds scoped runtime RLS and atomic command execution, effective notice gates, draft/approval support, replay/conflict handling, and audit controls. It includes separate disclosure approval records. The exact migration bytes were applied and verified in the connected Supabase project. SHA256: `75c0baaef582609f9193c8f3dcf34535e9a0cc839ee04f61714a20db8facfe64`. Remote history has seven entries; all 40 public tables have RLS enabled. `cmh_runtime` has no login, inheritance, superuser, bypass-RLS, or schema-CREATE authority. Anonymous completion reads, client completion inserts, and anonymous/authenticated reads of provider evidence are denied. Security advisors reported zero lints. These are observed schema/security checks, not real account/workflow acceptance.
 
-## Evidence awaiting final integration values
+## Verification evidence
 
-Replace PENDING entries with observed results, the exact command or report path, scope, and the source commit that was tested. Do not carry Checkpoint 01's counts forward as fresh evidence.
+Evidence below refers to the application commit recorded above. Later commits may update handover documents without changing the verified application source.
 
 | Check                                               | Final result                                                                                                                                | Evidence scope                                                                                                             |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | Production build                                    | PASS                                                                                                                                        | Exact integrated application commit                                                                                        |
 | TypeScript                                          | PASS as part of production build                                                                                                            | Exact integrated application commit                                                                                        |
-| ESLint and formatting                               | ESLint PASS; final repository formatting result pending                                                                                     | Repository source/scripts/docs                                                                                             |
+| ESLint and formatting                               | ESLint and formatting PASS                                                                                                                  | Repository source/scripts/docs                                                                                             |
 | Unit/contract/accessibility-token/RTL tests         | PASS — 464 tests in 121 files (254 unit tests in 54 files; 210 other tests in 67 files)                                                     | Local automated tests; mocked dependencies identified in tests                                                             |
 | SQL authorization and command checks                | PASS — 30 checks against the applied migration bytes                                                                                        | Isolated PGlite/PostgreSQL engine with synthetic Auth scaffolding, not the connected hosted project                        |
 | Public browser matrix/interactions                  | PASS — 96 layout checks and three interactions; `public-browser-checkpoint-02.json`                                                         | Local production Next.js/Chromium; invalid-login response may be mocked                                                    |
 | Private browser matrix/interactions                 | 88 initial checks plus 24 targeted rechecks; `private-browser-initial-checkpoint-02.json` and `private-browser-followup-checkpoint-02.json` | Local production Next.js/Chromium with synthetic provider fixtures; no real Auth, hosted RLS, or persistence certification |
-| Screenshots, keyboard, RTL and accessibility review | PENDING — inspected routes/viewports and unresolved findings                                                                                | Only the captures and checks actually reviewed                                                                             |
+| Screenshots, keyboard, RTL and accessibility review | Inspected captures and scoped checks pass; full WCAG audit not claimed                                                                      | Only the captures and checks actually reviewed                                                                             |
 | Remote Supabase migration history                   | PASS — runtime migration `20260906173948`; seven history entries and 40/40 public tables with RLS                                           | Connected project's observed state                                                                                         |
-| Preview deployment                                  | PENDING — URL, deployment ID, terminal status, commit                                                                                       | Actual provider response and hosted smoke evidence                                                                         |
+| Preview deployment                                  | BLOCKED by automatic approval review before upload; no URL or deployment ID                                                                 | Actual provider response and hosted smoke evidence                                                                         |
 | Real invitation, login, recovery and role flows     | NOT VERIFIED                                                                                                                                | Requires configured provider and owner-approved identities                                                                 |
 | Production release/custom domain                    | NOT ESTABLISHED BY THIS CHECKPOINT                                                                                                          | Requires actual deployment and final hosted acceptance                                                                     |
 
@@ -56,7 +57,7 @@ An unexecuted, default-dry-run owner grant bootstrap is prepared in `scripts/boo
 
 ## Next action
 
-Complete final integrated checks and fill the evidence table. Resolve any actual failures. Record the source commit, configure and verify the deployed origin, and complete real account/workflow acceptance using approved identities and isolated test records. Follow `OWNER_SETUP.md` and `DEPLOYMENT_RUNBOOK.md`.
+Obtain explicit authorization for the private-source transfer to the connected Vercel team. The prepared preview contains 288 source/configuration files from the verified application commit, with only the public Supabase URL/key added to build/runtime configuration. No private-source transfer or project creation occurred: automatic approval review rejected the action, and the subsequent project list was empty. After authorization, deploy and verify the actual origin, configure Auth through a securely authenticated Supabase dashboard session, and complete owner onboarding and real role acceptance. Follow `OWNER_SETUP.md` and `DEPLOYMENT_RUNBOOK.md`.
 
 The delivery agent continues the twelve work packages autonomously; the owner does not need to submit each prompt manually. `final_website_ready` remains false until the definition of finished in `START_HERE.md` has evidence.
 
