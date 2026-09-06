@@ -24,20 +24,13 @@ const css = readFileSync(
 describe('App Builder v1.2 luminous core primitive contract', () => {
   it('exports the exact governed variant names', () => {
     expect(glassCardVariants).toEqual(['soft', 'standard', 'strong', 'dark']);
-    expect(actionButtonVariants).toEqual([
-      'primary_glow',
-      'secondary_outline',
-      'ghost',
-      'danger',
-    ]);
+    expect(actionButtonVariants).toEqual(['primary_glow', 'secondary_outline', 'ghost', 'danger']);
     expect(statusChipVariants).toEqual(['info', 'success', 'warning', 'danger', 'neutral']);
   });
 
   it('renders GlassCard only as an allowed semantic container', () => {
     for (const variant of glassCardVariants) {
-      const defaultMarkup = renderToStaticMarkup(
-        <GlassCard variant={variant}>Content</GlassCard>,
-      );
+      const defaultMarkup = renderToStaticMarkup(<GlassCard variant={variant}>Content</GlassCard>);
       expect(defaultMarkup).toContain('<div');
       expect(defaultMarkup).toContain(`data-glass-card-variant="${variant}"`);
       expect(defaultMarkup).toContain('Content');
@@ -49,9 +42,7 @@ describe('App Builder v1.2 luminous core primitive contract', () => {
 
   it('renders ActionButton with native button, disabled and loading accessibility semantics', () => {
     for (const variant of actionButtonVariants) {
-      const markup = renderToStaticMarkup(
-        <ActionButton variant={variant}>Continue</ActionButton>,
-      );
+      const markup = renderToStaticMarkup(<ActionButton variant={variant}>Continue</ActionButton>);
       expect(markup).toContain('<button');
       expect(markup).toContain('type="button"');
       expect(markup).toContain(`data-action-button-variant="${variant}"`);

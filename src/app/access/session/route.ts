@@ -40,9 +40,36 @@ function httpStatusForStableCode(code: CredentialSubmissionStableCode): number {
 }
 
 export async function POST(request: Request) {
+  const origin = request.headers.get('origin');
+  if (origin !== new URL(request.url).origin) {
+    return stableErrorResponse('VALIDATION_FAILED', 400);
+  }
+  if (!request.headers.get('content-type')?.includes('application/json')) {
+    return stableErrorResponse('VALIDATION_FAILED', 400);
+  }
   let rawBody: unknown;
   try {
-    rawBody = await request.json();
+    const reader = request.body?.getReader();
+    if (!reader) return stableErrorResponse('VALIDATION_FAILED', 400);
+    const chunks: Uint8Array[] = [];
+    let length = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      length += value.byteLength;
+      if (length > 16_384) {
+        await reader.cancel();
+        return stableErrorResponse('VALIDATION_FAILED', 400);
+      }
+      chunks.push(value);
+    }
+    const bytes = new Uint8Array(length);
+    let offset = 0;
+    for (const chunk of chunks) {
+      bytes.set(chunk, offset);
+      offset += chunk.length;
+    }
+    rawBody = JSON.parse(new TextDecoder().decode(bytes));
   } catch {
     return stableErrorResponse('VALIDATION_FAILED', httpStatusForStableCode('VALIDATION_FAILED'));
   }

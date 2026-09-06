@@ -13,3 +13,11 @@ export {
   type StatusChipProps,
   type StatusChipVariant,
 } from './luminous-primitives';
+export {
+  IconButton,
+  Field,
+  FeedbackPanel,
+  type IconButtonProps,
+  type FieldProps,
+  type FeedbackPanelProps,
+} from './interaction-primitives';

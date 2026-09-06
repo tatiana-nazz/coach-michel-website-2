@@ -31,6 +31,8 @@ export type ApiResult<T> =
 
 export interface ApiRequest<TBody = unknown> {
   readonly operationId: string;
+  readonly pathParams?: Readonly<Record<string, string>>;
+  readonly query?: Readonly<Record<string, string | number | boolean | undefined>>;
   readonly body?: TBody;
   readonly signal?: AbortSignal;
 }

@@ -21,7 +21,7 @@ const createSupabaseServerClientMock = vi.mocked(createSupabaseServerClient);
 function credentialRequest(body: string): Request {
   return new Request('http://localhost/access/session', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', Origin: 'http://localhost' },
     body,
   });
 }

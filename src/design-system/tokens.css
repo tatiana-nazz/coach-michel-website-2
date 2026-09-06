@@ -52,17 +52,9 @@
   --cmh-glass-blur-desktop: 16px;
 
   --cmh-gradient-blue-action: linear-gradient(135deg, #075fea 0%, #0a83ff 100%);
-  --cmh-gradient-canvas-luminous: linear-gradient(
-    160deg,
-    #ffffff 0%,
-    #f7faff 35%,
-    #eaf3ff 100%
-  );
-  --cmh-gradient-hero-ice: radial-gradient(
-      circle at 75% 30%,
-      rgba(75, 195, 255, 0.18),
-      transparent 34%
-    ),
+  --cmh-gradient-canvas-luminous: linear-gradient(160deg, #ffffff 0%, #f7faff 35%, #eaf3ff 100%);
+  --cmh-gradient-hero-ice:
+    radial-gradient(circle at 75% 30%, rgba(75, 195, 255, 0.18), transparent 34%),
     linear-gradient(160deg, #ffffff, #edf5ff);
   --cmh-gradient-navy-data: linear-gradient(145deg, #071f49 0%, #0a326a 70%, #0b4c8c 100%);
 
@@ -113,11 +105,13 @@
   --cmh-grid-desktop-margin-1440: 48px;
   --cmh-grid-desktop-max-content: 1280px;
 
-  --cmh-font-ui: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --cmh-font-ui:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --cmh-font-display: var(--cmh-font-ui);
   --cmh-font-data: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --cmh-font-arabic: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Tahoma, Arial, sans-serif;
+  --cmh-font-arabic:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, Arial,
+    sans-serif;
 
   --cmh-type-display-mobile-size: 42px;
   --cmh-type-display-desktop-size: 64px;

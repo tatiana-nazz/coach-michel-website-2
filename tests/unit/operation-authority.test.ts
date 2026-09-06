@@ -8,7 +8,8 @@ import {
   operationAuthorityDefinitions,
 } from '@/platform/authorization/operation-authority';
 
-const EXPECTED_AUTHORITY_SHA256 = '55c19c64d89a90314c23e2cd5dfd5c7525d4dda970d2e518d7922fdf6dc5ec61';
+const EXPECTED_AUTHORITY_SHA256 =
+  '55c19c64d89a90314c23e2cd5dfd5c7525d4dda970d2e518d7922fdf6dc5ec61';
 
 describe('P4-S06 production operation authority registry', () => {
   it('preserves the exact 56-operation authority compilation', () => {

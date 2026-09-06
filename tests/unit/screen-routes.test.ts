@@ -153,9 +153,9 @@ describe('P4-S06 X-ROUTING-IA governed route registry', () => {
         exerciseRef: 'exercise 1',
       }),
     ).toBe('/trainee/sessions/session%2Fopaque/exercises/exercise%201');
-    expect(
-      buildScreenRoute('SCR-OPS-003', { recoveryRef: 'recovery#opaque' }),
-    ).toBe('/ops/recovery/recovery%23opaque/validation');
+    expect(buildScreenRoute('SCR-OPS-003', { recoveryRef: 'recovery#opaque' })).toBe(
+      '/ops/recovery/recovery%23opaque/validation',
+    );
   });
 
   it('fails closed on missing, blank, or unexpected dynamic references', () => {

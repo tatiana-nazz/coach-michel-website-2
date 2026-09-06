@@ -18,7 +18,7 @@ export interface OperationAuthorityDefinition {
  * This registry is descriptive authority metadata only; it does not choose multi-grant combination semantics.
  */
 export const operationAuthorityDefinitions = {
-  'p3s11_apin_001_get_1': {
+  p3s11_apin_001_get_1: {
     method: 'GET',
     path: '/public/overview',
     actionClass: 'QUERY',
@@ -26,7 +26,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-001'],
     resourceIds: ['RES-001'],
   },
-  'p3s11_apin_002_get_1': {
+  p3s11_apin_002_get_1: {
     method: 'GET',
     path: '/public/guidance',
     actionClass: 'QUERY',
@@ -34,7 +34,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-001'],
     resourceIds: ['RES-001', 'RES-008'],
   },
-  'p3s11_apin_003_get_1': {
+  p3s11_apin_003_get_1: {
     method: 'GET',
     path: '/public/guidance/{public_content_ref}',
     actionClass: 'QUERY',
@@ -42,20 +42,15 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-001'],
     resourceIds: ['RES-001', 'RES-008'],
   },
-  'p3s11_apin_004_get_1': {
+  p3s11_apin_004_get_1: {
     method: 'GET',
     path: '/disclosures/effective',
     actionClass: 'QUERY',
-    roleIds: [
-      'ROL-001',
-      'ROL-002',
-      'ROL-003',
-      'ROL-004',
-    ],
+    roleIds: ['ROL-001', 'ROL-002', 'ROL-003', 'ROL-004'],
     capabilityIds: ['CAP-001', 'CAP-003'],
     resourceIds: ['RES-002', 'RES-015'],
   },
-  'p3s11_apin_005_get_1': {
+  p3s11_apin_005_get_1: {
     method: 'GET',
     path: '/public/next-step-options',
     actionClass: 'QUERY',
@@ -63,7 +58,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-001', 'CAP-006'],
     resourceIds: ['RES-014'],
   },
-  'p3s11_apin_039_patch_1': {
+  p3s11_apin_039_patch_1: {
     method: 'PATCH',
     path: '/support-privacy-cases/{case_ref}',
     actionClass: 'COMMAND',
@@ -71,7 +66,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-006', 'CAP-016'],
     resourceIds: ['RES-014', 'RES-016'],
   },
-  'p3s11_apin_006_get_1': {
+  p3s11_apin_006_get_1: {
     method: 'GET',
     path: '/access/context',
     actionClass: 'QUERY',
@@ -79,7 +74,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-002', 'CAP-003'],
     resourceIds: ['RES-004', 'RES-005'],
   },
-  'p3s11_apin_007_get_1': {
+  p3s11_apin_007_get_1: {
     method: 'GET',
     path: '/access/provisioning-status',
     actionClass: 'QUERY',
@@ -87,7 +82,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-002', 'CAP-015'],
     resourceIds: ['RES-004', 'RES-005'],
   },
-  'p3s11_apin_035_post_1': {
+  p3s11_apin_035_post_1: {
     method: 'POST',
     path: '/access-administration/authority-changes',
     actionClass: 'COMMAND',
@@ -95,7 +90,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-015'],
     resourceIds: ['RES-004', 'RES-005', 'RES-018'],
   },
-  'p3s11_apin_008_get_1': {
+  p3s11_apin_008_get_1: {
     method: 'GET',
     path: '/access/notices/effective',
     actionClass: 'QUERY',
@@ -103,7 +98,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-003'],
     resourceIds: ['RES-002', 'RES-003', 'RES-015'],
   },
-  'p3s11_apin_009_post_1': {
+  p3s11_apin_009_post_1: {
     method: 'POST',
     path: '/access/acceptance-records',
     actionClass: 'COMMAND',
@@ -111,46 +106,31 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-003'],
     resourceIds: ['RES-003'],
   },
-  'p3s11_apin_010_post_1': {
+  p3s11_apin_010_post_1: {
     method: 'POST',
     path: '/access/recovery-requests',
     actionClass: 'COMMAND',
-    roleIds: [
-      'ROL-002',
-      'ROL-003',
-      'ROL-004',
-      'ROL-005',
-    ],
+    roleIds: ['ROL-002', 'ROL-003', 'ROL-004', 'ROL-005'],
     capabilityIds: ['CAP-002', 'CAP-015'],
     resourceIds: ['RES-004', 'RES-005', 'RES-014'],
   },
-  'p3s11_apin_011_get_1': {
+  p3s11_apin_011_get_1: {
     method: 'GET',
     path: '/access/recovery-requests/{recovery_ref}',
     actionClass: 'QUERY',
-    roleIds: [
-      'ROL-002',
-      'ROL-003',
-      'ROL-004',
-      'ROL-005',
-    ],
+    roleIds: ['ROL-002', 'ROL-003', 'ROL-004', 'ROL-005'],
     capabilityIds: ['CAP-002', 'CAP-015'],
     resourceIds: ['RES-004', 'RES-005', 'RES-014'],
   },
-  'p3s11_apin_012_get_1': {
+  p3s11_apin_012_get_1: {
     method: 'GET',
     path: '/trainee/today',
     actionClass: 'QUERY',
     roleIds: ['ROL-003'],
     capabilityIds: ['CAP-004'],
-    resourceIds: [
-      'RES-006',
-      'RES-010',
-      'RES-012',
-      'RES-019',
-    ],
+    resourceIds: ['RES-006', 'RES-010', 'RES-012', 'RES-019'],
   },
-  'p3s11_apin_013_get_1': {
+  p3s11_apin_013_get_1: {
     method: 'GET',
     path: '/trainee/sessions/{session_ref}',
     actionClass: 'QUERY',
@@ -158,7 +138,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-004'],
     resourceIds: ['RES-009', 'RES-010', 'RES-019'],
   },
-  'p3s11_apin_014_get_1': {
+  p3s11_apin_014_get_1: {
     method: 'GET',
     path: '/trainee/session-schedules/{session_schedule_ref}/exercise-sequence',
     actionClass: 'QUERY',
@@ -166,7 +146,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-004'],
     resourceIds: ['RES-008', 'RES-009', 'RES-010'],
   },
-  'p3s11_apin_015_get_1': {
+  p3s11_apin_015_get_1: {
     method: 'GET',
     path: '/trainee/session-schedules/{session_schedule_ref}/exercise-guidance',
     actionClass: 'QUERY',
@@ -174,7 +154,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-004'],
     resourceIds: ['RES-008', 'RES-009', 'RES-010'],
   },
-  'p3s11_apin_016_post_1': {
+  p3s11_apin_016_post_1: {
     method: 'POST',
     path: '/trainee/session-schedules/{schedule_ref}/completion-intents',
     actionClass: 'COMMAND',
@@ -182,36 +162,23 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-005', 'CAP-020'],
     resourceIds: ['RES-010', 'RES-011', 'RES-012'],
   },
-  'p3s11_apin_017_get_1': {
+  p3s11_apin_017_get_1: {
     method: 'GET',
     path: '/completion-state/{schedule_completion_or_case_ref}',
     actionClass: 'QUERY',
     roleIds: ['ROL-003', 'ROL-004'],
     capabilityIds: ['CAP-005', 'CAP-013'],
-    resourceIds: [
-      'RES-011',
-      'RES-012',
-      'RES-013',
-      'RES-017',
-      'RES-019',
-    ],
+    resourceIds: ['RES-011', 'RES-012', 'RES-013', 'RES-017', 'RES-019'],
   },
-  'p3s11_apin_018_get_1': {
+  p3s11_apin_018_get_1: {
     method: 'GET',
     path: '/account/context',
     actionClass: 'QUERY',
     roleIds: ['ROL-003', 'ROL-004'],
     capabilityIds: ['CAP-003'],
-    resourceIds: [
-      'RES-002',
-      'RES-003',
-      'RES-004',
-      'RES-006',
-      'RES-007',
-      'RES-015',
-    ],
+    resourceIds: ['RES-002', 'RES-003', 'RES-004', 'RES-006', 'RES-007', 'RES-015'],
   },
-  'p3s11_apin_019_post_1': {
+  p3s11_apin_019_post_1: {
     method: 'POST',
     path: '/support-privacy-requests',
     actionClass: 'COMMAND',
@@ -219,27 +186,15 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-006'],
     resourceIds: ['RES-014'],
   },
-  'p3s11_apin_020_get_1': {
+  p3s11_apin_020_get_1: {
     method: 'GET',
     path: '/coach/overview',
     actionClass: 'QUERY',
     roleIds: ['ROL-004'],
-    capabilityIds: [
-      'CAP-007',
-      'CAP-008',
-      'CAP-012',
-      'CAP-013',
-    ],
-    resourceIds: [
-      'RES-006',
-      'RES-009',
-      'RES-010',
-      'RES-012',
-      'RES-013',
-      'RES-019',
-    ],
+    capabilityIds: ['CAP-007', 'CAP-008', 'CAP-012', 'CAP-013'],
+    resourceIds: ['RES-006', 'RES-009', 'RES-010', 'RES-012', 'RES-013', 'RES-019'],
   },
-  'p3s11_apin_021_get_1': {
+  p3s11_apin_021_get_1: {
     method: 'GET',
     path: '/coach/trainees',
     actionClass: 'QUERY',
@@ -247,21 +202,15 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-007'],
     resourceIds: ['RES-005', 'RES-006'],
   },
-  'p3s11_apin_022_get_1': {
+  p3s11_apin_022_get_1: {
     method: 'GET',
     path: '/coach/trainees/{trainee_ref}',
     actionClass: 'QUERY',
     roleIds: ['ROL-004'],
     capabilityIds: ['CAP-007', 'CAP-013'],
-    resourceIds: [
-      'RES-006',
-      'RES-010',
-      'RES-012',
-      'RES-013',
-      'RES-019',
-    ],
+    resourceIds: ['RES-006', 'RES-010', 'RES-012', 'RES-013', 'RES-019'],
   },
-  'p3s11_apin_023_program_collection': {
+  p3s11_apin_023_program_collection: {
     method: 'GET',
     path: '/coach/programs',
     actionClass: 'QUERY',
@@ -269,7 +218,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-008'],
     resourceIds: ['RES-009'],
   },
-  'p3s11_apin_023_session_collection': {
+  p3s11_apin_023_session_collection: {
     method: 'GET',
     path: '/coach/sessions',
     actionClass: 'QUERY',
@@ -277,7 +226,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-008'],
     resourceIds: ['RES-009'],
   },
-  'p3s11_apin_024_program_draft': {
+  p3s11_apin_024_program_draft: {
     method: 'GET',
     path: '/coach/programs/{program_ref}/draft',
     actionClass: 'QUERY',
@@ -285,7 +234,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-008'],
     resourceIds: ['RES-008', 'RES-009'],
   },
-  'p3s11_apin_024_session_draft': {
+  p3s11_apin_024_session_draft: {
     method: 'GET',
     path: '/coach/sessions/{session_ref}/draft',
     actionClass: 'QUERY',
@@ -293,7 +242,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-008'],
     resourceIds: ['RES-008', 'RES-009'],
   },
-  'p3s11_apin_025_create_program_draft': {
+  p3s11_apin_025_create_program_draft: {
     method: 'POST',
     path: '/coach/program-drafts',
     actionClass: 'COMMAND',
@@ -301,7 +250,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-008'],
     resourceIds: ['RES-008', 'RES-009'],
   },
-  'p3s11_apin_025_revise_program_draft': {
+  p3s11_apin_025_revise_program_draft: {
     method: 'PATCH',
     path: '/coach/program-drafts/{draft_ref}',
     actionClass: 'COMMAND',
@@ -309,7 +258,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-008'],
     resourceIds: ['RES-008', 'RES-009'],
   },
-  'p3s11_apin_025_create_session_draft': {
+  p3s11_apin_025_create_session_draft: {
     method: 'POST',
     path: '/coach/session-drafts',
     actionClass: 'COMMAND',
@@ -317,7 +266,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-008'],
     resourceIds: ['RES-008', 'RES-009'],
   },
-  'p3s11_apin_025_revise_session_draft': {
+  p3s11_apin_025_revise_session_draft: {
     method: 'PATCH',
     path: '/coach/session-drafts/{draft_ref}',
     actionClass: 'COMMAND',
@@ -325,7 +274,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-008'],
     resourceIds: ['RES-008', 'RES-009'],
   },
-  'p3s11_apin_027_create_content_draft': {
+  p3s11_apin_027_create_content_draft: {
     method: 'POST',
     path: '/coach/content-drafts',
     actionClass: 'COMMAND',
@@ -333,7 +282,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-009'],
     resourceIds: ['RES-008'],
   },
-  'p3s11_apin_027_revise_content_draft': {
+  p3s11_apin_027_revise_content_draft: {
     method: 'PATCH',
     path: '/coach/content-drafts/{draft_ref}',
     actionClass: 'COMMAND',
@@ -341,7 +290,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-009'],
     resourceIds: ['RES-008'],
   },
-  'p3s11_apin_026_get_1': {
+  p3s11_apin_026_get_1: {
     method: 'GET',
     path: '/coach/exercises',
     actionClass: 'QUERY',
@@ -349,7 +298,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-009', 'CAP-010'],
     resourceIds: ['RES-008'],
   },
-  'p3s11_apin_028_post_1': {
+  p3s11_apin_028_post_1: {
     method: 'POST',
     path: '/content-publication-decisions',
     actionClass: 'COMMAND',
@@ -357,33 +306,23 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-010'],
     resourceIds: ['RES-002', 'RES-008'],
   },
-  'p3s11_apin_029_post_1': {
+  p3s11_apin_029_post_1: {
     method: 'POST',
     path: '/coach/schedule-release-previews',
     actionClass: 'QUERY',
     roleIds: ['ROL-004'],
     capabilityIds: ['CAP-012'],
-    resourceIds: [
-      'RES-005',
-      'RES-009',
-      'RES-010',
-      'RES-015',
-    ],
+    resourceIds: ['RES-005', 'RES-009', 'RES-010', 'RES-015'],
   },
-  'p3s11_apin_030_post_1': {
+  p3s11_apin_030_post_1: {
     method: 'POST',
     path: '/coach/assignment-release-commands',
     actionClass: 'COMMAND',
     roleIds: ['ROL-004', 'ROL-012'],
     capabilityIds: ['CAP-012', 'CAP-020'],
-    resourceIds: [
-      'RES-005',
-      'RES-009',
-      'RES-010',
-      'RES-015',
-    ],
+    resourceIds: ['RES-005', 'RES-009', 'RES-010', 'RES-015'],
   },
-  'p3s11_apin_036_get_1': {
+  p3s11_apin_036_get_1: {
     method: 'GET',
     path: '/policies',
     actionClass: 'QUERY',
@@ -391,34 +330,23 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-011', 'CAP-012'],
     resourceIds: ['RES-015'],
   },
-  'p3s11_apin_031_get_1': {
+  p3s11_apin_031_get_1: {
     method: 'GET',
     path: '/coach/completion-monitoring',
     actionClass: 'QUERY',
     roleIds: ['ROL-004'],
     capabilityIds: ['CAP-007', 'CAP-013'],
-    resourceIds: [
-      'RES-006',
-      'RES-010',
-      'RES-012',
-      'RES-013',
-      'RES-019',
-    ],
+    resourceIds: ['RES-006', 'RES-010', 'RES-012', 'RES-013', 'RES-019'],
   },
-  'p3s11_apin_032_post_1': {
+  p3s11_apin_032_post_1: {
     method: 'POST',
     path: '/reconciliation-cases',
     actionClass: 'COMMAND',
     roleIds: ['ROL-004', 'ROL-012'],
     capabilityIds: ['CAP-013', 'CAP-020'],
-    resourceIds: [
-      'RES-011',
-      'RES-012',
-      'RES-013',
-      'RES-017',
-    ],
+    resourceIds: ['RES-011', 'RES-012', 'RES-013', 'RES-017'],
   },
-  'p3s11_apin_033_read_case': {
+  p3s11_apin_033_read_case: {
     method: 'GET',
     path: '/reconciliation-cases/{case_ref}',
     actionClass: 'QUERY',
@@ -426,7 +354,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-013', 'CAP-014'],
     resourceIds: ['RES-013', 'RES-017', 'RES-018'],
   },
-  'p3s11_apin_033_update_proposal': {
+  p3s11_apin_033_update_proposal: {
     method: 'PATCH',
     path: '/reconciliation-cases/{case_ref}/proposal',
     actionClass: 'COMMAND',
@@ -434,7 +362,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-013', 'CAP-014'],
     resourceIds: ['RES-013', 'RES-017', 'RES-018'],
   },
-  'p3s11_apin_034_post_1': {
+  p3s11_apin_034_post_1: {
     method: 'POST',
     path: '/reconciliation-cases/{case_ref}/authorization-decisions',
     actionClass: 'COMMAND',
@@ -442,21 +370,15 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-014'],
     resourceIds: ['RES-012', 'RES-013', 'RES-018'],
   },
-  'p3s11_apin_044_get_1': {
+  p3s11_apin_044_get_1: {
     method: 'GET',
     path: '/audit-events',
     actionClass: 'QUERY',
-    roleIds: [
-      'ROL-011',
-      'ROL-006',
-      'ROL-007',
-      'ROL-009',
-      'ROL-010',
-    ],
+    roleIds: ['ROL-011', 'ROL-006', 'ROL-007', 'ROL-009', 'ROL-010'],
     capabilityIds: ['CAP-019'],
     resourceIds: ['RES-018'],
   },
-  'p3s11_apin_037_post_1': {
+  p3s11_apin_037_post_1: {
     method: 'POST',
     path: '/policy-approval-decisions',
     actionClass: 'COMMAND',
@@ -464,7 +386,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-011'],
     resourceIds: ['RES-015', 'RES-018'],
   },
-  'p3s11_apin_038_collection': {
+  p3s11_apin_038_collection: {
     method: 'GET',
     path: '/support-privacy-cases',
     actionClass: 'QUERY',
@@ -472,7 +394,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-016'],
     resourceIds: ['RES-014'],
   },
-  'p3s11_apin_038_detail': {
+  p3s11_apin_038_detail: {
     method: 'GET',
     path: '/support-privacy-cases/{case_ref}',
     actionClass: 'QUERY',
@@ -480,7 +402,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-016'],
     resourceIds: ['RES-014'],
   },
-  'p3s11_apin_040_intake': {
+  p3s11_apin_040_intake: {
     method: 'POST',
     path: '/operational-incidents',
     actionClass: 'COMMAND',
@@ -488,7 +410,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-017', 'CAP-016'],
     resourceIds: ['RES-016', 'RES-018'],
   },
-  'p3s11_apin_040_collection': {
+  p3s11_apin_040_collection: {
     method: 'GET',
     path: '/operational-incidents',
     actionClass: 'QUERY',
@@ -496,7 +418,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-017', 'CAP-016'],
     resourceIds: ['RES-016', 'RES-018'],
   },
-  'p3s11_apin_040_detail': {
+  p3s11_apin_040_detail: {
     method: 'GET',
     path: '/operational-incidents/{incident_ref}',
     actionClass: 'QUERY',
@@ -504,20 +426,15 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-017', 'CAP-016'],
     resourceIds: ['RES-016', 'RES-018'],
   },
-  'p3s11_apin_048_get_1': {
+  p3s11_apin_048_get_1: {
     method: 'GET',
     path: '/operational-dependencies/readiness',
     actionClass: 'QUERY',
     roleIds: ['ROL-009', 'ROL-010', 'ROL-011'],
     capabilityIds: ['CAP-017', 'CAP-018', 'CAP-019'],
-    resourceIds: [
-      'RES-016',
-      'RES-017',
-      'RES-018',
-      'RES-019',
-    ],
+    resourceIds: ['RES-016', 'RES-017', 'RES-018', 'RES-019'],
   },
-  'p3s11_apin_041_post_1': {
+  p3s11_apin_041_post_1: {
     method: 'POST',
     path: '/operational-incidents/{incident_ref}/recovery-activities',
     actionClass: 'COMMAND',
@@ -525,7 +442,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-017', 'CAP-020'],
     resourceIds: ['RES-016', 'RES-017', 'RES-018'],
   },
-  'p3s11_apin_042_read_validation_context': {
+  p3s11_apin_042_read_validation_context: {
     method: 'GET',
     path: '/recovery-activities/{recovery_activity_ref}/validation',
     actionClass: 'QUERY',
@@ -533,7 +450,7 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-018'],
     resourceIds: ['RES-017', 'RES-018'],
   },
-  'p3s11_apin_042_submit_validation': {
+  p3s11_apin_042_submit_validation: {
     method: 'POST',
     path: '/recovery-activities/{recovery_activity_ref}/validation-submissions',
     actionClass: 'COMMAND',
@@ -541,18 +458,13 @@ export const operationAuthorityDefinitions = {
     capabilityIds: ['CAP-018'],
     resourceIds: ['RES-017', 'RES-018'],
   },
-  'p3s11_apin_043_post_1': {
+  p3s11_apin_043_post_1: {
     method: 'POST',
     path: '/recovery-validations/{validation_ref}/state-reconciliation-handoffs',
     actionClass: 'COMMAND',
     roleIds: ['ROL-010', 'ROL-012'],
     capabilityIds: ['CAP-018', 'CAP-020'],
-    resourceIds: [
-      'RES-012',
-      'RES-013',
-      'RES-017',
-      'RES-019',
-    ],
+    resourceIds: ['RES-012', 'RES-013', 'RES-017', 'RES-019'],
   },
 } as const satisfies Readonly<Record<string, OperationAuthorityDefinition>>;
 

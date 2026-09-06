@@ -34,8 +34,11 @@ export function validateCredentialSubmissionBody(body: unknown): CredentialSubmi
     !keys.includes('password') ||
     typeof record.email !== 'string' ||
     record.email.length === 0 ||
+    record.email.length > 254 ||
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(record.email) ||
     typeof record.password !== 'string' ||
-    record.password.length === 0
+    record.password.length === 0 ||
+    record.password.length > 1024
   ) {
     return { ok: false, code: 'VALIDATION_FAILED' };
   }

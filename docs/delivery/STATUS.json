@@ -1,0 +1,105 @@
+{
+  "project": "CMH-2026-001",
+  "track": "delivery-2026-09-06",
+  "baseline_commit": "aeadf539ba1f793c09117837ad975753d2e88ef1",
+  "baseline_tree": "167d224d0fbbb8d38b8146fe32f85a4c6cc577c4",
+  "branch": "delivery/complete-website-2026-09-06",
+  "final_website_ready": false,
+  "stages": [
+    {
+      "number": 1,
+      "title": "Source and contract audit",
+      "status": "completed"
+    },
+    {
+      "number": 2,
+      "title": "Runtime and application architecture",
+      "status": "in_progress"
+    },
+    {
+      "number": 3,
+      "title": "Distinctive luminous design system",
+      "status": "in_progress"
+    },
+    {
+      "number": 4,
+      "title": "Public website",
+      "status": "in_progress"
+    },
+    {
+      "number": 5,
+      "title": "Secure access and first-login flow",
+      "status": "in_progress"
+    },
+    {
+      "number": 6,
+      "title": "Trainee workflows",
+      "status": "pending"
+    },
+    {
+      "number": 7,
+      "title": "Coach workflows",
+      "status": "pending"
+    },
+    {
+      "number": 8,
+      "title": "Operations, support and recovery",
+      "status": "pending"
+    },
+    {
+      "number": 9,
+      "title": "Data, content and integration completion",
+      "status": "in_progress"
+    },
+    {
+      "number": 10,
+      "title": "Responsive, Arabic and visual acceptance",
+      "status": "in_progress"
+    },
+    {
+      "number": 11,
+      "title": "Security and end-to-end release verification",
+      "status": "in_progress"
+    },
+    {
+      "number": 12,
+      "title": "Deploy and hand over the finished website",
+      "status": "pending"
+    }
+  ],
+  "supabase_observation": {
+    "project_ref": "szlcakassgylokircuxs",
+    "status": "ACTIVE_HEALTHY",
+    "public_tables": 39,
+    "migration_history_entries": 6,
+    "auth_users": 0,
+    "app_principals": 0,
+    "principal_grants": 0,
+    "trainee_profiles": 0,
+    "content_versions": 0,
+    "schema_or_user_mutations_this_checkpoint": false
+  },
+  "checkpoint": "01-public-website-and-foundation",
+  "evidence": ["CHECKPOINT_01.md", "SURFACE_MATRIX.json", "public-browser-report.json"],
+  "next_owner_input": "Email address for the first real Coach Michel owner/coach administrator; never request a password in chat.",
+  "next_engineering_work": "Complete stage 05 auth lifecycle and database command boundaries, then trainee, coach and operations wiring. The identity input is needed for live account verification; other engineering work can continue independently.",
+  "limitations": [
+    "No production deployment",
+    "No live successful sign-in or role workflow verification",
+    "Private trainee, coach and operations runtime wiring remains pending",
+    "Invitation/recovery pages are informational only",
+    "Public copy is a review draft; no effective approved content versions exist",
+    "56 registered production API operations remain to be implemented; the separate login operation is implemented"
+  ],
+  "validation": {
+    "production_build": "pass",
+    "typescript": "pass",
+    "vitest_files": 111,
+    "vitest_tests_passed": 400,
+    "lint": "pass",
+    "public_browser_checks_passed": 96,
+    "public_browser_interactions_passed": 3,
+    "live_authenticated_role_flows": "not_run",
+    "deployment": "not_performed"
+  }
+}

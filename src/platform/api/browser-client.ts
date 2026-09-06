@@ -18,6 +18,29 @@ const stableErrorCodes = new Set<StableApiErrorCode>([
   'STALE_OR_CONFLICTING_STATE',
 ]);
 
+export function buildOperationPath(
+  path: string,
+  request: Pick<ApiRequest, 'pathParams' | 'query'>,
+): string {
+  const required = new Set(Array.from(path.matchAll(/\{([a-zA-Z0-9_]+)\}/g), (match) => match[1]));
+  for (const key of Object.keys(request.pathParams ?? {})) {
+    if (!required.has(key)) throw new Error(`Unexpected API path parameter: ${key}`);
+  }
+  const resolved = path.replace(/\{([a-zA-Z0-9_]+)\}/g, (_match, name: string) => {
+    const value = request.pathParams?.[name];
+    if (value === undefined || !value.trim() || value === '.' || value === '..') {
+      throw new Error(`Missing or invalid API path parameter: ${name}`);
+    }
+    return encodeURIComponent(value);
+  });
+  const query = new URLSearchParams();
+  for (const [name, value] of Object.entries(request.query ?? {})) {
+    if (value !== undefined) query.set(name, String(value));
+  }
+  const suffix = query.toString();
+  return suffix ? `${resolved}?${suffix}` : resolved;
+}
+
 function isStableApiErrorCode(value: unknown): value is StableApiErrorCode {
   return typeof value === 'string' && stableErrorCodes.has(value as StableApiErrorCode);
 }
@@ -111,9 +134,16 @@ export function createBrowserApiClient(fetchImpl: typeof fetch = fetch): ApiClie
         };
       }
 
+      let path: string;
+      try {
+        path = buildOperationPath(operation.path, request);
+      } catch {
+        return { ok: false, error: { kind: 'validation', stableCode: 'VALIDATION_FAILED' } };
+      }
+
       let response: Response;
       try {
-        response = await fetchImpl(operation.path, buildRequestInit(operation.method, request));
+        response = await fetchImpl(path, buildRequestInit(operation.method, request));
       } catch (cause) {
         return {
           ok: false,
@@ -127,6 +157,16 @@ export function createBrowserApiClient(fetchImpl: typeof fetch = fetch): ApiClie
 
       const payload = await parseJsonIfPresent(response);
       if (response.ok) {
+        if (payload === undefined && response.status !== 204) {
+          return {
+            ok: false,
+            error: {
+              kind: 'server',
+              status: response.status,
+              stableCode: 'DEPENDENCY_UNAVAILABLE',
+            },
+          };
+        }
         return { ok: true, data: payload as TResponse };
       }
 

@@ -39,9 +39,9 @@ describe('P4-S06 application-owned Supabase grant authority', () => {
   });
 
   it.each([
-    [{ data: false, error: null }, 'false result'],
-    [{ data: null, error: null }, 'null result'],
-    [{ data: true, error: new Error('provider failure') }, 'provider error'],
+    { data: false, error: null },
+    { data: null, error: null },
+    { data: true, error: new Error('provider failure') },
   ])('fails closed for %s', async (result) => {
     const authority = new SupabaseGrantAuthority(() =>
       Promise.resolve({ rpc: vi.fn().mockResolvedValue(result) }),

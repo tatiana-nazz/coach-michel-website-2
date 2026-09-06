@@ -29,9 +29,7 @@ function readVariables(source: string): Readonly<Record<string, string>> {
 
 function rgbChannelToLinear(channel: number): number {
   const normalized = channel / 255;
-  return normalized <= 0.04045
-    ? normalized / 12.92
-    : ((normalized + 0.055) / 1.055) ** 2.4;
+  return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
 }
 
 function relativeLuminance(hex: string): number {

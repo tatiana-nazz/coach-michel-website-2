@@ -1,8 +1,4 @@
-import type {
-  ButtonHTMLAttributes,
-  HTMLAttributes,
-  ReactNode,
-} from 'react';
+import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react';
 
 import styles from './luminous-primitives.module.css';
 
@@ -16,7 +12,7 @@ export interface GlassCardProps extends HTMLAttributes<HTMLElement> {
   readonly children: ReactNode;
 }
 
-const glassCardVariantClass: Readonly<Record<GlassCardVariant, string>> = {
+const glassCardVariantClass: Readonly<Record<GlassCardVariant, string | undefined>> = {
   soft: styles.glassSoft,
   standard: styles.glassStandard,
   strong: styles.glassStrong,
@@ -54,7 +50,7 @@ export interface ActionButtonProps extends ButtonHTMLAttributes<HTMLButtonElemen
   readonly loading?: boolean;
 }
 
-const actionButtonVariantClass: Readonly<Record<ActionButtonVariant, string>> = {
+const actionButtonVariantClass: Readonly<Record<ActionButtonVariant, string | undefined>> = {
   primary_glow: styles.actionPrimaryGlow,
   secondary_outline: styles.actionSecondaryOutline,
   ghost: styles.actionGhost,
@@ -96,7 +92,7 @@ export interface StatusChipProps extends HTMLAttributes<HTMLSpanElement> {
   readonly children: string;
 }
 
-const statusChipVariantClass: Readonly<Record<StatusChipVariant, string>> = {
+const statusChipVariantClass: Readonly<Record<StatusChipVariant, string | undefined>> = {
   info: styles.statusInfo,
   success: styles.statusSuccess,
   warning: styles.statusWarning,

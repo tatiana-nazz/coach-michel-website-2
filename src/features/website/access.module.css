@@ -1,0 +1,210 @@
+.layout {
+  max-inline-size: 1110px;
+  margin: 70px auto 100px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  border: 1px solid #d4e2ee;
+  border-radius: 18px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 20px 60px #1a538010;
+}
+.formCard {
+  padding: 55px;
+  min-inline-size: 0;
+}
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #5a7891;
+  margin-block-end: 25px;
+}
+.formCard h1 {
+  font-size: 42px;
+  font-weight: 450;
+  letter-spacing: -1.7px;
+  margin-block-end: 15px;
+}
+.intro {
+  font-size: 14px;
+  color: #5c7183;
+  margin-block-end: 35px;
+}
+.formCard form {
+  display: grid;
+  gap: 24px;
+}
+.formCard form input {
+  border-radius: 8px;
+  border-color: #abc0d1;
+}
+.password {
+  position: relative;
+}
+.password input {
+  padding-inline-end: 65px;
+}
+.showPassword {
+  position: absolute;
+  inset-inline-end: 10px;
+  bottom: 4px;
+  min-block-size: 44px;
+  border: 0;
+  background: transparent;
+  color: #205987;
+  font-size: 12px;
+  padding-inline: 10px;
+  cursor: pointer;
+}
+.recoveryLink {
+  justify-self: end;
+  font-size: 12px;
+  text-decoration: underline !important;
+  padding-block: 8px;
+}
+.submit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border: 0;
+  background: #0658d9;
+  color: white;
+  border-radius: 8px;
+  min-block-size: 54px;
+  padding: 16px 22px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+}
+.submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+.invite {
+  font-size: 11px;
+  color: #61778a;
+  margin-block: 28px 0;
+}
+.invite a {
+  text-decoration: underline;
+}
+.context {
+  background: radial-gradient(circle at 60% 30%, #c0e5ff, transparent 60%), #e9f5ff;
+  padding: 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+.context h2 {
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  margin-block-end: 20px;
+  position: relative;
+}
+.context p:not(.eyebrow) {
+  font-size: 14px;
+  color: #4c6d87;
+  max-inline-size: 270px;
+  position: relative;
+}
+.contextMark {
+  font-size: 200px;
+  font-weight: 400;
+  line-height: 1;
+  position: absolute;
+  top: 8%;
+  inset-inline-start: 23%;
+  color: #206fcc;
+  text-shadow:
+    2px 5px 0 #77b0e9,
+    3px 10px 0 #abcff1;
+  transform: rotate(-12deg);
+}
+.contextLine {
+  position: absolute;
+  top: 1%;
+  inset-inline-start: -12%;
+  inline-size: 120%;
+  block-size: 60%;
+  border: 1px solid #76a9d1;
+  border-radius: 50%;
+  transform: rotate(-25deg);
+  pointer-events: none;
+}
+.help {
+  max-inline-size: 750px;
+  margin: 70px auto;
+  padding: 45px;
+  border: 1px solid #d4e2ee;
+  border-radius: 18px;
+  background: white;
+}
+.help h1 {
+  font-size: 38px;
+  font-weight: 450;
+  letter-spacing: -1px;
+}
+.help h2 {
+  font-size: 22px;
+  font-weight: 500;
+}
+.help p {
+  color: #4f6b81;
+  font-size: 15px;
+}
+.help a {
+  text-decoration: underline;
+}
+.help section {
+  padding-block: 25px;
+  border-block-start: 1px solid #d4e2ee;
+}
+@media (max-width: 1150px) {
+  .layout {
+    margin-inline: 35px;
+  }
+  .formCard,
+  .context {
+    padding: 40px;
+  }
+}
+@media (max-width: 760px) {
+  .layout {
+    margin: 40px 24px 65px;
+    grid-template-columns: 1fr;
+  }
+  .formCard {
+    padding: 32px 25px;
+  }
+  .context {
+    min-block-size: 250px;
+    padding: 30px;
+  }
+  .contextMark {
+    font-size: 170px;
+    top: 5%;
+    inset-inline-start: 65%;
+    opacity: 0.2;
+  }
+  .contextLine {
+    inset-inline-start: 25%;
+  }
+  .context h2 {
+    font-size: 28px;
+  }
+  .formCard h1 {
+    font-size: 36px;
+  }
+  .help {
+    margin: 35px 24px;
+    padding: 28px;
+  }
+  .help h1 {
+    font-size: 32px;
+  }
+}
