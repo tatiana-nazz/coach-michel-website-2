@@ -49,14 +49,19 @@ describe('P4-S06 governed Supabase source synchronization', () => {
     expect(source).not.toContain('diawtfefkwgsukntogip');
   });
 
-  it('materializes the exact six provider-applied migrations as repository source of truth', () => {
+  it('preserves the six provider-applied baseline migrations while permitting ordered additions', () => {
     const migrationDirectory = `${repositoryRoot}/supabase/migrations`;
     const actualNames = readdirSync(migrationDirectory)
       .filter((name) => name.endsWith('.sql'))
       .sort();
     const expectedNames = expectedMigrations.map(([name]) => name).sort();
 
-    expect(actualNames).toEqual(expectedNames);
+    expect(actualNames.slice(0, expectedNames.length)).toEqual(expectedNames);
+    expect(
+      actualNames
+        .slice(expectedNames.length)
+        .every((name) => name > expectedNames[expectedNames.length - 1]!),
+    ).toBe(true);
 
     for (const [name, expectedHash] of expectedMigrations) {
       expect(sha256(readFileSync(`${migrationDirectory}/${name}`))).toBe(expectedHash);

@@ -1,0 +1,385 @@
+{
+  "scope": "LOCAL SYNTHETIC PRESENTATION FIXTURES. This is not live authentication, RLS, persistence, or a real user workflow test.",
+  "checks": [
+    {
+      "area": "coach",
+      "locale": "en",
+      "width": 390,
+      "route": "/coach/programs-sessions",
+      "landed": "/coach/programs-sessions",
+      "status": 200,
+      "h1": 1,
+      "dir": "ltr",
+      "overflow": false,
+      "formAssertions": [
+        "Create program title",
+        "Create program reason",
+        "Create session title",
+        "Create session duration"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "en",
+      "width": 390,
+      "route": "/coach/exercises",
+      "landed": "/coach/exercises",
+      "status": 200,
+      "h1": 1,
+      "dir": "ltr",
+      "overflow": false,
+      "formAssertions": [
+        "Create exercise title",
+        "Exercise instructions",
+        "Exercise language",
+        "Exercise publication decision"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "en",
+      "width": 390,
+      "route": "/coach/schedule-release",
+      "landed": "/coach/schedule-release",
+      "status": 200,
+      "h1": 1,
+      "dir": "ltr",
+      "overflow": false,
+      "formAssertions": [
+        "Release trainee selection",
+        "Release session selection",
+        "Release schedule date",
+        "Release preview button"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "en",
+      "width": 390,
+      "route": "/coach/admin",
+      "landed": "/coach/admin",
+      "status": 200,
+      "h1": 1,
+      "dir": "ltr",
+      "overflow": false,
+      "formAssertions": [
+        "Create notice text",
+        "Notice language",
+        "Policy scheduling horizon",
+        "Policy past scheduling allowance",
+        "Revise policy",
+        "Record policy decision",
+        "Revise notice",
+        "Review publication decision",
+        "Scoped authority action"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "en",
+      "width": 1440,
+      "route": "/coach/programs-sessions",
+      "landed": "/coach/programs-sessions",
+      "status": 200,
+      "h1": 1,
+      "dir": "ltr",
+      "overflow": false,
+      "formAssertions": [
+        "Create program title",
+        "Create program reason",
+        "Create session title",
+        "Create session duration"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "en",
+      "width": 1440,
+      "route": "/coach/exercises",
+      "landed": "/coach/exercises",
+      "status": 200,
+      "h1": 1,
+      "dir": "ltr",
+      "overflow": false,
+      "formAssertions": [
+        "Create exercise title",
+        "Exercise instructions",
+        "Exercise language",
+        "Exercise publication decision"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "en",
+      "width": 1440,
+      "route": "/coach/schedule-release",
+      "landed": "/coach/schedule-release",
+      "status": 200,
+      "h1": 1,
+      "dir": "ltr",
+      "overflow": false,
+      "formAssertions": [
+        "Release trainee selection",
+        "Release session selection",
+        "Release schedule date",
+        "Release preview button"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "en",
+      "width": 1440,
+      "route": "/coach/admin",
+      "landed": "/coach/admin",
+      "status": 200,
+      "h1": 1,
+      "dir": "ltr",
+      "overflow": false,
+      "formAssertions": [
+        "Create notice text",
+        "Notice language",
+        "Policy scheduling horizon",
+        "Policy past scheduling allowance",
+        "Revise policy",
+        "Record policy decision",
+        "Revise notice",
+        "Review publication decision",
+        "Scoped authority action"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "ar",
+      "width": 390,
+      "route": "/coach/programs-sessions",
+      "landed": "/coach/programs-sessions",
+      "status": 200,
+      "h1": 1,
+      "dir": "rtl",
+      "overflow": false,
+      "formAssertions": [
+        "Create program title",
+        "Create program reason",
+        "Create session title",
+        "Create session duration"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "ar",
+      "width": 390,
+      "route": "/coach/exercises",
+      "landed": "/coach/exercises",
+      "status": 200,
+      "h1": 1,
+      "dir": "rtl",
+      "overflow": false,
+      "formAssertions": [
+        "Create exercise title",
+        "Exercise instructions",
+        "Exercise language",
+        "Exercise publication decision"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "ar",
+      "width": 390,
+      "route": "/coach/schedule-release",
+      "landed": "/coach/schedule-release",
+      "status": 200,
+      "h1": 1,
+      "dir": "rtl",
+      "overflow": false,
+      "formAssertions": [
+        "Release trainee selection",
+        "Release session selection",
+        "Release schedule date",
+        "Release preview button"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "ar",
+      "width": 390,
+      "route": "/coach/admin",
+      "landed": "/coach/admin",
+      "status": 200,
+      "h1": 1,
+      "dir": "rtl",
+      "overflow": false,
+      "formAssertions": [
+        "Create notice text",
+        "Notice language",
+        "Policy scheduling horizon",
+        "Policy past scheduling allowance",
+        "Revise policy",
+        "Record policy decision",
+        "Revise notice",
+        "Review publication decision",
+        "Scoped authority action"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "ar",
+      "width": 1440,
+      "route": "/coach/programs-sessions",
+      "landed": "/coach/programs-sessions",
+      "status": 200,
+      "h1": 1,
+      "dir": "rtl",
+      "overflow": false,
+      "formAssertions": [
+        "Create program title",
+        "Create program reason",
+        "Create session title",
+        "Create session duration"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "ar",
+      "width": 1440,
+      "route": "/coach/exercises",
+      "landed": "/coach/exercises",
+      "status": 200,
+      "h1": 1,
+      "dir": "rtl",
+      "overflow": false,
+      "formAssertions": [
+        "Create exercise title",
+        "Exercise instructions",
+        "Exercise language",
+        "Exercise publication decision"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "ar",
+      "width": 1440,
+      "route": "/coach/schedule-release",
+      "landed": "/coach/schedule-release",
+      "status": 200,
+      "h1": 1,
+      "dir": "rtl",
+      "overflow": false,
+      "formAssertions": [
+        "Release trainee selection",
+        "Release session selection",
+        "Release schedule date",
+        "Release preview button"
+      ],
+      "solidControlContrastFailures": 0
+    },
+    {
+      "area": "coach",
+      "locale": "ar",
+      "width": 1440,
+      "route": "/coach/admin",
+      "landed": "/coach/admin",
+      "status": 200,
+      "h1": 1,
+      "dir": "rtl",
+      "overflow": false,
+      "formAssertions": [
+        "Create notice text",
+        "Notice language",
+        "Policy scheduling horizon",
+        "Policy past scheduling allowance",
+        "Revise policy",
+        "Record policy decision",
+        "Revise notice",
+        "Review publication decision",
+        "Scoped authority action"
+      ],
+      "solidControlContrastFailures": 0
+    }
+  ],
+  "errors": [],
+  "consoleErrors": [],
+  "blockedOutbound": [],
+  "contrastFailures": [],
+  "unexpectedProviderRequests": [],
+  "syntheticPermissionCalls": [
+    {
+      "checks": 2,
+      "syntheticallyAllowed": 2
+    },
+    {
+      "checks": 9,
+      "syntheticallyAllowed": 9
+    },
+    {
+      "checks": 1,
+      "syntheticallyAllowed": 1
+    },
+    {
+      "checks": 108,
+      "syntheticallyAllowed": 108
+    },
+    {
+      "checks": 2,
+      "syntheticallyAllowed": 2
+    },
+    {
+      "checks": 9,
+      "syntheticallyAllowed": 9
+    },
+    {
+      "checks": 1,
+      "syntheticallyAllowed": 1
+    },
+    {
+      "checks": 108,
+      "syntheticallyAllowed": 108
+    },
+    {
+      "checks": 2,
+      "syntheticallyAllowed": 2
+    },
+    {
+      "checks": 9,
+      "syntheticallyAllowed": 9
+    },
+    {
+      "checks": 1,
+      "syntheticallyAllowed": 1
+    },
+    {
+      "checks": 108,
+      "syntheticallyAllowed": 108
+    },
+    {
+      "checks": 2,
+      "syntheticallyAllowed": 2
+    },
+    {
+      "checks": 9,
+      "syntheticallyAllowed": 9
+    },
+    {
+      "checks": 1,
+      "syntheticallyAllowed": 1
+    },
+    {
+      "checks": 108,
+      "syntheticallyAllowed": 108
+    }
+  ],
+  "providerRequests": 262
+}

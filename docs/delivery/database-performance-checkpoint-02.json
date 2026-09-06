@@ -1,0 +1,1140 @@
+{
+  "project_ref": "szlcakassgylokircuxs",
+  "date": "2026-09-06",
+  "counts": {
+    "INFO:unindexed_foreign_keys": 44,
+    "INFO:unused_index": 23,
+    "WARN:multiple_permissive_policies": 37
+  },
+  "decision": "Track query tuning for real workload; no production records exist and no measured slow query was observed. Do not remove access policies solely to silence a performance advisory.",
+  "findings": [
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "acceptance_records",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "acceptance_records_disclosure_version_id_fkey",
+        "fkey_columns": [4]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "access_provisioning_records",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "access_provisioning_records_created_by_principal_id_fkey",
+        "fkey_columns": [10]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "access_provisioning_records",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "access_provisioning_records_principal_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "access_recovery_requests",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "access_recovery_requests_principal_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "audit_events",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "audit_events_actor_principal_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "completion_intents",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "completion_intents_trainee_principal_id_fkey",
+        "fkey_columns": [5]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "content_approval_decisions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "content_approval_decisions_actor_principal_id_fkey",
+        "fkey_columns": [5]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "content_approval_decisions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "content_approval_decisions_content_version_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "content_items",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "content_items_created_by_principal_id_fkey",
+        "fkey_columns": [7]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "content_versions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "content_versions_created_by_principal_id_fkey",
+        "fkey_columns": [10]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "disclosure_approval_decisions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "disclosure_approval_decisions_actor_principal_id_fkey",
+        "fkey_columns": [5]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "disclosure_approval_decisions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "disclosure_approval_decisions_disclosure_version_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "disclosure_versions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "disclosure_versions_created_by_principal_id_fkey",
+        "fkey_columns": [12]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "operational_incidents",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "operational_incidents_detected_by_principal_id_fkey",
+        "fkey_columns": [5]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "policy_approval_decisions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "policy_approval_decisions_actor_principal_id_fkey",
+        "fkey_columns": [5]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "policy_approval_decisions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "policy_approval_decisions_policy_version_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "policy_versions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "policy_versions_created_by_principal_id_fkey",
+        "fkey_columns": [9]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "principal_grants",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "principal_grants_approved_by_principal_id_fkey",
+        "fkey_columns": [11]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "principal_grants",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "principal_grants_capability_id_fkey",
+        "fkey_columns": [5]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "principal_grants",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "principal_grants_resource_id_fkey",
+        "fkey_columns": [6]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "principal_grants",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "principal_grants_revoked_by_principal_id_fkey",
+        "fkey_columns": [14]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "principal_grants",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "principal_grants_role_id_fkey",
+        "fkey_columns": [4]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "program_definitions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "program_definitions_owner_coach_principal_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "program_versions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "program_versions_created_by_principal_id_fkey",
+        "fkey_columns": [8]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "reconciliation_authorization_decisions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "reconciliation_authorization_de_reconciliation_proposal_id_fkey",
+        "fkey_columns": [4]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "reconciliation_authorization_decisions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "reconciliation_authorization_decisi_reconciliation_case_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "reconciliation_authorization_decisions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "reconciliation_authorization_decisions_actor_principal_id_fkey",
+        "fkey_columns": [6]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "reconciliation_cases",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "reconciliation_cases_opened_by_principal_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "reconciliation_proposals",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "reconciliation_proposals_created_by_principal_id_fkey",
+        "fkey_columns": [8]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "recovery_activities",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "recovery_activities_initiated_by_principal_id_fkey",
+        "fkey_columns": [4]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "recovery_validations",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "recovery_validations_validator_principal_id_fkey",
+        "fkey_columns": [4]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "release_records",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "release_records_released_by_principal_id_fkey",
+        "fkey_columns": [5]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "release_records",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "release_records_trainee_assignment_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "session_definitions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "session_definitions_owner_coach_principal_id_fkey",
+        "fkey_columns": [4]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "session_definitions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "session_definitions_program_definition_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "session_exercise_links",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "session_exercise_links_exercise_content_item_id_fkey",
+        "fkey_columns": [4]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "session_exercise_links",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "session_exercise_links_guidance_content_item_id_fkey",
+        "fkey_columns": [5]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "session_schedules",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "session_schedules_session_version_id_fkey",
+        "fkey_columns": [4]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "session_versions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "session_versions_created_by_principal_id_fkey",
+        "fkey_columns": [8]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "state_reconciliation_handoffs",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "state_reconciliation_handoffs_reconciliation_case_id_fkey",
+        "fkey_columns": [4]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "support_privacy_cases",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "support_privacy_cases_principal_id_fkey",
+        "fkey_columns": [3]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "trainee_assignments",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "trainee_assignments_assigned_by_principal_id_fkey",
+        "fkey_columns": [4]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "trainee_assignments",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "trainee_assignments_program_version_id_fkey",
+        "fkey_columns": [5]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unindexed_foreign_keys",
+      "level": "INFO",
+      "metadata": {
+        "name": "workout_completions",
+        "type": "table",
+        "schema": "public",
+        "fkey_name": "workout_completions_trainee_principal_id_fkey",
+        "fkey_columns": [5]
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "principal_grants",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "principal_grants",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "principal_grants",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "access_provisioning_records",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "access_recovery_requests",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "policy_versions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "trainee_assignments",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "session_schedules",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "release_records",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "completion_intents",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "workout_completions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "derived_status_projections",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "reconciliation_cases",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "reconciliation_proposals",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "support_privacy_cases",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "operational_incidents",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "recovery_activities",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "recovery_validations",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "audit_events",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "audit_events",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "trainee_assignments",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "release_records",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "unused_index",
+      "level": "INFO",
+      "metadata": {
+        "name": "trainee_profiles",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "account_preferences",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "app_principals",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "coach_profiles",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "coach_profiles",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "content_approval_decisions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "content_items",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "content_versions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "content_versions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "disclosure_approval_decisions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "disclosure_approval_decisions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "disclosure_approval_decisions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "disclosure_versions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "disclosure_versions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "disclosure_versions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "disclosure_versions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "operational_incidents",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "operational_incidents",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "policies",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "policies",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "policy_versions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "policy_versions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "principal_grants",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "program_versions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "reconciliation_cases",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "recovery_activities",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "recovery_activities",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "recovery_validations",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "recovery_validations",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "recovery_validations",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "release_records",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "session_schedules",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "session_versions",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "state_reconciliation_handoffs",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "state_reconciliation_handoffs",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "state_reconciliation_handoffs",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "trainee_profiles",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    },
+    {
+      "name": "multiple_permissive_policies",
+      "level": "WARN",
+      "metadata": {
+        "name": "trainee_profiles",
+        "type": "table",
+        "schema": "public"
+      },
+      "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies"
+    }
+  ]
+}

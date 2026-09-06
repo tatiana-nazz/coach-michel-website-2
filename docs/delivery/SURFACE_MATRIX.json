@@ -2,7 +2,7 @@
   "baseline_page_count": 1,
   "baseline_handler_count": 1,
   "screen_count": 31,
-  "operation_count": 57,
+  "operation_count": 61,
   "screens": [
     {
       "screen_id": "SCR-PUB-001",
@@ -11,7 +11,9 @@
       "access_class": "PUBLIC_ANONYMOUS",
       "legacy_component_model": "src/features/public/screens/scr-pub-001/public-overview.model.ts",
       "delivery_page_exists": true,
-      "delivery_status": "public_presentation_requires_content_signoff"
+      "delivery_status": "public_presentation_requires_content_signoff",
+      "delivery_page_file": "src/app/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-PUB-002",
@@ -20,7 +22,9 @@
       "access_class": "PUBLIC_ANONYMOUS",
       "legacy_component_model": "src/features/public/screens/scr-pub-002/public-coaching-purpose.model.ts",
       "delivery_page_exists": true,
-      "delivery_status": "public_presentation_requires_content_signoff"
+      "delivery_status": "public_presentation_requires_content_signoff",
+      "delivery_page_file": "src/app/about/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-PUB-003",
@@ -29,7 +33,9 @@
       "access_class": "PUBLIC_ANONYMOUS",
       "legacy_component_model": "src/features/public/screens/scr-pub-003/public-guidance-collection.model.ts",
       "delivery_page_exists": true,
-      "delivery_status": "public_presentation_requires_content_signoff"
+      "delivery_status": "public_presentation_requires_content_signoff",
+      "delivery_page_file": "src/app/guidance/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-PUB-004",
@@ -38,7 +44,9 @@
       "access_class": "PUBLIC_ANONYMOUS",
       "legacy_component_model": "src/features/public/screens/scr-pub-004/public-disclosures.model.ts",
       "delivery_page_exists": true,
-      "delivery_status": "public_presentation_requires_content_signoff"
+      "delivery_status": "public_presentation_requires_content_signoff",
+      "delivery_page_file": "src/app/disclosures/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-PUB-005",
@@ -47,7 +55,9 @@
       "access_class": "PUBLIC_ANONYMOUS",
       "legacy_component_model": "src/features/public/screens/scr-pub-005/approved-next-step-handoff.model.ts",
       "delivery_page_exists": true,
-      "delivery_status": "public_presentation_requires_content_signoff"
+      "delivery_status": "public_presentation_requires_content_signoff",
+      "delivery_page_file": "src/app/next-steps/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-ACC-001",
@@ -56,7 +66,9 @@
       "access_class": "PRE_AUTH_OR_SESSION_NEUTRAL",
       "legacy_component_model": "src/features/access/screens/scr-acc-001/private-access-entry.model.ts",
       "delivery_page_exists": true,
-      "delivery_status": "login_integrated_no_live_accounts"
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/access/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-ACC-002",
@@ -65,7 +77,9 @@
       "access_class": "PRE_AUTH_OR_SESSION_NEUTRAL",
       "legacy_component_model": "src/features/access/screens/scr-acc-002/provisioning-invitation-entry.model.ts",
       "delivery_page_exists": true,
-      "delivery_status": "informational_help_only_not_lifecycle_complete"
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/access/provisioning/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-ACC-003",
@@ -73,8 +87,10 @@
       "route": "/access/notices",
       "access_class": "AUTHENTICATED_ACCESS_CONTEXT_REQUIRED",
       "legacy_component_model": "src/features/access/screens/scr-acc-003/first-login-notices-acceptance.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/access/notices/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-ACC-004",
@@ -83,7 +99,9 @@
       "access_class": "PRE_AUTH_OR_SESSION_NEUTRAL",
       "legacy_component_model": "src/features/access/screens/scr-acc-004/access-recovery.model.ts",
       "delivery_page_exists": true,
-      "delivery_status": "informational_help_only_not_lifecycle_complete"
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/access/recovery/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-TRN-001",
@@ -91,8 +109,10 @@
       "route": "/trainee/today",
       "access_class": "TRAINEE_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/trainee/screens/scr-trn-001/today-training-status.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/trainee/today/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-TRN-002",
@@ -100,8 +120,10 @@
       "route": "/trainee/sessions",
       "access_class": "TRAINEE_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/trainee/screens/scr-trn-002/available-session-overview.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/trainee/sessions/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-TRN-003",
@@ -109,8 +131,10 @@
       "route": "/trainee/sessions/[sessionRef]/sequence",
       "access_class": "TRAINEE_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/trainee/screens/scr-trn-003/exercise-sequence.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/trainee/sessions/[sessionRef]/sequence/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-TRN-004",
@@ -118,8 +142,10 @@
       "route": "/trainee/sessions/[sessionRef]/exercises/[exerciseRef]",
       "access_class": "TRAINEE_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/trainee/screens/scr-trn-004/exercise-guidance-item.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/trainee/sessions/[sessionRef]/exercises/[exerciseRef]/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-TRN-005",
@@ -127,8 +153,10 @@
       "route": "/trainee/sessions/[sessionRef]/completion",
       "access_class": "TRAINEE_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/trainee/screens/scr-trn-005/completion-submission.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/trainee/sessions/[sessionRef]/completion/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-TRN-006",
@@ -136,8 +164,10 @@
       "route": "/trainee/completions/[completionRef]",
       "access_class": "TRAINEE_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/trainee/screens/scr-trn-006/confirmation-reconciliation-state.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/trainee/completions/[completionRef]/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-TRN-007",
@@ -145,8 +175,10 @@
       "route": "/trainee/account",
       "access_class": "TRAINEE_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/trainee/screens/scr-trn-007/account-language-notices.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/trainee/account/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-TRN-008",
@@ -154,8 +186,10 @@
       "route": "/trainee/support",
       "access_class": "TRAINEE_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/trainee/screens/scr-trn-008/external-support-handoff.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/trainee/support/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-COA-001",
@@ -163,8 +197,10 @@
       "route": "/coach",
       "access_class": "COACH_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/coach/screens/scr-coa-001/coach-overview.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/coach/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-COA-002",
@@ -172,8 +208,10 @@
       "route": "/coach/trainees",
       "access_class": "COACH_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/coach/screens/scr-coa-002/trainees-collection.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/coach/trainees/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-COA-003",
@@ -181,8 +219,10 @@
       "route": "/coach/trainees/[traineeRef]",
       "access_class": "COACH_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/coach/screens/scr-coa-003/trainee-context.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/coach/trainees/[traineeRef]/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-COA-004",
@@ -190,8 +230,10 @@
       "route": "/coach/programs-sessions",
       "access_class": "COACH_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/coach/screens/scr-coa-004/programs-sessions-collection.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/coach/programs-sessions/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-COA-005",
@@ -199,8 +241,10 @@
       "route": "/coach/sessions/[sessionRef]/prepare",
       "access_class": "COACH_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/coach/screens/scr-coa-005/session-preparation.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/coach/sessions/[sessionRef]/prepare/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-COA-006",
@@ -208,8 +252,10 @@
       "route": "/coach/exercises",
       "access_class": "COACH_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/coach/screens/scr-coa-006/exercise-catalogue.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/coach/exercises/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-COA-007",
@@ -217,8 +263,10 @@
       "route": "/coach/schedule-release",
       "access_class": "COACH_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/coach/screens/scr-coa-007/scheduling-release.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/coach/schedule-release/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-COA-008",
@@ -226,8 +274,10 @@
       "route": "/coach/completions",
       "access_class": "COACH_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/coach/screens/scr-coa-008/completion-adherence-monitoring.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/coach/completions/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-COA-009",
@@ -235,8 +285,10 @@
       "route": "/coach/reconciliation/[caseRef]",
       "access_class": "COACH_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/coach/screens/scr-coa-009/correction-reconciliation-review.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/coach/reconciliation/[caseRef]/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-COA-010",
@@ -244,8 +296,10 @@
       "route": "/coach/admin",
       "access_class": "COACH_OR_ADMIN_AUTHORITY_REQUIRED_PER_GOVERNED_CONTEXT",
       "legacy_component_model": "src/features/coach/screens/scr-coa-010/admin-account-notices-external-escalation.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/coach/admin/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-OPS-001",
@@ -253,8 +307,10 @@
       "route": "/ops/incidents",
       "access_class": "OPS_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/operations/screens/scr-ops-001/incident-intake.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/ops/incidents/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-OPS-002",
@@ -262,8 +318,10 @@
       "route": "/ops/recovery/[recoveryRef]",
       "access_class": "OPS_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/operations/screens/scr-ops-002/recovery-operation.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/ops/recovery/[recoveryRef]/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-OPS-003",
@@ -271,8 +329,10 @@
       "route": "/ops/recovery/[recoveryRef]/validation",
       "access_class": "OPS_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/operations/screens/scr-ops-003/recovery-validation.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/ops/recovery/[recoveryRef]/validation/page.tsx",
+      "live_verified": false
     },
     {
       "screen_id": "SCR-OPS-004",
@@ -280,8 +340,10 @@
       "route": "/ops/reconciliation/[reconciliationRef]",
       "access_class": "OPS_AUTHORITY_REQUIRED",
       "legacy_component_model": "src/features/operations/screens/scr-ops-004/state-reconciliation-handoff.model.ts",
-      "delivery_page_exists": false,
-      "delivery_status": "component_exists_runtime_wiring_pending"
+      "delivery_page_exists": true,
+      "delivery_status": "runtime_integrated_pending_live_acceptance",
+      "delivery_page_file": "src/app/ops/reconciliation/[reconciliationRef]/page.tsx",
+      "live_verified": false
     }
   ],
   "operations": [
@@ -290,454 +352,701 @@
       "contract": "API-CMH-P3S11-APIN-001",
       "method": "GET",
       "path": "/public/overview",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/public-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_002_get_1",
       "contract": "API-CMH-P3S11-APIN-002",
       "method": "GET",
       "path": "/public/guidance",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/public-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_003_get_1",
       "contract": "API-CMH-P3S11-APIN-003",
       "method": "GET",
       "path": "/public/guidance/{public_content_ref}",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/public-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_004_get_1",
       "contract": "API-CMH-P3S11-APIN-004",
       "method": "GET",
       "path": "/disclosures/effective",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/public-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_005_get_1",
       "contract": "API-CMH-P3S11-APIN-005",
       "method": "GET",
       "path": "/public/next-step-options",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/public-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_039_patch_1",
       "contract": "API-CMH-P3S11-APIN-039",
       "method": "PATCH",
       "path": "/support-privacy-cases/{case_ref}",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_006_get_1",
       "contract": "API-CMH-P3S11-APIN-006",
       "method": "GET",
       "path": "/access/context",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/access-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_007_get_1",
       "contract": "API-CMH-P3S11-APIN-007",
       "method": "GET",
       "path": "/access/provisioning-status",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/access-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_035_post_1",
       "contract": "API-CMH-P3S11-APIN-035",
       "method": "POST",
       "path": "/access-administration/authority-changes",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_008_get_1",
       "contract": "API-CMH-P3S11-APIN-008",
       "method": "GET",
       "path": "/access/notices/effective",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/access-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_009_post_1",
       "contract": "API-CMH-P3S11-APIN-009",
       "method": "POST",
       "path": "/access/acceptance-records",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/access-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_010_post_1",
       "contract": "API-CMH-P3S11-APIN-010",
       "method": "POST",
       "path": "/access/recovery-requests",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/access-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_011_get_1",
       "contract": "API-CMH-P3S11-APIN-011",
       "method": "GET",
       "path": "/access/recovery-requests/{recovery_ref}",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/access-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_012_get_1",
       "contract": "API-CMH-P3S11-APIN-012",
       "method": "GET",
       "path": "/trainee/today",
-      "implementation": "pending",
-      "page_path_collision": true
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": true,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_013_get_1",
       "contract": "API-CMH-P3S11-APIN-013",
       "method": "GET",
       "path": "/trainee/sessions/{session_ref}",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_014_get_1",
       "contract": "API-CMH-P3S11-APIN-014",
       "method": "GET",
       "path": "/trainee/session-schedules/{session_schedule_ref}/exercise-sequence",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_015_get_1",
       "contract": "API-CMH-P3S11-APIN-015",
       "method": "GET",
       "path": "/trainee/session-schedules/{session_schedule_ref}/exercise-guidance",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_016_post_1",
       "contract": "API-CMH-P3S11-APIN-016",
       "method": "POST",
       "path": "/trainee/session-schedules/{schedule_ref}/completion-intents",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_017_get_1",
       "contract": "API-CMH-P3S11-APIN-017",
       "method": "GET",
       "path": "/completion-state/{schedule_completion_or_case_ref}",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_018_get_1",
       "contract": "API-CMH-P3S11-APIN-018",
       "method": "GET",
       "path": "/account/context",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_019_post_1",
       "contract": "API-CMH-P3S11-APIN-019",
       "method": "POST",
       "path": "/support-privacy-requests",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_020_get_1",
       "contract": "API-CMH-P3S11-APIN-020",
       "method": "GET",
       "path": "/coach/overview",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_021_get_1",
       "contract": "API-CMH-P3S11-APIN-021",
       "method": "GET",
       "path": "/coach/trainees",
-      "implementation": "pending",
-      "page_path_collision": true
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": true,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_022_get_1",
       "contract": "API-CMH-P3S11-APIN-022",
       "method": "GET",
       "path": "/coach/trainees/{trainee_ref}",
-      "implementation": "pending",
-      "page_path_collision": true
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": true,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_023_program_collection",
       "contract": "API-CMH-P3S11-APIN-023",
       "method": "GET",
       "path": "/coach/programs",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_023_session_collection",
       "contract": "API-CMH-P3S11-APIN-023",
       "method": "GET",
       "path": "/coach/sessions",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_024_program_draft",
       "contract": "API-CMH-P3S11-APIN-024",
       "method": "GET",
       "path": "/coach/programs/{program_ref}/draft",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_024_session_draft",
       "contract": "API-CMH-P3S11-APIN-024",
       "method": "GET",
       "path": "/coach/sessions/{session_ref}/draft",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_025_create_program_draft",
       "contract": "API-CMH-P3S11-APIN-025",
       "method": "POST",
       "path": "/coach/program-drafts",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_025_revise_program_draft",
       "contract": "API-CMH-P3S11-APIN-025",
       "method": "PATCH",
       "path": "/coach/program-drafts/{draft_ref}",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_025_create_session_draft",
       "contract": "API-CMH-P3S11-APIN-025",
       "method": "POST",
       "path": "/coach/session-drafts",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_025_revise_session_draft",
       "contract": "API-CMH-P3S11-APIN-025",
       "method": "PATCH",
       "path": "/coach/session-drafts/{draft_ref}",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_027_create_content_draft",
       "contract": "API-CMH-P3S11-APIN-027",
       "method": "POST",
       "path": "/coach/content-drafts",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_027_revise_content_draft",
       "contract": "API-CMH-P3S11-APIN-027",
       "method": "PATCH",
       "path": "/coach/content-drafts/{draft_ref}",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_026_get_1",
       "contract": "API-CMH-P3S11-APIN-026",
       "method": "GET",
       "path": "/coach/exercises",
-      "implementation": "pending",
-      "page_path_collision": true
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": true,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_028_post_1",
       "contract": "API-CMH-P3S11-APIN-028",
       "method": "POST",
       "path": "/content-publication-decisions",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_029_post_1",
       "contract": "API-CMH-P3S11-APIN-029",
       "method": "POST",
       "path": "/coach/schedule-release-previews",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_030_post_1",
       "contract": "API-CMH-P3S11-APIN-030",
       "method": "POST",
       "path": "/coach/assignment-release-commands",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_036_get_1",
       "contract": "API-CMH-P3S11-APIN-036",
       "method": "GET",
       "path": "/policies",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_031_get_1",
       "contract": "API-CMH-P3S11-APIN-031",
       "method": "GET",
       "path": "/coach/completion-monitoring",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_032_post_1",
       "contract": "API-CMH-P3S11-APIN-032",
       "method": "POST",
       "path": "/reconciliation-cases",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_033_read_case",
       "contract": "API-CMH-P3S11-APIN-033",
       "method": "GET",
       "path": "/reconciliation-cases/{case_ref}",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_033_update_proposal",
       "contract": "API-CMH-P3S11-APIN-033",
       "method": "PATCH",
       "path": "/reconciliation-cases/{case_ref}/proposal",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_034_post_1",
       "contract": "API-CMH-P3S11-APIN-034",
       "method": "POST",
       "path": "/reconciliation-cases/{case_ref}/authorization-decisions",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_044_get_1",
       "contract": "API-CMH-P3S11-APIN-044",
       "method": "GET",
       "path": "/audit-events",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_037_post_1",
       "contract": "API-CMH-P3S11-APIN-037",
       "method": "POST",
       "path": "/policy-approval-decisions",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/training-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_038_collection",
       "contract": "API-CMH-P3S11-APIN-038",
       "method": "GET",
       "path": "/support-privacy-cases",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_038_detail",
       "contract": "API-CMH-P3S11-APIN-038",
       "method": "GET",
       "path": "/support-privacy-cases/{case_ref}",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_040_intake",
       "contract": "API-CMH-P3S11-APIN-040",
       "method": "POST",
       "path": "/operational-incidents",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_040_collection",
       "contract": "API-CMH-P3S11-APIN-040",
       "method": "GET",
       "path": "/operational-incidents",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_040_detail",
       "contract": "API-CMH-P3S11-APIN-040",
       "method": "GET",
       "path": "/operational-incidents/{incident_ref}",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_048_get_1",
       "contract": "API-CMH-P3S11-APIN-048",
       "method": "GET",
       "path": "/operational-dependencies/readiness",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_041_post_1",
       "contract": "API-CMH-P3S11-APIN-041",
       "method": "POST",
       "path": "/operational-incidents/{incident_ref}/recovery-activities",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_042_read_validation_context",
       "contract": "API-CMH-P3S11-APIN-042",
       "method": "GET",
       "path": "/recovery-activities/{recovery_activity_ref}/validation",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_042_submit_validation",
       "contract": "API-CMH-P3S11-APIN-042",
       "method": "POST",
       "path": "/recovery-activities/{recovery_activity_ref}/validation-submissions",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_apin_043_post_1",
       "contract": "API-CMH-P3S11-APIN-043",
       "method": "POST",
       "path": "/recovery-validations/{validation_ref}/state-reconciliation-handoffs",
-      "implementation": "pending",
-      "page_path_collision": false
+      "implementation": "integrated_pending_live_verification",
+      "page_path_collision": false,
+      "handler_file": "src/platform/server/operations-operations.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff"
     },
     {
       "operation_id": "p3s11_scr_acc_001_establish_session_1",
       "method": "POST",
       "path": "/access/session",
-      "implementation": "implemented_and_unit_tested_no_live_accounts"
+      "implementation": "integrated_pending_live_verification",
+      "handler_file": "src/app/access/session/route.ts",
+      "live_verified": false,
+      "contract_scope": "preserved_handoff",
+      "page_path_collision": false
+    },
+    {
+      "operation_id": "delivery_create_disclosure_draft",
+      "contract": "CMH-DELIVERY-DISCLOSURE-DRAFT-001",
+      "method": "POST",
+      "path": "/configuration/disclosure-drafts",
+      "implementation": "integrated_pending_live_verification",
+      "handler_file": "src/platform/server/training-operations.ts",
+      "page_path_collision": false,
+      "contract_scope": "new_delivery_extension",
+      "live_verified": false
+    },
+    {
+      "operation_id": "delivery_revise_disclosure_draft",
+      "contract": "CMH-DELIVERY-DISCLOSURE-DRAFT-001",
+      "method": "PATCH",
+      "path": "/configuration/disclosure-drafts/{draft_ref}",
+      "implementation": "integrated_pending_live_verification",
+      "handler_file": "src/platform/server/training-operations.ts",
+      "page_path_collision": false,
+      "contract_scope": "new_delivery_extension",
+      "live_verified": false
+    },
+    {
+      "operation_id": "delivery_create_policy_draft",
+      "contract": "CMH-DELIVERY-POLICY-DRAFT-001",
+      "method": "POST",
+      "path": "/configuration/policy-drafts",
+      "implementation": "integrated_pending_live_verification",
+      "handler_file": "src/platform/server/training-operations.ts",
+      "page_path_collision": false,
+      "contract_scope": "new_delivery_extension",
+      "live_verified": false
+    },
+    {
+      "operation_id": "delivery_revise_policy_draft",
+      "contract": "CMH-DELIVERY-POLICY-DRAFT-001",
+      "method": "PATCH",
+      "path": "/configuration/policy-drafts/{draft_ref}",
+      "implementation": "integrated_pending_live_verification",
+      "handler_file": "src/platform/server/training-operations.ts",
+      "page_path_collision": false,
+      "contract_scope": "new_delivery_extension",
+      "live_verified": false
     }
-  ]
+  ],
+  "checkpoint": "02-integrated-private-application",
+  "final_website_ready": false,
+  "baseline_registered_operation_count": 57,
+  "preserved_production_operation_count": 56,
+  "separate_login_operation_count": 1,
+  "delivery_extension_count": 4,
+  "inventory_scope": "Source integration inventory; presence does not establish hosted workflow acceptance.",
+  "verification_scope": "Local tests and isolated fixture checks; live acceptance pending.",
+  "supporting_http_routes": [
+    {
+      "method": "GET",
+      "path": "/access/callback",
+      "purpose": "Verified PKCE or invite/recovery token exchange"
+    },
+    {
+      "method": "POST",
+      "path": "/access/password/update",
+      "purpose": "Current authenticated user password update"
+    },
+    {
+      "method": "POST",
+      "path": "/access/logout",
+      "purpose": "Same-origin sign-out"
+    },
+    {
+      "method": "GET",
+      "path": "/language",
+      "purpose": "Validated locale cookie update and relative redirect"
+    }
+  ],
+  "path_collision_resolution": "JSON Accept requests use the operation dispatcher; HTML navigation uses the page. Historical public paths are retained."
 }

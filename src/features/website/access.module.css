@@ -208,3 +208,55 @@
     font-size: 32px;
   }
 }
+.lifecycleForm {
+  display: grid;
+  gap: 24px;
+  margin-block: 28px;
+}
+.lifecycleForm form {
+  display: grid;
+  gap: 24px;
+}
+.lifecycleForm p,
+.notice p {
+  overflow-wrap: anywhere;
+}
+.checkLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-block-size: 48px;
+  cursor: pointer;
+}
+.checkLabel input {
+  inline-size: 20px;
+  block-size: 20px;
+  accent-color: #0658d9;
+  flex-shrink: 0;
+}
+.decisionActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-block: 18px;
+}
+.secondary {
+  border: 1px solid #abc0d1;
+  color: #244b70;
+  background: #fff;
+  min-block-size: 48px;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font: inherit;
+  cursor: pointer;
+}
+.secondary:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.version {
+  font-size: 12px !important;
+}
+.notice {
+  min-inline-size: 0;
+}

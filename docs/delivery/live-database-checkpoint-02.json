@@ -1,0 +1,96 @@
+{
+  "source": "Connected Supabase read-only verification after apply_migration",
+  "date": "2026-09-06",
+  "project_ref": "szlcakassgylokircuxs",
+  "migration_sql_sha256": "75c0baaef582609f9193c8f3dcf34535e9a0cc839ee04f61714a20db8facfe64",
+  "local_generated_version": "20260906170021",
+  "provider_applied_version": "20260906173948",
+  "note": "New local filename aligned to provider-assigned version; SQL bytes unchanged. No migration replay.",
+  "counts": {
+    "trainees": 0,
+    "auth_users": 0,
+    "app_principals": 0,
+    "content_versions": 0,
+    "principal_grants": 0
+  },
+  "tables": {
+    "public": 40,
+    "rls_enabled": 40
+  },
+  "functions": [
+    {
+      "owner": "postgres",
+      "nspname": "cmh_private",
+      "proname": "register_auth_principal",
+      "proconfig": ["search_path=\"\""],
+      "prosecdef": true
+    },
+    {
+      "owner": "postgres",
+      "nspname": "public",
+      "proname": "cmh_command",
+      "proconfig": ["search_path=\"\""],
+      "prosecdef": false
+    },
+    {
+      "owner": "postgres",
+      "nspname": "public",
+      "proname": "cmh_permission_checks",
+      "proconfig": ["search_path=\"\""],
+      "prosecdef": false
+    },
+    {
+      "owner": "cmh_runtime",
+      "nspname": "cmh_private",
+      "proname": "run_command",
+      "proconfig": ["search_path=\"\""],
+      "prosecdef": true
+    }
+  ],
+  "migrations": [
+    {
+      "name": "0001_authorization_core",
+      "version": "20260824063341"
+    },
+    {
+      "name": "0002_access_content_policy_core",
+      "version": "20260824063413"
+    },
+    {
+      "name": "0003_training_completion_core",
+      "version": "20260824063442"
+    },
+    {
+      "name": "0004_reconciliation_support_operations",
+      "version": "20260824063511"
+    },
+    {
+      "name": "0005_rls_indexes_seed_catalogs",
+      "version": "20260824063543"
+    },
+    {
+      "name": "0006_supabase_acl_rls_hardening",
+      "version": "20260824064700"
+    },
+    {
+      "name": "runtime_authorization_and_atomic_commands",
+      "version": "20260906173948"
+    }
+  ],
+  "runtime_role": {
+    "rolname": "cmh_runtime",
+    "rolsuper": false,
+    "rolinherit": false,
+    "rolcanlogin": false,
+    "rolbypassrls": false
+  },
+  "security_advisor_lints": [],
+  "privilege_checks": {
+    "anon_completions_table_select": false,
+    "authenticated_completion_insert": false,
+    "anon_provider_evidence_select": false,
+    "authenticated_provider_evidence_select": false,
+    "runtime_can_create_private_schema": false
+  },
+  "limitations": ["No real Auth users or live successful authenticated workflow tests."]
+}

@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "task_date": "2026-09-06",
+  "migration": "supabase/migrations/20260906173948_runtime_authorization_and_atomic_commands.sql",
+  "migration_sha256": "75c0baaef582609f9193c8f3dcf34535e9a0cc839ee04f61714a20db8facfe64",
+  "migration_count": 7,
+  "database_engine": "PostgreSQL 18.3 (PGlite 0.5.8)",
+  "node_version": "24.18.0",
+  "migration_execution_role": {
+    "superuser": false,
+    "create_role": true,
+    "bypass_rls": true
+  },
+  "command_execution_role": {
+    "login": false,
+    "superuser": false,
+    "bypass_rls": false,
+    "authenticated_member": false,
+    "private_schema_create": false
+  },
+  "scenarios_passed": 30,
+  "scenarios": [
+    "no notices fails trainee capability closed",
+    "explicit current notice acceptance persisted",
+    "latest translated decline overrides earlier acceptance",
+    "author cannot self-publish policy, independent approval establishes scheduling policy",
+    "coach creates a real draft version",
+    "unauthorized publication and unapproved release fail closed",
+    "independent approver publishes content",
+    "published coaching exercise is invisible to anonymous users",
+    "scoped coach cannot assign another trainee",
+    "approved release is atomic and becomes readable by assigned trainee",
+    "another trainee sees no schedules/content, even with unscoped self grants",
+    "trainee cannot forge direct writes or audit events",
+    "completion is atomic and identical retry is idempotent",
+    "support request is durable and hides handler fields at REST boundary",
+    "proposal author cannot authorize own correction",
+    "independent correction approval increments authoritative version",
+    "operational intake and independent validation preserve separation",
+    "technical operator cannot submit validator-only handoff through direct RPC",
+    "handoff cannot cross incident scope and does not alter trainee state",
+    "access administrator cannot elevate self or grant privileged authority",
+    "audit is append only and restricted to audit reviewer",
+    "derived projections enforce self ownership for unscoped trainee grants",
+    "suspended principal loses domain reads and commands immediately",
+    "wrong role capability tuple never establishes authority",
+    "activity scoped validator reads only related evidence and duplicate validation is rejected",
+    "private command role has no login, no RLS bypass, no client membership, no schema creation",
+    "disclosure authoring preserves independent approval and changes required notice coverage",
+    "new Auth identity ignores metadata authority and starts with zero grants",
+    "published provider evidence and approval internals are hidden from visitors and trainees",
+    "parent-scoped disclosure approver can review and independently publish the exact draft"
+  ],
+  "live_database_access": "None; synthetic local fixtures only",
+  "limits": [
+    "No hosted Auth email/session integration",
+    "No multi-process concurrency load test",
+    "Hosted advisors and schema-cache verification performed separately"
+  ]
+}

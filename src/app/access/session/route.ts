@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { isSameAccessOrigin } from '@/platform/auth/request-boundary';
 
 import {
   classifyProviderAuthFailure,
@@ -40,8 +41,7 @@ function httpStatusForStableCode(code: CredentialSubmissionStableCode): number {
 }
 
 export async function POST(request: Request) {
-  const origin = request.headers.get('origin');
-  if (origin !== new URL(request.url).origin) {
+  if (!isSameAccessOrigin(request)) {
     return stableErrorResponse('VALIDATION_FAILED', 400);
   }
   if (!request.headers.get('content-type')?.includes('application/json')) {

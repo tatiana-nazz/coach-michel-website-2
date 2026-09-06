@@ -9,65 +9,152 @@
     {
       "number": 1,
       "title": "Source and contract audit",
-      "status": "completed"
+      "status": "completed",
+      "evidence_note": "Historical source and contract inventory verified."
     },
     {
       "number": 2,
       "title": "Runtime and application architecture",
-      "status": "in_progress"
+      "status": "in_progress",
+      "evidence_note": "Runtime, dispatcher, content negotiation, and private workspace architecture integrated; final release acceptance pending."
     },
     {
       "number": 3,
       "title": "Distinctive luminous design system",
-      "status": "in_progress"
+      "status": "in_progress",
+      "evidence_note": "Original luminous design and shared public/private controls implemented; inspected fixture evidence does not replace final accessibility acceptance."
     },
     {
       "number": 4,
       "title": "Public website",
-      "status": "in_progress"
+      "status": "in_progress",
+      "evidence_note": "Public routes implemented; approved owner content/contact/privacy facts and hosted acceptance pending."
     },
     {
       "number": 5,
       "title": "Secure access and first-login flow",
-      "status": "in_progress"
+      "status": "in_progress",
+      "evidence_note": "Refresh, callback, recovery/reset, invitation status, current notices, and role routing implemented; real account/email/provider acceptance pending."
     },
     {
       "number": 6,
       "title": "Trainee workflows",
-      "status": "pending"
+      "status": "in_progress",
+      "evidence_note": "All eight trainee routes integrated with scoped reads and commands; hosted persisted role flows pending."
     },
     {
       "number": 7,
       "title": "Coach workflows",
-      "status": "pending"
+      "status": "in_progress",
+      "evidence_note": "All ten coach routes integrated, including authoring, release, monitoring, reconciliation and administration; real data and independent approvals pending."
     },
     {
       "number": 8,
       "title": "Operations, support and recovery",
-      "status": "pending"
+      "status": "in_progress",
+      "evidence_note": "Four operations routes and support/privacy handling integrated; live operational permissions and persistence verification pending."
     },
     {
       "number": 9,
       "title": "Data, content and integration completion",
-      "status": "in_progress"
+      "status": "in_progress",
+      "evidence_note": "Seventh migration with Auth zero-grant onboarding, scoped commands and disclosure/policy draft extensions applied and verified remotely; owner content and provider configuration remain pending."
     },
     {
       "number": 10,
       "title": "Responsive, Arabic and visual acceptance",
-      "status": "in_progress"
+      "status": "in_progress",
+      "evidence_note": "Public96 checks and3 interactions pass; private88 initial and24 targeted rechecks use synthetic provider fixtures. Final reviewed scope remains explicit."
     },
     {
       "number": 11,
       "title": "Security and end-to-end release verification",
-      "status": "in_progress"
+      "status": "in_progress",
+      "evidence_note": "Build/lint and464 tests pass;30 SQL fixture checks pass against applied migration bytes; live schema/advisor checks pass; real Auth/role acceptance remains pending."
     },
     {
       "number": 12,
       "title": "Deploy and hand over the finished website",
-      "status": "pending"
+      "status": "pending",
+      "evidence_note": "No live deployment, real account acceptance, or production handover established."
     }
   ],
-  "supabase_observation": {
+  "checkpoint": "02-integrated-private-application",
+  "evidence": [
+    "CHECKPOINT_02.md",
+    "SURFACE_MATRIX.json",
+    "public-browser-checkpoint-02.json",
+    "private-browser-initial-checkpoint-02.json",
+    "private-browser-followup-checkpoint-02.json",
+    "private-authoring-checkpoint-02.json",
+    "live-database-checkpoint-02.json",
+    "database-performance-checkpoint-02.json"
+  ],
+  "next_owner_input": "Owner-designated initial administrator email and independently approved author/approver identities; never request passwords in chat. These facts do not block remaining independent engineering.",
+  "next_engineering_work": "Finalize the release evidence and exact source commit, configure and verify hosting/provider callbacks, and complete real account and role acceptance. The runtime migration is applied and verified.",
+  "limitations": [
+    "No production deployment or live URL established by this checkpoint",
+    "No real successful sign-in, invitation/recovery delivery, or hosted role workflow acceptance",
+    "SQL tests run in isolated PGlite with synthetic Auth scaffolding; private browser checks use a synthetic provider",
+    "Owner-approved notices, public content/contact/privacy facts and independent approval actors remain to be established",
+    "Final checkpoint commit, deployed origin, and real account/workflow acceptance remain pending"
+  ],
+  "validation": {
+    "production_build": "pass",
+    "typescript": "pass",
+    "vitest_files": 121,
+    "vitest_tests_passed": 464,
+    "vitest_unit_files": 54,
+    "vitest_unit_tests_passed": 254,
+    "vitest_other_files": 67,
+    "vitest_other_tests_passed": 210,
+    "lint": "pass",
+    "format": "pass",
+    "public_browser_checks_passed": 96,
+    "public_browser_interactions_passed": 3,
+    "private_browser_initial_checks": 88,
+    "private_browser_targeted_rechecks": 24,
+    "private_browser_scope": "local production Next.js and Chromium with an isolated synthetic provider; not live authentication, hosted RLS or persistence evidence",
+    "sql_fixture_final_result": "pass",
+    "sql_scope": "isolated PGlite database with synthetic Auth scaffolding",
+    "live_authenticated_role_flows": "not_run",
+    "deployment": "not_performed",
+    "exact_source_commit": null,
+    "sql_fixture_checks_passed": 30,
+    "live_schema_and_security_advisors": "pass",
+    "private_authoring_checks": 16,
+    "private_authoring_visible_control_assertions": 84,
+    "private_authoring_provider_rpc": "Synthetic read-only permission responses; no live Auth or mutation evidence",
+    "database_performance_advisors": {
+      "unindexed_foreign_keys_info": 44,
+      "unused_indexes_info": 23,
+      "multiple_permissive_policies_warn": 37,
+      "security_findings": 0
+    }
+  },
+  "checkpoint_commit": null,
+  "checkpoint_tree": null,
+  "evidence_finalization": "verified_application_ready_for_source_commit_and_preview_deployment",
+  "owner_must_execute_prompts_manually": false,
+  "implementation": {
+    "intended_screens": 31,
+    "public_screens": 5,
+    "access_screens": 4,
+    "trainee_screens": 8,
+    "coach_screens": 10,
+    "operations_screens": 4,
+    "intended_screen_routes_present": 31,
+    "preserved_production_operations": 56,
+    "separate_login_operations": 1,
+    "delivery_authoring_extensions": 4,
+    "registered_operations_total": 61,
+    "source_migration_files": 7,
+    "runtime_migration_file": "20260906173948_runtime_authorization_and_atomic_commands.sql",
+    "private_application_wiring": "integrated_pending_live_acceptance"
+  },
+  "supabase_prior_observation": {
+    "checkpoint": "01",
+    "historical_snapshot_only": true,
     "project_ref": "szlcakassgylokircuxs",
     "status": "ACTIVE_HEALTHY",
     "public_tables": 39,
@@ -79,19 +166,30 @@
     "content_versions": 0,
     "schema_or_user_mutations_this_checkpoint": false
   },
-  "checkpoint": "01-public-website-and-foundation",
-  "evidence": ["CHECKPOINT_01.md", "SURFACE_MATRIX.json", "public-browser-report.json"],
-  "next_owner_input": "Email address for the first real Coach Michel owner/coach administrator; never request a password in chat.",
-  "next_engineering_work": "Complete stage 05 auth lifecycle and database command boundaries, then trainee, coach and operations wiring. The identity input is needed for live account verification; other engineering work can continue independently.",
-  "limitations": [
-    "No production deployment",
-    "No live successful sign-in or role workflow verification",
-    "Private trainee, coach and operations runtime wiring remains pending",
-    "Invitation/recovery pages are informational only",
-    "Public copy is a review draft; no effective approved content versions exist",
-    "56 registered production API operations remain to be implemented; the separate login operation is implemented"
-  ],
-  "validation": {
+  "supabase_current_release_state": {
+    "project_ref": "szlcakassgylokircuxs",
+    "runtime_migration_remote_applied": true,
+    "remote_application_verification": "pass",
+    "current_remote_public_tables": 40,
+    "current_remote_migration_entries": 7,
+    "real_initial_administrator": "not_established",
+    "real_login_verified": false,
+    "public_tables_with_rls": 40,
+    "runtime_migration_version": "20260906173948",
+    "runtime_migration_sha256": "75c0baaef582609f9193c8f3dcf34535e9a0cc839ee04f61714a20db8facfe64",
+    "auth_users": 0,
+    "app_principals": 0,
+    "principal_grants": 0,
+    "trainee_profiles": 0,
+    "content_versions": 0,
+    "security_advisor_lints": 0,
+    "runtime_role_privileges": "NOLOGIN NOINHERIT NOSUPERUSER NOBYPASSRLS; schema CREATE denied",
+    "anonymous_completion_select": false,
+    "client_completion_insert": false,
+    "anonymous_or_authenticated_provider_evidence_select": false
+  },
+  "previous_checkpoint_validation": {
+    "checkpoint": "01",
     "production_build": "pass",
     "typescript": "pass",
     "vitest_files": 111,
@@ -101,5 +199,14 @@
     "public_browser_interactions_passed": 3,
     "live_authenticated_role_flows": "not_run",
     "deployment": "not_performed"
+  },
+  "owner_bootstrap": {
+    "template": "scripts/bootstrap-owner.sql",
+    "status": "prepared_static_review_only",
+    "executed": false,
+    "default_mode": "rollback_dry_run",
+    "explicit_grants": 15,
+    "grant_expiry_optional": true,
+    "default_grant_expiry": null
   }
 }

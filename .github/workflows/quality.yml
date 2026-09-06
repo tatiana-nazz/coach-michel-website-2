@@ -1,15 +1,17 @@
-name: Scaffold quality gates
+name: Website quality gates
 
 on:
   workflow_dispatch:
   push:
     branches:
       - p4/bootstrap-greenfield
+      - delivery/**
     paths-ignore:
       - '.github/workflows/**'
   pull_request:
     branches:
       - main
+      - p4/bootstrap-greenfield
 
 permissions:
   contents: read

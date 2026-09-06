@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
+import { accessApplicationOrigin, isSameAccessOrigin } from '@/platform/auth/request-boundary';
 import { createSupabaseServerClient } from '@/platform/auth/supabase-server';
 export async function POST(request: Request) {
-  const url = new URL(request.url);
-  if (request.headers.get('origin') !== url.origin)
+  if (!isSameAccessOrigin(request))
     return NextResponse.json(
       { error: { code: 'AUTHORITY_DENIED' } },
       { status: 403, headers: { 'Cache-Control': 'private, no-store' } },
@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       { error: { code: 'DEPENDENCY_UNAVAILABLE' } },
       { status: 503, headers: { 'Cache-Control': 'private, no-store' } },
     );
-  const response = NextResponse.redirect(new URL('/access', url.origin), 303);
+  const response = NextResponse.redirect(new URL('/access', accessApplicationOrigin(request)), 303);
   response.headers.set('Cache-Control', 'private, no-store');
   return response;
 }

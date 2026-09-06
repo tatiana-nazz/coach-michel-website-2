@@ -1,3 +1,4 @@
+import { deliveryOperationRegistry } from './delivery-operations';
 export type ApiOperationMethod = 'GET' | 'POST' | 'PATCH';
 
 export interface OperationDescriptor {
@@ -13,7 +14,7 @@ export interface OperationRegistry {
 
 export const ESTABLISH_SESSION_OPERATION_ID = 'p3s11_scr_acc_001_establish_session_1';
 
-const productionOperationDescriptors = [
+export const productionOperationDescriptors = [
   {
     operationId: 'p3s11_apin_001_get_1',
     contractReference: 'API-CMH-P3S11-APIN-001',
@@ -368,7 +369,8 @@ const operationDescriptors = new Map<string, OperationDescriptor>([
 ]);
 
 export const operationRegistry: OperationRegistry = {
-  get: (operationId) => operationDescriptors.get(operationId),
+  get: (operationId) =>
+    operationDescriptors.get(operationId) ?? deliveryOperationRegistry.get(operationId),
 };
 
 /** Preserved empty registry for scaffold-era consumers that explicitly require no production operations. */

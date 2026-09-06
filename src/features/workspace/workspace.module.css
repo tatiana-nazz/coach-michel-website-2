@@ -1,0 +1,323 @@
+.workspace {
+  --workspace-ink: #102b48;
+  --workspace-muted: #536578;
+  --workspace-blue: #0658d9;
+  --workspace-line: #d9e5ee;
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  min-block-size: 100svh;
+  background: #f5f9fd;
+  color: var(--workspace-ink);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-wrap: anywhere;
+}
+.workspace[dir='rtl'] {
+  font-family: Tahoma, Arial, sans-serif;
+}
+.workspace * {
+  box-sizing: border-box;
+}
+:where(.workspace) a {
+  color: inherit;
+  text-decoration: none;
+}
+.workspace button,
+.workspace input,
+.workspace textarea,
+.workspace select {
+  font: inherit;
+}
+.workspace :focus-visible {
+  outline: 3px solid #034fc7;
+  outline-offset: 4px;
+}
+.skip {
+  position: fixed;
+  inset-block-start: 8px;
+  inset-inline-start: 8px;
+  padding: 12px 18px;
+  background: white;
+  transform: translateY(-150%);
+  z-index: 100;
+}
+.skip:focus {
+  transform: translateY(0);
+}
+.sidebar {
+  position: sticky;
+  inset-block-start: 0;
+  block-size: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: 36px 22px;
+  border-inline-end: 1px solid var(--workspace-line);
+  background: linear-gradient(165deg, #fff 60%, #e7f2ff);
+}
+.brand {
+  display: inline-flex;
+  margin-block-end: 50px;
+}
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  line-height: 1.6;
+  margin: 0 0 16px;
+  color: var(--workspace-muted);
+}
+.workspace[dir='rtl'] .eyebrow {
+  letter-spacing: 0;
+  font-size: 12px;
+}
+.sidebar > nav {
+  display: grid;
+  gap: 6px;
+}
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 13px;
+  padding: 14px 12px;
+  border-radius: 9px;
+}
+.sidebar nav a:hover {
+  background: #eaf2fc;
+}
+.sidebar nav a[aria-current='page'] {
+  background: #0755ce;
+  color: white;
+  box-shadow: 0 8px 18px #0658d91c;
+}
+.navNumber {
+  font-size: 10px;
+  opacity: 0.72;
+  font-variant-numeric: tabular-nums;
+}
+.sidebarEnd {
+  margin-block-start: auto;
+  padding-block-start: 30px;
+  position: relative;
+  overflow: hidden;
+}
+.sidebarEnd p {
+  font-size: 10px;
+  line-height: 1.9;
+  letter-spacing: 0.1em;
+  white-space: pre-line;
+  position: relative;
+}
+.sidebarEnd a {
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding-block: 12px;
+  border-block-start: 1px solid var(--workspace-line);
+}
+.orbit {
+  position: absolute;
+  inset-inline-end: -14px;
+  inset-block-start: 28px;
+  width: 100px;
+  height: 100px;
+  border: 16px solid #badbff;
+  border-radius: 50%;
+  transform: rotate(-25deg) scaleX(0.5);
+  opacity: 0.6;
+}
+.body {
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-block-size: 88px;
+  padding: 24px 44px;
+  border-block-end: 1px solid var(--workspace-line);
+  background: #ffffffb8;
+}
+.topLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: var(--workspace-muted);
+}
+.topLabel span {
+  padding-inline: 14px;
+  color: #7390ab;
+}
+.actions {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.actions button {
+  border: 0;
+  background: none;
+  color: var(--workspace-ink);
+  padding: 0;
+  cursor: pointer;
+  font-size: 12px;
+}
+.actions button span {
+  padding-inline-start: 9px;
+}
+.main {
+  inline-size: 100%;
+  max-inline-size: 1600px;
+  margin-inline: auto;
+  padding: 42px 44px 64px;
+  flex: 1;
+  min-inline-size: 0;
+}
+.heading {
+  margin-block-end: 34px;
+}
+.heading h1 {
+  font-size: clamp(30px, 3vw, 46px);
+  line-height: 1.14;
+  letter-spacing: -0.045em;
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+.workspace[dir='rtl'] .heading h1 {
+  letter-spacing: -0.02em;
+  line-height: 1.55;
+}
+.description {
+  font-size: 14px;
+  color: var(--workspace-muted);
+  max-inline-size: 650px;
+  line-height: 1.8;
+  margin: 0;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px 44px;
+  border-block-start: 1px solid var(--workspace-line);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--workspace-muted);
+}
+.mobileMenu {
+  display: none;
+}
+@media (min-width: 1600px) {
+  .workspace {
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+  .sidebar {
+    padding-inline: 34px;
+  }
+  .main {
+    padding-inline: 64px;
+  }
+}
+@media (max-width: 1100px) {
+  .workspace {
+    grid-template-columns: 215px minmax(0, 1fr);
+  }
+  .sidebar {
+    padding-inline: 14px;
+  }
+  .main {
+    padding: 32px 26px 48px;
+  }
+  .topbar {
+    padding: 24px 26px;
+  }
+  .topLabel {
+    font-size: 9px;
+  }
+  .topLabel span {
+    padding-inline: 6px;
+  }
+  .footer {
+    padding-inline: 26px;
+  }
+}
+@media (max-width: 760px) {
+  .workspace {
+    display: block;
+  }
+  .sidebar {
+    display: none;
+  }
+  .main {
+    padding: 28px 18px 44px;
+  }
+  .heading {
+    margin-block-end: 25px;
+  }
+  .heading h1 {
+    font-size: 34px;
+  }
+  .topbar {
+    min-block-size: 70px;
+    padding: 18px;
+    position: relative;
+  }
+  .topLabel {
+    display: none;
+  }
+  .actions {
+    gap: 20px;
+  }
+  .mobileMenu {
+    display: block;
+  }
+  .mobileMenu summary {
+    list-style: none;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .mobileMenu summary::-webkit-details-marker {
+    display: none;
+  }
+  .mobileMenu summary span {
+    margin-inline-start: 12px;
+  }
+  .mobileMenu nav {
+    position: absolute;
+    inset-inline: 16px;
+    inset-block-start: 64px;
+    display: grid;
+    gap: 5px;
+    padding: 16px;
+    background: white;
+    border: 1px solid var(--workspace-line);
+    border-radius: 12px;
+    box-shadow: 0 18px 45px #102b4820;
+    z-index: 30;
+  }
+  .mobileMenu nav a {
+    padding: 12px;
+    font-size: 14px;
+  }
+  .footer {
+    padding: 20px 18px;
+    font-size: 9px;
+  }
+  .eyebrow {
+    font-size: 9px;
+  }
+  .description {
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workspace * {
+    scroll-behavior: auto;
+  }
+}
